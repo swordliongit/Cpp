@@ -1,0 +1,6 @@
+﻿  pch.cpp
+  dllmain.cpp
+  networkscanLib.cpp
+  Generating Code...
+     Creating library C:\Users\aslan\Desktop\Workspace\Programming\C++\Visual Studio Directory\networkscanLib\x64\Debug\networkscanLib.lib and object C:\Users\aslan\Desktop\Workspace\Programming\C++\Visual Studio Directory\networkscanLib\x64\Debug\networkscanLib.exp
+  networkscanLib.vcxproj -> C:\Users\aslan\Desktop\Workspace\Programming\C++\Visual Studio Directory\networkscanLib\x64\Debug\networkscanLib.dll

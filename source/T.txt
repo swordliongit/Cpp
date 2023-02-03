@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.13)
+project(libtins_test)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories("C:/Users/aslan/Desktop/Workspace/Programming/C++/source/include")
+link_directories("C:/Users/aslan/Desktop/Workspace/Programming/C++/source/lib")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ltins -static")
+add_definitions(-DTINS_STATIC)
+add_definitions(-DWIN32)
+
+add_executable(libtins_test main.cpp)
+
+target_link_libraries(libtins_test tins Ws2_32 Iphlpapi wpcap)

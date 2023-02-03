@@ -1,0 +1,2 @@
+#define NETWORKSCANLIB_API __declspec(dllexport)
+#define NETWORKSCANLIB_API __declspec(dllimport)
