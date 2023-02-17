@@ -39,7 +39,8 @@
 #include "fonts/SystemFont5x7.h"
 #include "fonts/Arial_black_16.h"
 #include "fonts/Arial14.h"
-#include <vector>
+#include <vector> // for vector
+#include <limits> // for numeric_limits
 
 
 #include <p10_animations_kilicarslan.h>
@@ -48,6 +49,9 @@
 String data_from_serial2 = "";
 char screen_test_char[] = "test";
 String screen_test_string = "XSarj";
+
+TaskHandle_t Task1;
+TaskHandle_t Task2;
 
 const int wdtTimeout = 60000;  //time in ms to trigger the watchdog
 hw_timer_t *timer = NULL;
@@ -112,171 +116,119 @@ void setup(void)
 
 }
 
-//16x64
-std::vector<std::vector<int>> xsarj_full = 
-{
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,0,1,1,0,1,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,1,0,1,1,1,0,0,0,0,0,0,1,1,1,0,1,1,1,1,1,1,0,1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,1,1,1,1,0,0,1,0,0,0,0,1,0,1,0,0,1,1,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-};
-//7x35
-std::vector<std::vector<int>> xsarj = 
-{
-    {1,1,0,0,0,0,1,1,1,0,0,0,1,1,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,0,0,0,0,1,1},
-    {0,1,1,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,0,0,1,1},
-    {0,0,1,1,1,1,1,0,0,0,0,1,1,1,0,0,0,1,1,0,0,1,1,0,1,0,0,1,1,0,0,0,0,1,1},
-    {0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,1,0,1,1,1,1,0,0,0,0,0,1,1},
-    {0,0,1,0,1,1,1,0,0,0,0,0,0,1,1,1,0,1,1,1,1,1,1,0,1,0,0,1,0,0,0,0,0,1,1},
-    {0,1,1,0,0,1,1,1,0,0,0,1,1,1,1,0,0,1,0,0,0,0,1,0,1,0,0,1,1,0,1,1,0,1,1},
-    {1,1,0,0,0,0,1,1,1,0,0,0,0,1,1,0,0,1,0,0,0,0,1,0,1,0,0,0,1,0,1,1,1,1,1}
-};
-
-//5x3
-std::vector<std::vector<int>> arrow_s_in_border = 
-{
-    {1,0,0},
-    {0,1,0},
-    {0,0,1},
-    {0,1,0},
-    {1,0,0}
-};
-
-// 7x4
-std::vector<std::vector<int>> arrow_s = 
-{
-	{1,0,0,0},
-	{0,1,0,0},
-	{0,0,1,0},
-	{0,0,0,1},
-	{0,0,1,0},
-	{0,1,0,0},
-	{1,0,0,0}
-};
-
-//7x14
-std::vector<std::vector<int>> lightning = {
-	{1,0,0,0,0,0,1,0,0,0,0,0,0,0},
-	{1,1,0,0,0,0,1,1,1,0,0,0,0,0},
-	{0,1,1,1,0,0,1,1,1,1,0,0,0,0},
-	{0,0,1,1,1,1,1,1,1,1,1,0,0,0},
-	{0,0,0,1,1,1,1,0,0,1,1,1,0,0},
-	{0,0,0,0,1,1,1,0,0,0,1,1,1,0},
-	{0,0,0,0,0,0,1,0,0,0,0,0,1,1},
-};
-
-// 7x64
-std::vector<std::vector<int>> excmark = 
-{
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0}
-};
-
-// 7x20
-std::vector<std::vector<int>> hourglass = 
-{
-	{1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1},
-	{1,0,1,0,0,0,1,1,0,0,0,0,1,1,0,0,0,1,0,1},
-	{1,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,1},
-	{1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-	{1,0,1,0,0,0,0,0,1,1,1,1,0,0,0,0,0,1,0,1},
-	{1,0,1,0,0,0,1,1,0,0,0,0,1,1,0,0,0,1,0,1},
-	{1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1}
-};
-// 5x14
-std::vector<std::vector<int>> hourglass_anim_start =
-{
-	{0,0,0,1,1,0,0,0,0,1,1,0,1,0},
-	{1,0,0,0,0,1,1,1,1,1,0,1,0,0},
-	{0,1,0,1,0,0,1,0,1,0,1,0,1,0},
-	{1,0,0,0,0,1,1,1,1,1,0,1,0,0},
-	{0,0,0,1,1,0,0,0,0,1,1,0,1,0}
-};
-std::vector<std::vector<int>> hourglass_anim_phase_first = 
-{
-	{1,0,0,1,1,0,0,0,0,1,1,1,0,0},
-	{0,1,0,0,0,1,1,1,1,0,1,0,0,0},
-	{1,0,1,0,1,0,0,1,0,1,0,1,0,0},
-	{0,1,0,0,0,1,1,1,1,0,1,0,0,0},
-	{1,0,0,1,1,0,0,0,0,1,1,1,0,0}
-};
-std::vector<std::vector<int>> hourglass_anim_phase_second =
-{
-	{1,0,1,1,1,0,0,0,0,1,1,0,0,0},
-	{0,1,0,0,0,1,1,1,1,1,0,0,0,0},
-	{1,0,1,0,1,0,1,0,1,0,1,0,0,0},
-	{0,1,0,0,0,1,1,1,1,1,0,0,0,0},
-	{1,0,1,1,1,0,0,0,0,1,1,0,0,0}
-};
-std::vector<std::vector<int>> hourglass_anim_phase_third =
-{
-    {1,0,1,1,1,0,0,0,0,1,1,0,0,0},
-    {0,1,0,1,0,1,1,1,1,0,0,0,0,0},
-    {1,0,1,0,0,1,0,1,0,1,0,0,0,0},
-    {0,1,0,1,0,1,1,1,1,0,0,0,0,0},
-    {1,0,1,1,1,0,0,0,0,1,1,0,0,0}
-};
-std::vector<std::vector<int>> hourglass_anim_phase_last =
-{
-    {1,0,1,1,1,0,0,0,0,1,1,0,0,0},
-    {0,1,0,1,0,1,1,1,1,0,0,0,0,0},
-    {1,0,1,0,1,0,1,0,1,0,0,0,0,0},
-    {0,1,0,1,0,1,1,1,1,0,0,0,0,0},
-    {1,0,1,1,1,0,0,0,0,1,1,0,0,0}
-};
-
-void anim_StationReserved()
+void anim_StationReserved(double cycle=std::numeric_limits<double>::infinity())
 {
 	PatternAnimator p10(&dmd);
 
-    int msdelay = 1000;
     int ROW_START = 4;
     int COL_START = 43;
-    int PATTERN_ROW_MAX = 7;
-    int PATTERN_COL_MAX = 20;
+    int msdelay = 250;
 
     // hourglass frame
-    p10.draw_pattern_static(hourglass, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
+    p10.draw_pattern_static(p10.hourglass, ROW_START, COL_START);
     // animation loop
-    while(true)
+    while(cycle > 0)
     {
         ROW_START = 5;
         COL_START = 40;
-        PATTERN_ROW_MAX = 5;
-        PATTERN_COL_MAX = 14;
-        p10.draw_pattern_static(hourglass_anim_start, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
+        p10.draw_pattern_static(p10.hourglass_anim_start, ROW_START, COL_START);
         delay(msdelay);
-        p10.delete_pattern_static(ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
-        p10.draw_pattern_static(hourglass_anim_phase_first, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
+        p10.delete_pattern_static(p10.hourglass_anim_start, ROW_START, COL_START);
+        p10.draw_pattern_static(p10.hourglass_anim_phase_first, ROW_START, COL_START);
         delay(msdelay);
-        p10.delete_pattern_static(ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
-        p10.draw_pattern_static(hourglass_anim_phase_second, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
+        p10.delete_pattern_static(p10.hourglass_anim_phase_first, ROW_START, COL_START);
+        p10.draw_pattern_static(p10.hourglass_anim_phase_second, ROW_START, COL_START);
         delay(msdelay);
-        p10.delete_pattern_static(ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
-        p10.draw_pattern_static(hourglass_anim_phase_third, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
+        p10.delete_pattern_static(p10.hourglass_anim_phase_second, ROW_START, COL_START);
+        p10.draw_pattern_static(p10.hourglass_anim_phase_third, ROW_START, COL_START);
         delay(msdelay);
-        p10.delete_pattern_static(ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
-        p10.draw_pattern_static(hourglass_anim_phase_last, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX);
+        p10.delete_pattern_static(p10.hourglass_anim_phase_third, ROW_START, COL_START);
+        p10.draw_pattern_static(p10.hourglass_anim_phase_last, ROW_START, COL_START);
         delay(msdelay);
+        --cycle;
     }
 }
+
+void anim_StationWaiting(double cycle=std::numeric_limits<double>::infinity())
+{
+    PatternAnimator p10(&dmd);
+
+    int ROW_START = 4;
+    int COL_START = 63;
+    int PANEL_LAST_COL = 55;
+    int pxjmp_step = 0;
+    int msdelay = 4;
+    p10.draw_pattern_tetris(p10.xsarj, ROW_START, COL_START, PANEL_LAST_COL, pxjmp_step, msdelay, cycle);
+    delay(1000);
+}
+
+void Task1code(void* ptr)
+{
+    int ROW_START = 4;
+    int COL_START = 0;
+    int pxjmp_step = 0;
+    int msdelay = 0;
+    int PANEL_LAST_COL = 0;
+    int cycle = 0;
+
+    PatternAnimator p10(&dmd);
+
+    COL_START = 73;
+    msdelay = 70;
+    int PATTERN_DISTANCE = 10;
+    p10.draw_pattern_scrolling(p10.arrow_single, ROW_START, COL_START, pxjmp_step, msdelay);
+}
+
+void anim_StationStopped(double cycle=std::numeric_limits<double>::infinity())
+{
+    PatternAnimator p10(&dmd);
+
+    int ROW_START = 4;
+    int COL_START = 40;
+    p10.draw_pattern_static(p10.chargehandle_lightning, ROW_START, COL_START);
+}
+
+
+void Task2code(void* ptr)
+{
+    int ROW_START = 4;
+
+    int COL_START = 0;
+    int pxjmp_step = 0;
+    int msdelay = 0;
+    int PANEL_LAST_COL = 0;
+    int cycle = 0;
+
+    PatternAnimator p10(&dmd);
+
+    COL_START = 73;
+    msdelay = 30;
+    int PATTERN_DISTANCE = 10;
+    p10.draw_pattern_scrolling(p10.lightning, ROW_START, COL_START, pxjmp_step, msdelay);
+}
+void runthreads()
+{
+    //create a task that will be executed in the Task1code() function, with priority 1 and executed on core 0
+    xTaskCreatePinnedToCore(
+                        Task1code,   /* Task function. */
+                        "Task1",     /* name of task. */
+                        10000,       /* Stack size of task */
+                        NULL,        /* parameter of the task */
+                        1,           /* priority of the task */
+                        &Task1,      /* Task handle to keep track of created task */
+                        0);          /* pin task to core 0 */                  
+
+    //create a task that will be executed in the Task2code() function, with priority 1 and executed on core 1
+    xTaskCreatePinnedToCore(
+                        Task2code,   /* Task function. */
+                        "Task2",     /* name of task. */
+                        10000,       /* Stack size of task */
+                        NULL,        /* parameter of the task */
+                        1,           /* priority of the task */
+                        &Task2,      /* Task handle to keep track of created task */
+                        1);          /* pin task to core 1 */
+}
+
 /*--------------------------------------------------------------------------------------
   loop
   Arduino architecture main loop
@@ -291,36 +243,56 @@ void loop(void)
 	dmd.clearScreen( true );
 	dmd.selectFont(System5x7);
 
-	// dmd.drawBox(  0,  4, (32*DISPLAYS_ACROSS)-1, (11*DISPLAYS_DOWN)-1, GRAPHICS_NORMAL );
-	// delay( 1000 );
-
-	// dmd.drawFilledBox(  0,  4, (32*DISPLAYS_ACROSS)-1, (11*DISPLAYS_DOWN)-1, GRAPHICS_NORMAL );
-
-	// anim_StationReserved();
     PatternAnimator p10(&dmd);
 
     int ROW_START = 4;
-    int COL_START = 63;
-    int PATTERN_ROW_MAX = 7;
-    int PATTERN_COL_MAX = 35;
+
+    int COL_START = 0;
     int pxjmp_step = 0;
+    int msdelay = 0;
+    int PANEL_LAST_COL = 0;
+    int cycle = 0;
 
-    // hourglass frame
-    p10.draw_pattern_tetris(xsarj, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX, pxjmp_step);
+    anim_StationStopped();
+    COL_START = 60;
+    msdelay = 300;
+    p10.draw_pattern_blinking(p10.excmark_little, ROW_START, COL_START, msdelay);
 
-
-	
-
-	//   p10.draw_pattern_blinking(excmark, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX, msdelay, cycle);
-	//   delay(2000);
-
-	//   PATTERN_ROW_MAX = 7;
-	//   PATTERN_COL_MAX = 4;
-	//   cycle = 3;
+    // runthreads();
 
 
-	//   p10.draw_pattern_scrolling(arrow_s, ROW_START, COL_START, PATTERN_ROW_MAX, PATTERN_COL_MAX, pxjmp_step, cycle);
-	//   delay(2000);
+	// anim_StationReserved();
+
+
+    
+    // p10.draw_pattern_scrolling_disjoint(arrow_s, lightning, ROW_START, COL_START, PATTERN_DISTANCE, pxjmp_step, cycle);
+    // while(true)
+    // {
+        
+
+    //     COL_START = 60;
+    //     msdelay = 500;
+    //     cycle = 4;
+    //     p10.draw_pattern_blinking(excmark, ROW_START, COL_START, msdelay, cycle);
+    //     delay(1000);
+
+    //     COL_START = 63;
+    //     cycle = 3;
+    //     msdelay = 250;
+    //     p10.draw_pattern_scrolling(arrow_s, ROW_START, COL_START, pxjmp_step, cycle);
+    //     delay(1000);
+
+        cycle = 4;
+        msdelay = 250;
+    //     anim_StationReserved(msdelay, cycle);
+
+    //     dmd.clearScreen(true);
+    //     delay(1000);
+    // }
+    
+
+
+
 
 	delay(3600000);
 
