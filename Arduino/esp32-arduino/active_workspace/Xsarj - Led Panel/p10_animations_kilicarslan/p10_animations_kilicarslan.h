@@ -55,7 +55,4 @@ public:
     void draw_pattern_scrolling_pack(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_ROW_MAX, int PATTERN_COL_MAX, int pxjmp_step, double cycle=std::numeric_limits<double>::infinity());
 };
 
-
-
-
 #endif
