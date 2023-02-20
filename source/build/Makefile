@@ -56,10 +56,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\SWORD\Desktop\Workspace\Programming\C++\source
+CMAKE_SOURCE_DIR = C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\SWORD\Desktop\Workspace\Programming\C++\source\build
+CMAKE_BINARY_DIR = C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -77,7 +77,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/SWORD/Desktop/Workspace/Programming/C++/source/build/CPackSourceConfig.cmake
+	"C:\Program Files\CMake\bin\cpack.exe" --config ./CPackSourceConfig.cmake C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source/build/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -116,9 +116,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\SWORD\Desktop\Workspace\Programming\C++\source\build\CMakeFiles C:\Users\SWORD\Desktop\Workspace\Programming\C++\source\build\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build\CMakeFiles C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\SWORD\Desktop\Workspace\Programming\C++\source\build\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -510,41 +510,41 @@ ContinuousSubmit/fast:
 .PHONY : ContinuousSubmit/fast
 
 #=============================================================================
-# Target rules for targets named cpp_python
+# Target rules for targets named main
 
 # Build rule for target.
-cpp_python: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 cpp_python
-.PHONY : cpp_python
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-cpp_python/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\cpp_python.dir\build.make CMakeFiles/cpp_python.dir/build
-.PHONY : cpp_python/fast
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
-dllexportpy.obj: dllexportpy.cpp.obj
-.PHONY : dllexportpy.obj
+main.obj: main.cpp.obj
+.PHONY : main.obj
 
 # target to build an object file
-dllexportpy.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\cpp_python.dir\build.make CMakeFiles/cpp_python.dir/dllexportpy.cpp.obj
-.PHONY : dllexportpy.cpp.obj
+main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/main.cpp.obj
+.PHONY : main.cpp.obj
 
-dllexportpy.i: dllexportpy.cpp.i
-.PHONY : dllexportpy.i
+main.i: main.cpp.i
+.PHONY : main.i
 
 # target to preprocess a source file
-dllexportpy.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\cpp_python.dir\build.make CMakeFiles/cpp_python.dir/dllexportpy.cpp.i
-.PHONY : dllexportpy.cpp.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-dllexportpy.s: dllexportpy.cpp.s
-.PHONY : dllexportpy.s
+main.s: main.cpp.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-dllexportpy.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\cpp_python.dir\build.make CMakeFiles/cpp_python.dir/dllexportpy.cpp.s
-.PHONY : dllexportpy.cpp.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\main.dir\build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -585,10 +585,10 @@ help:
 	@echo ... NightlySubmit
 	@echo ... NightlyTest
 	@echo ... NightlyUpdate
-	@echo ... cpp_python
-	@echo ... dllexportpy.obj
-	@echo ... dllexportpy.i
-	@echo ... dllexportpy.s
+	@echo ... main
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 .PHONY : help
 
 

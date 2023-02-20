@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Users/SWORD/Desktop/Workspace/Programming/C++/source
-BuildDirectory: C:/Users/SWORD/Desktop/Workspace/Programming/C++/source/build
+SourceDirectory: C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source
+BuildDirectory: C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source/build
 
 # Where to place the cost data store
 CostDataFile: 
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/SWORD/Desktop/Workspace/Programming/C++/source"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source"
 MakeCommand: C:/Program\ Files/CMake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
@@ -63,7 +63,7 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: C:/msys64/mingw64/bin/c++.exe
+Compiler: C:/mingw64/bin/c++.exe
 CompilerVersion: 12.2.0
 
 # Dynamic analysis (MemCheck)
@@ -81,7 +81,7 @@ MemoryCheckCommandOptions:
 MemoryCheckSuppressionFile: 
 
 # Coverage
-CoverageCommand: C:/msys64/mingw64/bin/gcov.exe
+CoverageCommand: C:/mingw64/bin/gcov.exe
 CoverageExtraFlags: -l
 
 # Testing options

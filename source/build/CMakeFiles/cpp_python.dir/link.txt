@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\cpp_python.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\cpp_python.dir/objects.a @CMakeFiles\cpp_python.dir\objects1
-C:\msys64\mingw64\bin\c++.exe -shared -o libcpp_python.dll -Wl,--out-implib,libcpp_python.dll.a -Wl,--major-image-version,0,--minor-image-version,0 -Wl,--whole-archive CMakeFiles\cpp_python.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\cpp_python.dir\linkLibs.rsp

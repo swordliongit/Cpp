@@ -253,10 +253,24 @@ void loop(void)
     int PANEL_LAST_COL = 0;
     int cycle = 0;
 
-    anim_StationStopped();
-    COL_START = 60;
-    msdelay = 300;
-    p10.draw_pattern_blinking(p10.excmark_little, ROW_START, COL_START, msdelay);
+    // anim_StationStopped();
+    COL_START = 63;
+    int PATTERN_DISTANCE = 10;
+    // p10.draw_pattern_blinking(p10.excmark_little, ROW_START, COL_START, msdelay);
+    p10.pattern_pack.push_back(p10.arrow_single);
+    p10.pattern_pack.push_back(p10.excmark_little);
+    p10.pattern_pack.push_back(p10.lightning);
+    p10.pattern_pack.push_back(p10.arrow_single);
+    p10.pattern_pack.push_back(p10.arrow_single);
+    p10.pattern_pack.push_back(p10.lightning);
+    p10.pattern_pack.push_back(p10.lightning);
+    p10.pattern_pack.push_back(p10.lightning);
+    p10.pattern_pack.push_back(p10.excmark_little);
+    p10.pattern_pack.push_back(p10.excmark_little);
+    p10.pattern_pack.push_back(p10.lightning);
+    p10.pattern_pack.push_back(p10.excmark_little);
+ 
+    p10.draw_pattern_scrolling_series(p10.pattern_pack, ROW_START, COL_START, PATTERN_DISTANCE, pxjmp_step);
 
     // runthreads();
 
