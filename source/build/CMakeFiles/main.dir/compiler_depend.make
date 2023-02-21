@@ -144,7 +144,23 @@ CMakeFiles/main.dir/main.cpp.obj: C:/Users/SWORD/Desktop/Workspace/Programming/C
   C:/mingw64/include/c++/12.2.0/bits/stl_uninitialized.h \
   C:/mingw64/include/c++/12.2.0/bits/stl_vector.h \
   C:/mingw64/include/c++/12.2.0/bits/stl_bvector.h \
-  C:/mingw64/include/c++/12.2.0/bits/vector.tcc
+  C:/mingw64/include/c++/12.2.0/bits/vector.tcc \
+  C:/mingw64/include/c++/12.2.0/cmath \
+  C:/mingw64/x86_64-w64-mingw32/include/math.h \
+  C:/mingw64/include/c++/12.2.0/bits/specfun.h \
+  C:/mingw64/include/c++/12.2.0/limits \
+  C:/mingw64/include/c++/12.2.0/tr1/gamma.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/special_function_util.h \
+  C:/mingw64/include/c++/12.2.0/tr1/bessel_function.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/beta_function.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/ell_integral.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/exp_integral.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/hypergeometric.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/legendre_function.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/modified_bessel_func.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/poly_hermite.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/poly_laguerre.tcc \
+  C:/mingw64/include/c++/12.2.0/tr1/riemann_zeta.tcc
 
 
 C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source/main.cpp:
@@ -255,6 +271,8 @@ C:/mingw64/include/c++/12.2.0/bits/hash_bytes.h:
 
 C:/mingw64/include/c++/12.2.0/type_traits:
 
+C:/mingw64/include/c++/12.2.0/tr1/poly_hermite.tcc:
+
 C:/mingw64/include/c++/12.2.0/cstdint:
 
 C:/mingw64/include/c++/12.2.0/bits/localefwd.h:
@@ -272,6 +290,8 @@ C:/mingw64/include/c++/12.2.0/clocale:
 C:/mingw64/x86_64-w64-mingw32/include/locale.h:
 
 C:/mingw64/include/c++/12.2.0/cctype:
+
+C:/mingw64/include/c++/12.2.0/tr1/bessel_function.tcc:
 
 C:/mingw64/x86_64-w64-mingw32/include/ctype.h:
 
@@ -373,6 +393,8 @@ C:/mingw64/include/c++/12.2.0/bits/alloc_traits.h:
 
 C:/mingw64/include/c++/12.2.0/bits/stl_construct.h:
 
+C:/mingw64/include/c++/12.2.0/tr1/gamma.tcc:
+
 C:/mingw64/include/c++/12.2.0/string_view:
 
 C:/mingw64/include/c++/12.2.0/ext/string_conversions.h:
@@ -431,6 +453,32 @@ C:/mingw64/include/c++/12.2.0/bits/stl_uninitialized.h:
 
 C:/mingw64/include/c++/12.2.0/bits/stl_vector.h:
 
+C:/mingw64/include/c++/12.2.0/tr1/exp_integral.tcc:
+
 C:/mingw64/include/c++/12.2.0/bits/stl_bvector.h:
 
 C:/mingw64/include/c++/12.2.0/bits/vector.tcc:
+
+C:/mingw64/include/c++/12.2.0/cmath:
+
+C:/mingw64/x86_64-w64-mingw32/include/math.h:
+
+C:/mingw64/include/c++/12.2.0/bits/specfun.h:
+
+C:/mingw64/include/c++/12.2.0/limits:
+
+C:/mingw64/include/c++/12.2.0/tr1/special_function_util.h:
+
+C:/mingw64/include/c++/12.2.0/tr1/beta_function.tcc:
+
+C:/mingw64/include/c++/12.2.0/tr1/ell_integral.tcc:
+
+C:/mingw64/include/c++/12.2.0/tr1/hypergeometric.tcc:
+
+C:/mingw64/include/c++/12.2.0/tr1/legendre_function.tcc:
+
+C:/mingw64/include/c++/12.2.0/tr1/modified_bessel_func.tcc:
+
+C:/mingw64/include/c++/12.2.0/tr1/poly_laguerre.tcc:
+
+C:/mingw64/include/c++/12.2.0/tr1/riemann_zeta.tcc:

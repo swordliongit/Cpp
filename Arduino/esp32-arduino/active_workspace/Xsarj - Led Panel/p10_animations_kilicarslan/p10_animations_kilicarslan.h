@@ -36,23 +36,43 @@ public:
     // 7x24
     static std::vector<std::vector<int>> lightning_arrow;
     // 7x11
+    // for series
     static std::vector<std::vector<int>> arrow_single;
     static std::vector<std::vector<int>> lightning;
+    static std::vector<std::vector<int>> excmark_little;
+    static std::vector<std::vector<int>> spaceship;
+    static std::vector<std::vector<int>> claw;
+    static std::vector<std::vector<int>> stripe;
+    // 7x7
+    // for rotation
+    static std::vector<std::vector<int>> sword;
+    static std::vector<std::vector<int>> bomb;
+    static std::vector<std::vector<int>> robot;
+    static std::vector<std::vector<int>> excmark_45;
     // 7x50
     static std::vector<std::vector<int>> chargehandle;
     static std::vector<std::vector<int>> chargehandle_lightning;
-    static std::vector<std::vector<int>> excmark_little;
+    
+    // 7x10
+    static std::vector<std::vector<int>> xmark;
 
     static std::vector<std::vector<std::vector<int>>> pattern_pack;
+
     
     // member functions
-    void draw_pattern_blinking(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int msdelay, double cycle=std::numeric_limits<double>::infinity());
-    void draw_pattern_scrolling(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int pxjmp_step, int delaystep, double cycle=std::numeric_limits<double>::infinity());
-    void draw_pattern_scrolling_disjoint(std::vector<std::vector<int>> pattern_first, std::vector<std::vector<int>> pattern_second, int ROW_START, int COL_START, int PATTERN_DISTANCE, int pxjmp_step, double cycle=std::numeric_limits<double>::infinity());
+    // basic
     void draw_pattern_static(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START);
     void delete_pattern_static(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START);
-    void draw_pattern_tetris(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int PANEL_LAST_COL, int pxjmp_step, int msdelay, double cycle=std::numeric_limits<double>::infinity());
-    void draw_pattern_scrolling_pack(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_ROW_MAX, int PATTERN_COL_MAX, int pxjmp_step, double cycle=std::numeric_limits<double>::infinity());
+    void draw_pattern_blinking(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int msdelay, double cycle=std::numeric_limits<double>::infinity());
+    void draw_pattern_scrolling(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, float delaystep, double cycle=std::numeric_limits<double>::infinity());
+    void draw_pattern_scrolling_rotating(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, float delaystep, double cycle=std::numeric_limits<double>::infinity());
+    // advanced drawers
+    void draw_pattern_tetris(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int PANEL_LAST_COL, int msdelay, double cycle=std::numeric_limits<double>::infinity());
+    void draw_pattern_scrolling_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_DISTANCE, float delaystep, double cycle=std::numeric_limits<double>::infinity());
+    void rotate_matrix_90(std::vector<std::vector<int>>& matrix);
 };
+
+
+
 
 #endif
