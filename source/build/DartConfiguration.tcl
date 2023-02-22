@@ -4,14 +4,14 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Users/aslan/Desktop/Workspace/Programming/Cpp/source
-BuildDirectory: C:/Users/aslan/Desktop/Workspace/Programming/Cpp/source/build
+SourceDirectory: C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source
+BuildDirectory: C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source/build
 
 # Where to place the cost data store
 CostDataFile: 
 
 # Site is something like machine.domain, i.e. pragmatic.crd
-Site: SWORDLION-PC
+Site: DESKTOP-S01C9MS
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
 BuildName: Win32-mingw32-make
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/aslan/Desktop/Workspace/Programming/Cpp/source"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/source"
 MakeCommand: C:/Program\ Files/CMake/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
@@ -64,7 +64,7 @@ UpdateType:
 
 # Compiler info
 Compiler: C:/mingw64/bin/c++.exe
-CompilerVersion: 11.2.0
+CompilerVersion: 12.2.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 

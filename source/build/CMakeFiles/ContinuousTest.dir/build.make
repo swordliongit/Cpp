@@ -52,10 +52,10 @@ RM = "C:\Program Files\CMake\bin\cmake.exe" -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\aslan\Desktop\Workspace\Programming\Cpp\source
+CMAKE_SOURCE_DIR = C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\aslan\Desktop\Workspace\Programming\Cpp\source\build
+CMAKE_BINARY_DIR = C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build
 
 # Utility rule file for ContinuousTest.
 
@@ -81,6 +81,6 @@ CMakeFiles/ContinuousTest.dir/clean:
 .PHONY : CMakeFiles/ContinuousTest.dir/clean
 
 CMakeFiles/ContinuousTest.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\aslan\Desktop\Workspace\Programming\Cpp\source C:\Users\aslan\Desktop\Workspace\Programming\Cpp\source C:\Users\aslan\Desktop\Workspace\Programming\Cpp\source\build C:\Users\aslan\Desktop\Workspace\Programming\Cpp\source\build C:\Users\aslan\Desktop\Workspace\Programming\Cpp\source\build\CMakeFiles\ContinuousTest.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build C:\Users\SWORD\Desktop\Workspace\Programming\Cpp\source\build\CMakeFiles\ContinuousTest.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ContinuousTest.dir/depend
 

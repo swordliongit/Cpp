@@ -108,24 +108,21 @@ void setup(void)
     timerAlarmWrite(timer, 300, true);
     // Start an alarm
     timerAlarmEnable(timer);
-
     //clear/init the DMD pixels held in RAM
     dmd.clearScreen( true );   //true is normal (all pixels off), false is negative (all pixels on)
 
-    pthread_t threads[4];
-    pthread_create(&threads[0], NULL, TCB1, NULL);
-    pthread_create(&threads[1], NULL, TCB2, NULL);
-    pthread_create(&threads[2], NULL, TCB3, NULL);
-    pthread_create(&threads[3], NULL, TCB4, NULL);
+    // pthread_t threads[4];
+    // pthread_create(&threads[0], NULL, TCB1, NULL);
+    // pthread_create(&threads[1], NULL, TCB2, NULL);
+    // pthread_create(&threads[2], NULL, TCB3, NULL);
+    // pthread_create(&threads[3], NULL, TCB4, NULL);
 
 }
 
-void anim_StationReserved(double cycle=std::numeric_limits<double>::infinity())
+void anim_StationReserved(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
 {
-	PatternAnimator p10(&dmd);
-
     int ROW_START = 4;
-    int COL_START = 43;
+    int COL_START = 23;
     int msdelay = 250;
 
     // hourglass frame
@@ -134,7 +131,7 @@ void anim_StationReserved(double cycle=std::numeric_limits<double>::infinity())
     while(cycle > 0)
     {
         ROW_START = 5;
-        COL_START = 40;
+        COL_START = 27;
         p10.draw_pattern_static(p10.hourglass_anim_start, ROW_START, COL_START);
         delay(msdelay);
         p10.delete_pattern_static(p10.hourglass_anim_start, ROW_START, COL_START);
@@ -153,60 +150,53 @@ void anim_StationReserved(double cycle=std::numeric_limits<double>::infinity())
     }
 }
 
-void anim_StationWaiting(double cycle=std::numeric_limits<double>::infinity())
+void anim_StationWaiting(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
 {
-    PatternAnimator p10(&dmd);
-
     int ROW_START = 4;
-    int COL_START = 63;
+    int COL_START = 0;
     int PANEL_LAST_COL = 55;
-    int msdelay = 4;
+    int msdelay = 4000;
+    int delaystep = 25;
     p10.draw_pattern_tetris(p10.xsarj, ROW_START, COL_START, PANEL_LAST_COL, msdelay, cycle);
-    delay(1000);
+    dmd.clearScreen(true);
+    COL_START = 55;
+    p10.draw_pattern_scrolling(p10.xsarj, ROW_START, COL_START, delaystep, cycle);
 }
 
-// void Task1code(void* ptr)
-// {
-//     int ROW_START = 4;
-//     int COL_START = 0;
-//     int pxjmp_step = 0;
-//     int msdelay = 0;
-//     int PANEL_LAST_COL = 0;
-//     int cycle = 0;
-
-//     PatternAnimator p10(&dmd);
-
-//     COL_START = 73;
-//     msdelay = 70;
-//     int PATTERN_DISTANCE = 10;
-//     p10.draw_pattern_scrolling(p10.arrow_single, ROW_START, COL_START, pxjmp_step, msdelay);
-// }
-
-// void Task2code(void* ptr)
-// {
-//     int ROW_START = 4;
-
-//     int COL_START = 0;
-//     int pxjmp_step = 0;
-//     int msdelay = 0;
-//     int PANEL_LAST_COL = 0;
-//     int cycle = 0;
-
-//     PatternAnimator p10(&dmd);
-
-//     COL_START = 73;
-//     msdelay = 30;
-//     int PATTERN_DISTANCE = 10;
-//     p10.draw_pattern_scrolling(p10.lightning, ROW_START, COL_START, pxjmp_step, msdelay);
-// }
-
-void anim_StationStopped(double cycle=std::numeric_limits<double>::infinity())
+void anim_StationStopped(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
 {
-    PatternAnimator p10(&dmd);
-
     int ROW_START = 4;
-    int COL_START = 40;
-    p10.draw_pattern_static(p10.chargehandle_lightning, ROW_START, COL_START);
+    int COL_START = 0;
+    int msdelay = 300;
+    int delaystep = 25;
+    p10.draw_pattern_static(p10.chargehandle, ROW_START, COL_START);
+    // COL_START = 55;
+    // p10.draw_pattern_blinking(p10.excmark_little, ROW_START, COL_START, msdelay, cycle);
+}
+
+// void* x_rotator(void* x_single_ptr)
+// {
+//     int ROW_START = 4;
+//     int COL_START = 17;
+//     PatternAnimator p10(&dmd);
+//     delay(4000);
+//     std::vector<std::vector<int>> x_single = *(static_cast<std::vector<std::vector<int>>*>(x_single_ptr));
+//     for(int i = 0; i < 12; ++i)
+//     {
+//         p10.rotate_matrix_90(x_single);
+//         p10.draw_pattern_static(x_single, ROW_START, COL_START);
+//         delay(70);
+//         dmd.clearScreen(true);
+//     }
+// }
+
+
+void anim_StationCharging(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
+{
+    int ROW_START = 4;
+    int COL_START = 0;
+    int delaystep = 35;
+    p10.draw_pattern_scrolling(p10.arrow_single, ROW_START, COL_START, delaystep, cycle);
 }
 
 void runthreads()
@@ -297,9 +287,23 @@ void loop(void)
     float delaystep = 35;
 
     // anim_StationStopped();
-    COL_START = 63;
+    COL_START = 0;
     int PATTERN_DISTANCE = 10;
 
+    PatternAnimator p10(&dmd);
+
+    // p10.draw_pattern_scrolling(p10.xsarj, ROW_START, COL_START, 35);
+
+    while(true)
+    {
+        anim_StationWaiting(p10, 1);
+        delay(1000);
+        // anim_StationStopped(p10, 8);
+        // dmd.clearScreen(true);
+        // anim_StationReserved(p10, 2);
+        // dmd.clearScreen(true);
+        // anim_StationCharging(p10, 2);
+    }
 
     // PatternAnimator p10(&dmd);
     // p10.draw_pattern_scrolling_rotating(p10.sword, ROW_START, COL_START, delaystep);
