@@ -19,8 +19,6 @@ public:
 
     // patterns
 
-    //16x64
-    static std::vector<std::vector<int>> xsarj_full;
     //7x35
     static std::vector<std::vector<int>> xsarj;
     // 7x64
@@ -33,28 +31,26 @@ public:
     static std::vector<std::vector<int>> hourglass_anim_phase_second;
     static std::vector<std::vector<int>> hourglass_anim_phase_third;
     static std::vector<std::vector<int>> hourglass_anim_phase_last;
-    // 7x24
-    static std::vector<std::vector<int>> lightning_arrow;
-    // 7x11
+
+    
     // for series
+    // 7x11
     static std::vector<std::vector<int>> arrow_single;
     static std::vector<std::vector<int>> lightning;
+    // 7x18
     static std::vector<std::vector<int>> excmark_little;
-    static std::vector<std::vector<int>> spaceship;
-    static std::vector<std::vector<int>> claw;
-    static std::vector<std::vector<int>> stripe;
+    
     // 7x7
     // for rotation
-    static std::vector<std::vector<int>> sword;
     static std::vector<std::vector<int>> bomb;
-    static std::vector<std::vector<int>> robot;
-    static std::vector<std::vector<int>> excmark_45;
-    // 7x50
-    static std::vector<std::vector<int>> chargehandle;
-    static std::vector<std::vector<int>> chargehandle_lightning;
-    
-    // 7x10
-    static std::vector<std::vector<int>> xmark;
+
+    // 7x20
+    static std::vector<std::vector<int>> chargehandle_frame_1;
+    static std::vector<std::vector<int>> chargehandle_frame_2;
+    static std::vector<std::vector<int>> chargehandle_frame_3;
+    // 7x15
+    static std::vector<std::vector<int>> chargehandle_cable_frame_1;
+    static std::vector<std::vector<int>> chargehandle_cable_frame_2;
 
     static std::vector<std::vector<std::vector<int>>> pattern_pack;
 
@@ -69,6 +65,8 @@ public:
     // advanced drawers
     void draw_pattern_tetris(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int PANEL_LAST_COL, int msdelay, double cycle=std::numeric_limits<double>::infinity());
     void draw_pattern_scrolling_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_DISTANCE, float delaystep, double cycle=std::numeric_limits<double>::infinity());
+    void draw_pattern_scrolling_accumulator_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_DISTANCE, float delaystep, double cycle=std::numeric_limits<double>::infinity());
+
     void rotate_matrix_90(std::vector<std::vector<int>>& matrix);
 };
 
