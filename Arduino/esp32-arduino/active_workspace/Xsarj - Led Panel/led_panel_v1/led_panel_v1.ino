@@ -116,7 +116,6 @@ void setup(void)
     // pthread_create(&threads[1], NULL, TCB2, NULL);
     // pthread_create(&threads[2], NULL, TCB3, NULL);
     // pthread_create(&threads[3], NULL, TCB4, NULL);
-
 }
 
 void anim_StationReserved(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
@@ -131,7 +130,7 @@ void anim_StationReserved(PatternAnimator& p10, double cycle=std::numeric_limits
     while(cycle > 0)
     {
         ROW_START = 5;
-        COL_START = 27;
+        COL_START = 26;
         p10.draw_pattern_static(p10.hourglass_anim_start, ROW_START, COL_START);
         delay(msdelay);
         p10.delete_pattern_static(p10.hourglass_anim_start, ROW_START, COL_START);
@@ -163,33 +162,85 @@ void anim_StationWaiting(PatternAnimator& p10, double cycle=std::numeric_limits<
     p10.draw_pattern_scrolling(p10.xsarj, ROW_START, COL_START, delaystep, cycle);
 }
 
+// *********************************
+// Station Stopped( chargehandle )
+// *********************************
+// to pass multiple arguments to the thread function
+struct pDrawerArgs
+{
+    int msdelay;
+    double cycle;
+};
 void anim_StationStopped(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
 {
-    int ROW_START = 4;
+    int ROW_START = 0;
     int COL_START = 0;
-    int msdelay = 300;
-    int delaystep = 25;
-    p10.draw_pattern_static(p10.chargehandle, ROW_START, COL_START);
-    // COL_START = 55;
-    // p10.draw_pattern_blinking(p10.excmark_little, ROW_START, COL_START, msdelay, cycle);
+    int msdelay = 0;
+    int delaystep = 0;
+
+    pDrawerArgs args1, args2;
+    pthread_t chargehandle_animator[2];
+
+    msdelay = 100;
+    delaystep = 25;
+    args1.msdelay = msdelay;
+    args1.cycle = cycle+16;
+    pthread_create(&chargehandle_animator[0], NULL, parallel_drawer_chargehandle, &args1);
+
+    msdelay = 250;
+    args2.msdelay = msdelay;
+    args2.cycle = cycle+6;
+    pthread_create(&chargehandle_animator[1], NULL, parallel_drawer_chargehandle_cable, &args2);
+
+    ROW_START = 4;
+    COL_START = 3;
+    msdelay = 400;
+    p10.draw_pattern_blinking(p10.excmark_little, ROW_START, COL_START, msdelay, cycle);
 }
+void* parallel_drawer_chargehandle_cable(void* thread_ptr)
+{
+    int ROW_START = 4;
+    int COL_START = 26;
+    PatternAnimator p10(&dmd);
 
-// void* x_rotator(void* x_single_ptr)
-// {
-//     int ROW_START = 4;
-//     int COL_START = 17;
-//     PatternAnimator p10(&dmd);
-//     delay(4000);
-//     std::vector<std::vector<int>> x_single = *(static_cast<std::vector<std::vector<int>>*>(x_single_ptr));
-//     for(int i = 0; i < 12; ++i)
-//     {
-//         p10.rotate_matrix_90(x_single);
-//         p10.draw_pattern_static(x_single, ROW_START, COL_START);
-//         delay(70);
-//         dmd.clearScreen(true);
-//     }
-// }
+    pDrawerArgs* args = static_cast<pDrawerArgs*>(thread_ptr);
+    int msdelay = args->msdelay;
+    int cycle = args->cycle;
+    // delay(4000);
+    // var = *(static_cast<type*>(pattern_ptr));
+    while(cycle > 0)
+    {
+        p10.draw_pattern_static(p10.chargehandle_cable_frame_1, ROW_START, COL_START);
+        delay(msdelay);
+        p10.draw_pattern_static(p10.chargehandle_cable_frame_2, ROW_START, COL_START);
+        delay(msdelay);
+        --cycle;
+    }
+}
+void* parallel_drawer_chargehandle(void* thread_ptr)
+{
+    int ROW_START = 4;
+    int COL_START = 41;
+    PatternAnimator p10(&dmd);
 
+    pDrawerArgs* args = static_cast<pDrawerArgs*>(thread_ptr);
+    int msdelay = args->msdelay;
+    int cycle = args->cycle;
+    // delay(4000);
+    // var = *(static_cast<type*>(pattern_ptr));
+    while(cycle > 0)
+    {
+        p10.draw_pattern_static(p10.chargehandle_frame_1, ROW_START, COL_START);
+        delay(msdelay);
+        p10.draw_pattern_static(p10.chargehandle_frame_2, ROW_START, COL_START);
+        delay(msdelay);
+        p10.draw_pattern_static(p10.chargehandle_frame_3, ROW_START, COL_START);
+        delay(msdelay);
+        --cycle;
+    }
+}
+// *********************************
+// *********************************
 
 void anim_StationCharging(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
 {
@@ -222,47 +273,8 @@ void runthreads()
     //                     &Task2,      /* Task handle to keep track of created task */
     //                     1);          /* pin task to core 1 */
 }
-void* TCB1(void*)
-{
-    int ROW_START = 4;
-    int COL_START = 63;
-    int PATTERN_DISTANCE = 10;
-    float delaystep = 75;
 
-    PatternAnimator p10(&dmd);
-    p10.draw_pattern_scrolling_rotating(p10.sword, ROW_START, COL_START, delaystep);
 
-}
-void* TCB2(void*)
-{
-    int ROW_START = 4;
-    int COL_START = 63;
-    int PATTERN_DISTANCE = 10;
-    float delaystep = 55;
-
-    PatternAnimator p10(&dmd);
-    p10.draw_pattern_scrolling_rotating(p10.bomb, ROW_START, COL_START, delaystep);
-}
-void* TCB3(void*)
-{
-    int ROW_START = 4;
-    int COL_START = 63;
-    int PATTERN_DISTANCE = 10;
-    float delaystep = 35;
-
-    PatternAnimator p10(&dmd);
-    p10.draw_pattern_scrolling_rotating(p10.robot, ROW_START, COL_START, delaystep);
-}
-void* TCB4(void*)
-{
-    int ROW_START = 4;
-    int COL_START = 63;
-    int PATTERN_DISTANCE = 10;
-    float delaystep = 18;
-
-    PatternAnimator p10(&dmd);
-    p10.draw_pattern_scrolling_rotating(p10.excmark_45, ROW_START, COL_START, delaystep);
-}
 /*--------------------------------------------------------------------------------------
   loop
   Arduino architecture main loop
@@ -294,15 +306,24 @@ void loop(void)
 
     // p10.draw_pattern_scrolling(p10.xsarj, ROW_START, COL_START, 35);
 
+    p10.pattern_pack.push_back(p10.arrow_single);
+    p10.pattern_pack.push_back(p10.arrow_single);
+    p10.pattern_pack.push_back(p10.arrow_single);
+
+    delaystep = 35;
+
+
     while(true)
     {
-        anim_StationWaiting(p10, 1);
-        delay(1000);
-        // anim_StationStopped(p10, 8);
+        p10.draw_pattern_scrolling_accumulator_series(p10.pattern_pack, ROW_START, COL_START, 1, delaystep);
+        // anim_StationWaiting(p10, 1);
+        // dmd.clearScreen(true);
+        // anim_StationStopped(p10, 10);
         // dmd.clearScreen(true);
         // anim_StationReserved(p10, 2);
         // dmd.clearScreen(true);
         // anim_StationCharging(p10, 2);
+        // dmd.clearScreen(true);
     }
 
     // PatternAnimator p10(&dmd);
