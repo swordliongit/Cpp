@@ -32,10 +32,12 @@ public:
     static std::vector<std::vector<int>> hourglass_anim_phase_third;
     static std::vector<std::vector<int>> hourglass_anim_phase_last;
 
-    
     // for series
-    // 7x11
-    static std::vector<std::vector<int>> arrow_single;
+    // 7x4
+    static std::vector<std::vector<int>> arrow_small;
+    static std::vector<std::vector<int>> arrow_mid;
+    static std::vector<std::vector<int>> arrow_large;
+
     static std::vector<std::vector<int>> lightning;
     // 7x18
     static std::vector<std::vector<int>> excmark_little;
@@ -62,11 +64,12 @@ public:
     void draw_pattern_blinking(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int msdelay, double cycle=std::numeric_limits<double>::infinity());
     void draw_pattern_scrolling(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, float delaystep, double cycle=std::numeric_limits<double>::infinity());
     void draw_pattern_scrolling_rotating(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, float delaystep, double cycle=std::numeric_limits<double>::infinity());
-    // advanced drawers
+    // advanced
     void draw_pattern_tetris(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int PANEL_LAST_COL, int msdelay, double cycle=std::numeric_limits<double>::infinity());
     void draw_pattern_scrolling_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_DISTANCE, float delaystep, double cycle=std::numeric_limits<double>::infinity());
     void draw_pattern_scrolling_accumulator_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_DISTANCE, float delaystep, double cycle=std::numeric_limits<double>::infinity());
 
+    // helper functions
     void rotate_matrix_90(std::vector<std::vector<int>>& matrix);
 };
 

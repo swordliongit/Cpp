@@ -1,32 +1,16 @@
 #include <iostream>
 #include <vector>
 
-#include <pthread.h>
+void caller();
 
-int a = 0;
-
-void* TBC1(void*)
+void printer()
 {
-    int& b = a;
-    b += 10;
-    return NULL;
-}
-
-void* TBC2(void*)
-{
-    int& b = a;
-    b += 10;
-    return NULL;
+    std::cout << "Printed from the main function";
 }
 
 int main() 
 {
-    pthread_t thread_1, thread_2;
-
-    pthread_create(&thread_1, NULL, TBC1, NULL);
-    pthread_create(&thread_2, NULL, TBC2, NULL);
-
-    std::cout << ::a;
-
+    caller();
+    
     return 0;
 }

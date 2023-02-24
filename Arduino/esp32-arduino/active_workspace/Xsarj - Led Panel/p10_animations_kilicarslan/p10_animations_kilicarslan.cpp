@@ -93,8 +93,30 @@ std::vector<std::vector<int>> PatternAnimator::excmark_little =
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 	{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
-// 7x11
-std::vector<std::vector<int>> PatternAnimator::arrow_single =
+// 7x2
+std::vector<std::vector<int>> PatternAnimator::arrow_small =
+{
+	{0,0},
+	{0,0},
+	{1,0},
+	{0,1},
+	{1,0},
+	{0,0},
+	{0,0}
+};
+// 7x3
+std::vector<std::vector<int>> PatternAnimator::arrow_mid =
+{
+	{0,0,0},
+	{1,0,0},
+	{0,1,0},
+	{0,0,1},
+	{0,1,0},
+	{1,0,0},
+	{0,0,0}
+};
+// 7x4
+std::vector<std::vector<int>> PatternAnimator::arrow_large =
 {
 	{1,0,0,0},
 	{0,1,0,0},
@@ -454,26 +476,32 @@ void PatternAnimator::draw_pattern_scrolling_accumulator_series(std::vector<std:
 	COL_START -= PATTERN_COL_MAX;
 	float step = delaystep;
 	int pxjmp_step = 0;
-	int draw_next_pattern = 0;
 	
+	int counter = 0;
+	int dynamic_size = 0;
+
 	while(cycle > 0)
 	{
-		for(int patternindex=0, counter=0; patternindex < pattern_pack.size(); ++patternindex, counter+=(PATTERN_DISTANCE+PATTERN_COL_MAX))
+		if(pxjmp_step >= 0 && pxjmp_step < 20)
 		{
-			// draw the pattern
+			dynamic_size = 1;
+		}
+		else if(pxjmp_step >= 20 && pxjmp_step < 40)
+		{
+			dynamic_size = 2;
+		}
+		else if(pxjmp_step >= 40)
+		{
+			dynamic_size = 3;
+		}
+		// draw the patterns
+		for(int patternindex=0, counter=0; patternindex < dynamic_size; ++patternindex, counter+=(PATTERN_DISTANCE+PATTERN_COL_MAX))
+		{
 			for(int row=ROW_START, rowindex=0; rowindex <= pattern_pack[patternindex].size()-1; ++row, ++rowindex)
 			{
 				for(int col=COL_START+pxjmp_step, colindex=0; colindex <= pattern_pack[patternindex][rowindex].size()-1; ++col, ++colindex)
 				{
-					if(pxjmp_step > 15)
-					{
-						dmd->writePixel(col-counter, row, GRAPHICS_NORMAL, pattern_pack[patternindex][rowindex][colindex]);
-					} 
-					else
-					{
-						dmd->writePixel(col, row, GRAPHICS_NORMAL, pattern_pack[patternindex][rowindex][colindex]);
-					}
-					
+					dmd->writePixel(col-counter, row, GRAPHICS_NORMAL, pattern_pack[patternindex][rowindex][colindex]);
 				}
 			}
 		}
@@ -483,19 +511,31 @@ void PatternAnimator::draw_pattern_scrolling_accumulator_series(std::vector<std:
 		{
 			delaystep = delaystep-0.6f;
 		}
-		
-		for(int patternindex=0, counter=0; patternindex < pattern_pack.size(); ++patternindex, counter+=(PATTERN_DISTANCE+PATTERN_COL_MAX))
+
+		if(pxjmp_step >= 0 && pxjmp_step < 20)
 		{
-			// delete the pattern
-			for(int row=ROW_START, rowindex=0; rowindex < pattern_pack[patternindex].size(); ++row, ++rowindex)
+			dynamic_size = 1;
+		}
+		else if(pxjmp_step >= 20 && pxjmp_step < 40)
+		{
+			dynamic_size = 2;
+		}
+		else if(pxjmp_step >= 40)
+		{
+			dynamic_size = 3;
+		}
+		// delete the patterns
+		for(int patternindex=0, counter=0; patternindex < dynamic_size; ++patternindex, counter+=(PATTERN_DISTANCE+PATTERN_COL_MAX))
+		{
+			for(int row=ROW_START, rowindex=0; rowindex <= pattern_pack[patternindex].size()-1; ++row, ++rowindex)
 			{
-				for(int col=COL_START+pxjmp_step, colindex=0; colindex < pattern_pack[patternindex][rowindex].size()-1; ++col, ++colindex)
+				for(int col=COL_START+pxjmp_step, colindex=0; colindex <= pattern_pack[patternindex][rowindex].size()-1; ++col, ++colindex)
 				{
 					dmd->writePixel(col-counter, row, GRAPHICS_NORMAL, 0);
 				}
 			}
 		}
-		
+
 		// shift the pixels by 1 bit
 		++pxjmp_step;
 		// start from the beginning
