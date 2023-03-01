@@ -234,7 +234,64 @@ void anim_StationStopped(PatternAnimator& p10, double cycle=std::numeric_limits<
 // *********************************
 // *********************************
 
-void anim_StationCharging(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
+void anim_StationCharge_Starting()
+{
+    for(int cycle = 0; cycle < 2; ++cycle)
+    {
+        dmd.drawMarquee("ŞARJ BAŞLIYOR",14,(32*DISPLAYS_ACROSS)-1,0);
+        long start=millis();
+        long timer=start;
+        boolean ret=false;
+        while(!ret)
+        {
+            if ((timer+30) < millis()) 
+            {
+                ret=dmd.stepMarquee(-1,0);
+                timer=millis();
+            }
+        }
+    }
+}
+
+void anim_StationCharge_Started()
+{
+    for(int cycle = 0; cycle < 5; ++cycle)
+    {
+        dmd.drawMarquee("ŞARJ BAŞLADI",14,(32*DISPLAYS_ACROSS)-1,0);
+        long start=millis();
+        long timer=start;
+        boolean ret=false;
+        while(!ret)
+        {
+            if ((timer+30) < millis()) 
+            {
+                ret=dmd.stepMarquee(-1,0);
+                timer=millis();
+            }
+        }
+    }
+}
+
+void anim_StationCharge_Stopped()
+{
+    for(int cycle = 0; cycle < 2; ++cycle)
+    {
+        dmd.drawMarquee("ŞARJ SONLANDIRILDI",14,(32*DISPLAYS_ACROSS)-1,0);
+        long start=millis();
+        long timer=start;
+        boolean ret=false;
+        while(!ret)
+        {
+            if ((timer+30) < millis()) 
+            {
+                ret=dmd.stepMarquee(-1,0);
+                timer=millis();
+            }
+        }
+    }
+}
+
+void anim_StationCharge_Charging(PatternAnimator& p10, double cycle=std::numeric_limits<double>::infinity())
 {
     int ROW_START = 4;
     int COL_START = 0;
@@ -277,10 +334,12 @@ void runthreads()
   Arduino architecture main loop
   --------------------------------------------------------------------------------------*/
 
-PatternAnimator p10(&dmd);
+
 
 void loop(void)
 {
+    PatternAnimator p10(&dmd);
+
     timerWrite(timer, 0); //reset timer (feed watchdog)
     
 	byte b;
