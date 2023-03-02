@@ -238,7 +238,7 @@ void anim_StationCharge_Starting()
 {
     for(int cycle = 0; cycle < 2; ++cycle)
     {
-        dmd.drawMarquee("ŞARJ BAŞLIYOR",14,(32*DISPLAYS_ACROSS)-1,0);
+        dmd.drawMarquee("ŞARJ BAŞLIYOR",13,(32*DISPLAYS_ACROSS)-1,4);
         long start=millis();
         long timer=start;
         boolean ret=false;
@@ -257,7 +257,7 @@ void anim_StationCharge_Started()
 {
     for(int cycle = 0; cycle < 5; ++cycle)
     {
-        dmd.drawMarquee("ŞARJ BAŞLADI",14,(32*DISPLAYS_ACROSS)-1,0);
+        dmd.drawMarquee("ŞARJ BAŞLADI",12,(32*DISPLAYS_ACROSS)-1,4);
         long start=millis();
         long timer=start;
         boolean ret=false;
@@ -276,7 +276,7 @@ void anim_StationCharge_Stopped()
 {
     for(int cycle = 0; cycle < 2; ++cycle)
     {
-        dmd.drawMarquee("ŞARJ SONLANDIRILDI",14,(32*DISPLAYS_ACROSS)-1,0);
+        dmd.drawMarquee("ŞARJ SONLANDIRILDI",18,(32*DISPLAYS_ACROSS)-1,4);
         long start=millis();
         long timer=start;
         boolean ret=false;
