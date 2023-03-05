@@ -604,7 +604,7 @@ void PatternAnimator::draw_pattern_tetris(std::vector<std::vector<int>> pattern,
 			--jmpstep_shifter;
 
 			step = 35;
-			if(colindex == -1) 
+			if(colindex == 0) 
 			{
 				delay(msdelay);
 				dmd->clearScreen(true);
