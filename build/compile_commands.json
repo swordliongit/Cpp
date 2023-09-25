@@ -1,7 +1,0 @@
-[
-{
-  "directory": "C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/build",
-  "command": "C:\\mingw64\\bin\\g++.exe   -g -std=gnu++17 -o CMakeFiles\\main.dir\\main.cpp.obj -c C:\\Users\\SWORD\\Desktop\\Workspace\\Programming\\Cpp\\src\\main.cpp",
-  "file": "C:/Users/SWORD/Desktop/Workspace/Programming/Cpp/src/main.cpp"
-}
-]

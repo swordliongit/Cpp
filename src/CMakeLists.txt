@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(main VERSION 0.1.0)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 
 include(CTest)
 enable_testing()
 
 # find_package(pybind11 REQUIRED)
 # add_compile_definitions(MS_WIN64)
+# file(GLOB SOURCES "*.cpp")
 set(SOURCE_FILES main.cpp)
 
 # find_package(HDF5 REQUIRED COMPONENTS C)
