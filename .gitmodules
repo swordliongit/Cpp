@@ -1,0 +1,9 @@
+[submodule "MicroOcpp"]
+	path = MicroOcpp
+	url = https://github.com/swordliongit/MicroOcpp.git
+[submodule "ImGui"]
+	path = ImGui
+	url = https://github.com/swordliongit/ImGui.git
+[submodule "ESP32-MAX7219"]
+	path = ESP32-MAX7219
+	url = https://github.com/swordliongit/ESP32-MAX7219.git
