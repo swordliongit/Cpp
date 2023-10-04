@@ -1,0 +1,190 @@
+void change_wifi_Command() {
+  if (raw_serial2.indexOf("w_") >= 0 && raw_serial2.indexOf("-") > 0 && raw_serial2.indexOf("%") > 0) {
+    String data = raw_serial2;
+    Serial.println("here1");
+    writeStringToEeprom(1, data);
+    arrangeWifiAndPassword();
+    if (data.startsWith("w_")) {
+      Serial.println("Camera Wifi Name and Password Changed!");
+      delay(5);
+      ESP.restart();
+    }
+  }
+}
+void arrangeWifiAndPassword() {
+  String recivedData;
+  recivedData = read_StringFromEeprom(1);
+  Serial.print("Read Wifi Data:");
+  Serial.println(recivedData);
+  if (recivedData.startsWith("w_")) {
+    wifiname = (recivedData.substring(recivedData.indexOf("w_") + 2, recivedData.indexOf("-")));
+    wifipassword = (recivedData.substring(recivedData.indexOf("-") + 1, recivedData.indexOf("%")));
+    delay(1000);
+    wifiname.toCharArray(ssid, 50);
+    wifipassword.toCharArray(password, 50);
+    yield();
+  }
+}
+
+void tryToReconnectWifi_Setup() {
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("Wifi Name Found Succesfully. Trying To Connect..");
+    WiFi.disconnect();
+    WiFi.mode(WIFI_OFF);
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, password);
+    delay(500);
+    Serial.print(".");
+    if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+      Serial.printf("WiFi Failed!\n");
+      ESP.restart();
+      return;
+    }
+    WiFi.setSleep(false);
+  }
+  if (WiFi.status() == WL_CONNECTED) {
+    wifi_connected_counter++;
+    wifi_status = 1;
+  }
+}
+
+
+void tryToReconnectWifi() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis_wifi_timer >= interval_wifi_timer) {
+    previousMillis_wifi_timer = currentMillis;
+    unsigned long currentMillis = millis();
+    if (WiFi.status() != WL_CONNECTED) {
+      Serial.println("Wifi Name Found Succesfully. Trying To Connect..");
+      WiFi.disconnect();
+      WiFi.mode(WIFI_OFF);
+      WiFi.mode(WIFI_STA);
+      WiFi.begin(ssid, password);
+      //    if (WiFi.waitForConnectResult() != WL_CONNECTED) {
+      //      Serial.printf("WiFi Failed!\n");
+      //      return;
+      //    }
+      WiFi.setSleep(false);
+    }
+    if (wifi_connected_counter == 0 && WiFi.status() == WL_CONNECTED) {
+      ESP.restart();
+    }
+  }
+}
+
+
+void writeStringToEeprom(char add, String data)
+{
+  int _size = data.length();
+  int i;
+  for (i = 0; i < _size; i++)
+  {
+    EEPROM.write(add + i, data[i]);
+  }
+  EEPROM.write(add + _size, '\0'); //Add termination null character for String Data
+  EEPROM.commit();
+}
+
+String read_StringFromEeprom(char add)
+{
+  int i;
+  char data[100]; //Max 100 Bytes
+  int len = 0;
+  unsigned char k;
+  k = EEPROM.read(add);
+  while (k != '\0' && len < 59) //Read until null character
+  {
+    k = EEPROM.read(add + len);
+    data[len] = k;
+    len++;
+  }
+  data[len] = '\0';
+  return String(data);
+}
+
+void reset_Eeprom() {
+  Serial.println("WiFi Eeprom Resetted!");
+  writeStringToEeprom(1, "nodata");
+  ESP.restart();
+}
+
+void testEepromWorking() {
+  if (!EEPROM.begin(512)) {
+    Serial.println("Failed to initialise EEPROM");
+    Serial.println("Restarting...");
+    ESP.restart();
+  }
+}
+
+
+void write_Int_ToEeprom()
+{
+  EEPROM.write(109, version);
+
+
+  //  EEPROM.write(53, config_4_value);
+  //  EEPROM.write(54, config_5_value);
+  //  EEPROM.write(55, config_6_value);
+  //  EEPROM.write(56, config_7_value);
+  //  EEPROM.write(57, config_8_value);
+  //  EEPROM.write(58, config_9_value);
+  //  EEPROM.write(59, config_10_value);
+  //  EEPROM.write(60, config_11_value);
+  //  EEPROM.write(61, config_12_value);
+  //  EEPROM.write(62, config_13_value);
+  //  EEPROM.write(63, config_14_value);
+  //  EEPROM.write(64, config_15_value);
+  //  EEPROM.write(65, config_16_value);
+  //  EEPROM.write(66, config_17_value);
+  //  EEPROM.write(67, config_18_value);
+  //  EEPROM.write(68, config_19_value);
+  //  EEPROM.write(69, config_20_value);
+  //  EEPROM.write(70, config_20_value);
+  //  EEPROM.write(71, config_20_value);
+  //  EEPROM.write(72, config_20_value);
+  //  EEPROM.write(73, config_20_value);
+  //  EEPROM.write(74, config_20_value);
+  //  EEPROM.write(75, config_20_value);
+  //  EEPROM.write(76, config_20_value);
+  //  EEPROM.write(77, config_20_value);
+  //  EEPROM.write(78, config_20_value);
+  //  EEPROM.write(79, config_20_value);
+  EEPROM.commit();
+  Serial.println("Writing Datas To Eeprom");
+}
+
+void read_Int_Eeprom() {
+  version = int(EEPROM.read(109));
+
+  //  config_4_value = int(EEPROM.read(53));
+  //  config_5_value = int(EEPROM.read(54));
+  //  config_6_value = int(EEPROM.read(55));
+  //  config_7_value = int(EEPROM.read(56));
+  //  config_8_value = int(EEPROM.read(57));
+  //  config_9_value = int(EEPROM.read(58));
+  //  config_10_value = int(EEPROM.read(59));
+  //  config_11_value = int(EEPROM.read(60));
+  //  config_12_value = int(EEPROM.read(61));
+  //  config_13_value = int(EEPROM.read(62));
+  //  config_14_value = int(EEPROM.read(63));
+  //  config_15_value = int(EEPROM.read(64));
+  //  config_16_value = int(EEPROM.read(65));
+  //  config_17_value = int(EEPROM.read(66));
+  //  config_18_value = int(EEPROM.read(67));
+  //  config_19_value = int(EEPROM.read(68));
+  //  config_20_value = int(EEPROM.read(69));
+  //  config_21_value = int(EEPROM.read(70));
+  //  config_22_value = int(EEPROM.read(71));
+  //  config_23_value = int(EEPROM.read(72));
+  //  config_24_value = int(EEPROM.read(73));
+  //  config_25_value = int(EEPROM.read(74));
+  //  config_26_value = int(EEPROM.read(75));
+  //  config_27_value = int(EEPROM.read(76));
+  //  config_28_value = int(EEPROM.read(77));
+  //  config_29_value = int(EEPROM.read(78));
+  //  config_30_value = int(EEPROM.read(79));
+
+  Serial.println("-----------Read Eeprom Int Values-------------------------");
+  Serial.print("version:");
+  Serial.println(version);
+}
