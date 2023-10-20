@@ -18,30 +18,55 @@
             }
           },
           {
-            "id": "934316ada032285e",
+            "id": "aac2760a2c8234b3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Dictionary.md",
+                "file": "Dictionary/Dictionary ( Map ).md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "8cd956f3e4576cfa",
+            "id": "a1972077047bd30f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Patterns/Structural Patterns/Structural Patterns.md",
+                "file": "Dictionary/Iterating over Dictionary.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2aae990477d9a5d9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Dictionary/Dictionary ( Map ).md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "36a0933f5d210b96",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Patterns/Structural Patterns/Adapter.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -107,6 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Patterns/Structural Patterns/Adapter.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,6 +149,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Patterns/Structural Patterns/Adapter.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -144,7 +171,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Patterns/Structural Patterns/Adapter.md"
+              }
             }
           }
         ]
@@ -164,15 +193,18 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f7b00dfac9fd40b9",
+  "active": "36a0933f5d210b96",
   "lastOpenFiles": [
-    "Patterns/Structural Patterns/Adapter.md",
-    "Dictionary.md",
-    "Patterns/Structural Patterns/Structural Patterns.md",
     "Patterns/Patterns.md",
-    "Iterating over Dictionary.md",
-    "Finding a Key.md",
+    "Dictionary/Dictionary ( Map ).md",
+    "Dictionary/Iterating over Dictionary.md",
+    "Dictionary/Insert a key-value pair.md",
+    "Patterns/Structural Patterns/Adapter.md",
+    "Dictionary/Finding a Key.md",
+    "Tuple.md",
+    "Dictionary",
     "Patterns/Structural Patterns/Bridge.md",
+    "Patterns/Structural Patterns/Structural Patterns.md",
     "Patterns/Structural Patterns",
     "Patterns"
   ]
