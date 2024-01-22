@@ -50,6 +50,14 @@ void swSer_send_Data_Pstatus(String swSer_String) {
 //  }
 //}
 
+void swser_Get_Data() {
+  if (swSer.available() > 0) {
+    data_from_serial = swSer.readStringUntil('\n');
+    Serial.println("Raw Wireless Sensor Data: " + data_from_serial);
+    yield();
+  }
+}
+
 //23 ve 5 pini
 //void esp_To_Esp_Communication() {
 //  if (swSer_1.available() > 0) {

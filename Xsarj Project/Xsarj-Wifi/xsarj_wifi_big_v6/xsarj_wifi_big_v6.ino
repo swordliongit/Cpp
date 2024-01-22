@@ -695,5 +695,9 @@ void loop() {
   wifi_Http_Get_Request_For_Ota_Filename();
 
   led_blink();
+  //wser_Get_Data();
+
+  swSer.println("plugged");
+  delay(10000);
 
 }
