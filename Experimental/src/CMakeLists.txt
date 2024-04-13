@@ -9,6 +9,8 @@ enable_testing()
 # add_compile_definitions(MS_WIN64)
 # file(GLOB SOURCES "*.cpp")
 set(SOURCE_FILES main.cpp)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 
 # find_package(HDF5 REQUIRED COMPONENTS C)
 

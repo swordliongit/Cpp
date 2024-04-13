@@ -1,0 +1,140 @@
+{
+  "nodePositions": [
+    {
+      "id": "CONCURRENCY/CONCURRENCY.md",
+      "x": 558.8558349609375,
+      "y": 93.43839263916016
+    },
+    {
+      "id": "CONCURRENCY/Thread Management and Interface.md",
+      "x": 584.8359375,
+      "y": 335.6047058105469
+    },
+    {
+      "id": "CONCURRENCY/Threads.md",
+      "x": 436.7171630859375,
+      "y": 219.09054565429688
+    },
+    {
+      "id": "CONTAINERS/CONTAINERS.md",
+      "x": 201.7969512939453,
+      "y": -443.0316162109375
+    },
+    {
+      "id": "CONTAINERS/Dictionary/Map ( Dictionary ).md",
+      "x": 370.4124450683594,
+      "y": -376.9515075683594
+    },
+    {
+      "id": "CONTAINERS/Filtering.md",
+      "x": 275.47894287109375,
+      "y": -598.3034057617188
+    },
+    {
+      "id": "CONTAINERS/Tuple.md",
+      "x": 53.31166458129883,
+      "y": -539.5642700195312
+    },
+    {
+      "id": "FUNCTIONAL/Currying.md",
+      "x": 170.7420654296875,
+      "y": 165.2493896484375
+    },
+    {
+      "id": "FUNCTIONAL/FUNCTIONAL.md",
+      "x": 24.40726661682129,
+      "y": 73.16326141357422
+    },
+    {
+      "id": "FUNCTIONAL/Lambda.md",
+      "x": 167.0916748046875,
+      "y": -30.616514205932617
+    },
+    {
+      "id": "Literals.md",
+      "x": -643.3634643554688,
+      "y": -88.68904876708984
+    },
+    {
+      "id": "Modern Pointer Usage.md",
+      "x": -410.1087646484375,
+      "y": 51.114566802978516
+    },
+    {
+      "id": "Move Semantics - Done with the object.md",
+      "x": -593.9848022460938,
+      "y": 213.62847900390625
+    },
+    {
+      "id": "Number Systems.md",
+      "x": -551.7503051757812,
+      "y": -376.1097412109375
+    },
+    {
+      "id": "PATTERNS/PATTERNS.md",
+      "x": -272.3744812011719,
+      "y": 488.30224609375
+    },
+    {
+      "id": "PATTERNS/Structural Patterns/Adapter.md",
+      "x": -204.1737518310547,
+      "y": 661.1069946289062
+    },
+    {
+      "id": "PATTERNS/Structural Patterns/Bridge.md",
+      "x": -151.82591247558594,
+      "y": 361.3551025390625
+    },
+    {
+      "id": "PATTERNS/Structural Patterns/Structural Patterns.md",
+      "x": -94.37049102783203,
+      "y": 528.6373291015625
+    },
+    {
+      "id": "Random Numbers.md",
+      "x": -389.7629089355469,
+      "y": -203.2589874267578
+    },
+    {
+      "id": "Stream Functions - Output Formatting.md",
+      "x": -118.4942855834961,
+      "y": -179.12216186523438
+    },
+    {
+      "id": "Strings.md",
+      "x": -322.5483093261719,
+      "y": -524.0519409179688
+    },
+    {
+      "id": "Type Casting.md",
+      "x": -153.8965606689453,
+      "y": -408.1570129394531
+    },
+    {
+      "id": "CONCURRENCY/Shared Data.md",
+      "x": 362.35882568359375,
+      "y": 395.9756164550781
+    },
+    {
+      "id": "CONCURRENCY/Sync Issues.md",
+      "x": -212.02496337890625,
+      "y": 89.94427490234375
+    },
+    {
+      "id": "CONCURRENCY/CPUs and Threads.md",
+      "x": 217.25863647460938,
+      "y": -227.63758850097656
+    },
+    {
+      "id": "CONCURRENCY/Untitled.md",
+      "x": 118.96493530273438,
+      "y": 426.9409484863281
+    },
+    {
+      "id": "CONCURRENCY/Mutex.md",
+      "x": 275.44500732421875,
+      "y": 555.3770141601562
+    }
+  ],
+  "automaticallyRestoreNodePositions": true
+}

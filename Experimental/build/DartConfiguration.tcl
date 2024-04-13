@@ -14,7 +14,7 @@ CostDataFile:
 Site: SWORD
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Win32-MSBuild
+BuildName: Win32-mingw32-make
 
 # Subprojects
 LabelsForSubprojects: 
@@ -27,8 +27,8 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/Workspace/Programming/Cpp/Experimental/src"
-MakeCommand: "C:\Program Files\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
+ConfigureCommand: "C:/mingw64/bin/cmake.exe" "C:/Workspace/Programming/Cpp/Experimental/src"
+MakeCommand: C:/mingw64/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 
 # version control
@@ -63,8 +63,8 @@ UpdateOptions:
 UpdateType: 
 
 # Compiler info
-Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.36.32532/bin/Hostx64/x64/cl.exe
-CompilerVersion: 19.36.32535.0
+Compiler: C:/mingw64/bin/g++.exe
+CompilerVersion: 13.1.0
 
 # Dynamic analysis (MemCheck)
 PurifyCommand: 
@@ -95,7 +95,7 @@ TimeOut: 1500
 # so would cause the system load to exceed this value.
 TestLoad: 
 
-UseLaunchers: 0
+UseLaunchers: 
 CurlOptions: 
 # warning, if you add new options here that have to do with submit,
 # you have to update cmCTestSubmitCommand.cxx

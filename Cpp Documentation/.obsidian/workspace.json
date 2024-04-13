@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "547f29b14f79df6b",
+        "id": "c0bcd7d32ace98c5",
         "type": "tabs",
         "children": [
           {
-            "id": "f7b00dfac9fd40b9",
+            "id": "55bbcfc38cd4409b",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -18,55 +18,79 @@
             }
           },
           {
-            "id": "aac2760a2c8234b3",
+            "id": "fde9a50cda0285c9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Dictionary/Dictionary ( Map ).md",
+                "file": "CONCURRENCY/CPUs and Threads.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "a1972077047bd30f",
+            "id": "1c2ebfc20910ddbb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Dictionary/Iterating over Dictionary.md",
+                "file": "CONCURRENCY/CPUs and Threads.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "2aae990477d9a5d9",
+            "id": "b712df14419c487f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Dictionary/Dictionary ( Map ).md",
+                "file": "CONCURRENCY/Threads.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "36a0933f5d210b96",
+            "id": "854a5b1627de81fd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Patterns/Structural Patterns/Adapter.md",
+                "file": "CONCURRENCY/Mutex.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "016c9bc5d5a5029e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CONCURRENCY/Mutex.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0ce89f50923a191e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CONCURRENCY/Mutex.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -116,7 +140,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "f8e511d41ff08dc2",
@@ -132,7 +156,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Patterns/Structural Patterns/Adapter.md",
+                "file": "CONCURRENCY/Mutex.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -149,7 +173,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Patterns/Structural Patterns/Adapter.md",
+                "file": "CONCURRENCY/Mutex.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -172,7 +196,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Patterns/Structural Patterns/Adapter.md"
+                "file": "CONCURRENCY/Mutex.md"
               }
             }
           }
@@ -193,19 +217,51 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "36a0933f5d210b96",
+  "active": "0ce89f50923a191e",
   "lastOpenFiles": [
-    "Patterns/Patterns.md",
-    "Dictionary/Dictionary ( Map ).md",
-    "Dictionary/Iterating over Dictionary.md",
-    "Dictionary/Insert a key-value pair.md",
-    "Patterns/Structural Patterns/Adapter.md",
-    "Dictionary/Finding a Key.md",
-    "Tuple.md",
-    "Dictionary",
-    "Patterns/Structural Patterns/Bridge.md",
-    "Patterns/Structural Patterns/Structural Patterns.md",
-    "Patterns/Structural Patterns",
-    "Patterns"
+    "CONCURRENCY/Mutex.md",
+    "CONCURRENCY/Threads.md",
+    "CONCURRENCY/Shared Data.md",
+    "CONCURRENCY/CPUs and Threads.md",
+    "SS/Screenshot 2024-04-10 121648.png",
+    "SS",
+    "CONCURRENCY/SS/Screenshot 2024-04-10 202028.png",
+    "CONCURRENCY/SS",
+    "CONCURRENCY/Untitled.md",
+    "SS/Screenshot 2024-04-10 201341.png",
+    "CONCURRENCY/SS/Screenshot 2024-04-10 215241.png",
+    "CONCURRENCY/SS/Screenshot 2024-04-10 215244.png",
+    "CONCURRENCY/SS/Screenshot 2024-04-10 215738.png",
+    "CONCURRENCY/SS/Screenshot 2024-04-11 141621.png",
+    "CONCURRENCY/SS/Screenshot 2024-04-11 142243.png",
+    "CONCURRENCY/SS/Screenshot 2024-04-11 144513.png",
+    "CONCURRENCY/SS/Screenshot 2024-04-11 144641.png",
+    "Move Semantics - Done with the object.md",
+    "CONCURRENCY/Sync Issues.md",
+    "CONCURRENCY/Thread Management and Interface.md",
+    "Modern Pointer Usage.md",
+    "Strings.md",
+    "Stream Functions - Output Formatting.md",
+    "CONCURRENCY/CONCURRENCY.md",
+    "CONCURRENCY",
+    "CONTAINERS/Tuple.md",
+    "Random Numbers.md",
+    "FUNCTIONAL/Lambda.md",
+    "Type Casting.md",
+    "FUNCTIONAL/FUNCTIONAL.md",
+    "Literals.md",
+    "CONTAINERS/CONTAINERS.md",
+    "CONTAINERS/Filtering.md",
+    "CONTAINERS/Dictionary/Map ( Dictionary ).md",
+    "FUNCTIONAL/Currying.md",
+    "PATTERNS/Structural Patterns/Adapter.md",
+    "PATTERNS/Structural Patterns/Bridge.md",
+    "PATTERNS/Structural Patterns/Structural Patterns.md",
+    "CONTAINERS/Dictionary/Insert a key-value pair.md",
+    "CONTAINERS",
+    "FUNCTIONAL",
+    "CONTAINERS/Dictionary",
+    "PATTERNS/Structural Patterns",
+    "PATTERNS"
   ]
 }

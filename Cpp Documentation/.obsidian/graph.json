@@ -5,18 +5,47 @@
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": true,
-  "colorGroups": [],
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "CONTAINERS",
+      "color": {
+        "a": 1,
+        "rgb": 6072278
+      }
+    },
+    {
+      "query": "tag:PATTERNS",
+      "color": {
+        "a": 1,
+        "rgb": 11982428
+      }
+    },
+    {
+      "query": "tag:FUNCTIONAL",
+      "color": {
+        "a": 1,
+        "rgb": 6079190
+      }
+    },
+    {
+      "query": "tag:#CONCURRENCY  ",
+      "color": {
+        "a": 1,
+        "rgb": 10496782
+      }
+    }
+  ],
   "collapse-display": false,
   "showArrow": false,
-  "textFadeMultiplier": 0,
-  "nodeSizeMultiplier": 1,
-  "lineSizeMultiplier": 1,
+  "textFadeMultiplier": -3,
+  "nodeSizeMultiplier": 1.82958768479588,
+  "lineSizeMultiplier": 1.95718839007188,
   "collapse-forces": false,
-  "centerStrength": 0.248403749490558,
-  "repelStrength": 10,
-  "linkStrength": 0.852669474256215,
-  "linkDistance": 202,
-  "scale": 0.6671361259312965,
+  "centerStrength": 0.10558795605588,
+  "repelStrength": 5.06306795063068,
+  "linkStrength": 0.51356300013563,
+  "linkDistance": 165,
+  "scale": 0.6671361259312967,
   "close": false
 }

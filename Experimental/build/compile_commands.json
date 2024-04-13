@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Workspace/Programming/Cpp/Experimental/build",
+  "command": "C:\\mingw64\\bin\\g++.exe   -g -std=gnu++20 -o CMakeFiles\\main.dir\\main.cpp.obj -c C:\\Workspace\\Programming\\Cpp\\Experimental\\src\\main.cpp",
+  "file": "C:/Workspace/Programming/Cpp/Experimental/src/main.cpp",
+  "output": "CMakeFiles/main.dir/main.cpp.obj"
+}
+]
