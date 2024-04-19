@@ -1,0 +1,3 @@
+#TEMPLATES
+
+[[Variadic Templates]]

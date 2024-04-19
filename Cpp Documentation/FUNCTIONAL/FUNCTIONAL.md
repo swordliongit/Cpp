@@ -1,4 +1,0 @@
-#FUNCTIONAL
-
-[[Currying]]
-[[Lambda]]

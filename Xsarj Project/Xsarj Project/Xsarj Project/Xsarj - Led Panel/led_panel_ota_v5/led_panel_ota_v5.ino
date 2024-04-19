@@ -44,7 +44,7 @@
 #include <vector> // for vector
 #include <limits> // for numeric_limits
 #include <thread>
-#include <p10_animations_kilicarslan.h>
+#include "p10_animations_kilicarslan.h"
 
 #include <Arduino.h>
 #include <WiFi.h>
@@ -148,20 +148,20 @@ void setup(void)
   Serial.print(password);
   Serial.print(" ");
 
-  scan_Wifi();
+  //scan_Wifi();
   if (wifi_name_found == 0) {
     //ble_Setup();
   }
-
+/*
   if (wifi_name_found == 1) {
     tryToReconnectWifi_Setup();
     Serial.print("IP Address: ");
     Serial.println(WiFi.localIP());
 
-    wifi_Http_Get_Request_For_Ota_Filename_Setup();
+    //wifi_Http_Get_Request_For_Ota_Filename_Setup();
 
   }
-
+*/
   timer = timerBegin(0, 80, true);                  //timer 0, div 80
   timerAttachInterrupt(timer, &resetModule, true);  //attach callback
   timerAlarmWrite(timer, wdtTimeout * 1000, false); //set time in us
@@ -397,6 +397,20 @@ void anim_StationCharge_Charging(PatternAnimator& p10, double cycle = std::numer
   p10.draw_pattern_scrolling(p10.lightning, ROW_START, COL_START, delaystep, cycle);
 }
 
+void anim_StationWaiting_custom(PatternAnimator& p10, const char* bChars) {
+  dmd.drawMarquee(bChars, 6, (32 * DISPLAYS_ACROSS) - 1, 4);
+  long start = millis();
+  long timer = start;
+  boolean ret = false;
+  while (!ret) {
+    if ((timer + 21) < millis()) {
+      ret = dmd.stepMarquee(-1, 0);
+      timer = millis();
+    }
+  }
+}
+
+
 void runthreads()
 {
 
@@ -454,7 +468,6 @@ void loop(void)
     charge_started = false;
     charge_stopped = false;
     anim_StationCharge_Starting();
-
   }
   else if (data_from_serial2 == "2")
   {
@@ -480,7 +493,8 @@ void loop(void)
       anim_StationCharge_Stopped();
       charge_stopped = true;
     }
-    anim_StationWaiting(p10, 1);
+    //anim_StationWaiting(p10, 1);
+    anim_StationWaiting_custom(p10, "PETROO");
   }
   else if (data_from_serial2 == "5")
   {
@@ -493,7 +507,8 @@ void loop(void)
   {
     charge_started = false;
     charge_stopped = false;
-    anim_StationWaiting(p10, 1);
+    //anim_StationWaiting(p10, 1);
+    anim_StationWaiting_custom(p10, "PETROO");
   }
   else if (data_from_serial2 == "7")
   {
@@ -506,6 +521,9 @@ void loop(void)
     charge_started = false;
     charge_stopped = false;
     anim_InsertSocket(p10, 1);
+  }
+  else if (data_from_serial2 == "9") {
+    ;
   }
   else if (data_from_serial2 == "99")
   {

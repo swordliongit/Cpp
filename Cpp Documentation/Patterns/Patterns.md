@@ -1,3 +1,0 @@
-#PATTERNS
-
-[[Structural Patterns]]

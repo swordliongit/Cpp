@@ -1,6 +1,11 @@
 
+#include <barrier>
+#include <exception>
 #include <iostream>
+#include <iterator>
+#include <map>
 #include <mutex>
+#include <string>
 #include <thread>
 #include <vector>
 
@@ -58,10 +63,14 @@ std::mutex mutex;
 
 void adder() {
 
-    for (int i = 0; i < 100'000; i++) {
-        mutex.lock();
-        ++num;
-        mutex.unlock();
+    try {
+        for (int i = 0; i < 100'000; i++) {
+            std::lock_guard lguard{mutex};
+            ++num;
+            // throw std::exception();
+        }
+    } catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
     }
 }
 
@@ -96,12 +105,81 @@ public:
         mutex.unlock();
     }
 };
-Vector vec;
 
+std::barrier barrier{3};
+
+void btask1() {
+    std::this_thread::sleep_for(3s);
+    std::cout << "thread 1 arrived to barrier"
+              << "\n";
+    barrier.arrive_and_wait();
+    std::cout << "thread 1 exited the barrier"
+              << "\n";
+}
+
+void btask2() {
+    std::cout << "thread 2 arrived to barrier"
+              << "\n";
+    barrier.arrive_and_wait();
+    std::cout << "thread 2 exited the barrier"
+              << "\n";
+}
+
+void btask3() {
+    std::this_thread::sleep_for(5s);
+    std::cout << "thread 3 arrived to barrier"
+              << "\n";
+    barrier.arrive_and_wait();
+    std::cout << "thread 3 exited the barrier"
+              << "\n";
+}
+
+void printer_task(std::string str, std::mutex& mtx) {
+    for (int i = 0; i < 5; ++i) {
+        try {
+            std::lock_guard lguard{mtx};
+            std::cout << str[0] << str[1] << str[2] << std::endl;
+            throw std::exception();
+            std::this_thread::sleep_for(50ms);
+        } catch (const std::exception& e) {
+            std::cout << "Exception caught: " << e.what() << std::endl;
+        }
+    }
+}
+
+void printer_task_alt(std::string str, std::mutex& mtx) {
+    for (int i = 0; i < 5; ++i) {
+        std::unique_lock<std::mutex> uqlock{mtx};
+        std::cout << str[0] << str[1] << str[2] << std::endl;
+        uqlock.unlock();
+        std::this_thread::sleep_for(50ms);
+    }
+}
 
 int main(int argc, char const* argv[]) {
 
-    std::string_view str;
+    // std::thread t1(btask1);
+    // std::thread t2(btask2);
+    // std::thread t3(btask3);
+    std::mutex mtx;
+    // std::thread t1(printer_task, "abc", std::ref(mtx));
+    // std::thread t2(printer_task, "xyz", std::ref(mtx));
+    // std::thread t3(printer_task, "def", std::ref(mtx));
+
+    std::thread t1(printer_task_alt, "abc", std::ref(mtx));
+    std::thread t2(printer_task_alt, "xyz", std::ref(mtx));
+    std::thread t3(printer_task_alt, "def", std::ref(mtx));
+
+    t1.join();
+    t2.join();
+    t3.join();
+
+    // for (auto it = jsdict.) {
+    //     std::cout << key << value;
+    // }
+    // t1.join();
+    // t2.join();
+    // t3.join();
     // basic mutex
     // std::thread t1(adder);
     // std::thread t2(adder);

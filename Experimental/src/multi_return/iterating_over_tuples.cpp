@@ -3,9 +3,13 @@
 #include <vector>
 
 template <typename... Args>
-auto Sum(const std::tuple<Args...>& tp) {
+auto Sum(const std::tuple<Args...> & tp) {
     auto sum = 0;
-    std::apply([&sum](const auto&... args) { ((sum += args), ...); }, tp);
+    std::apply(
+        [&sum](const auto &... args) {
+            ((sum += args), ...);
+        },
+        tp);
     return sum;
 }
 

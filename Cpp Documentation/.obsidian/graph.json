@@ -29,10 +29,24 @@
       }
     },
     {
-      "query": "tag:#CONCURRENCY  ",
+      "query": "tag:CONCURRENCY  ",
       "color": {
         "a": 1,
         "rgb": 10496782
+      }
+    },
+    {
+      "query": "file:C++",
+      "color": {
+        "a": 1,
+        "rgb": 13130966
+      }
+    },
+    {
+      "query": "tag:#TEMPLATES  ",
+      "color": {
+        "a": 1,
+        "rgb": 9568455
       }
     }
   ],
@@ -46,6 +60,6 @@
   "repelStrength": 5.06306795063068,
   "linkStrength": 0.51356300013563,
   "linkDistance": 165,
-  "scale": 0.6671361259312967,
+  "scale": 0.38889624010285817,
   "close": false
 }

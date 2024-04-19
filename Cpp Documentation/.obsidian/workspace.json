@@ -18,79 +18,31 @@
             }
           },
           {
-            "id": "fde9a50cda0285c9",
+            "id": "1ddbdb28e173c695",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CONCURRENCY/CPUs and Threads.md",
+                "file": "C++/TEMPLATES/Variadic Templates.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "1c2ebfc20910ddbb",
+            "id": "dc9c2b8520d3d4fe",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CONCURRENCY/CPUs and Threads.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b712df14419c487f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CONCURRENCY/Threads.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "854a5b1627de81fd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CONCURRENCY/Mutex.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "016c9bc5d5a5029e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CONCURRENCY/Mutex.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0ce89f50923a191e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CONCURRENCY/Mutex.md",
+                "file": "C++/ImGui/ImGui.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -156,7 +108,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CONCURRENCY/Mutex.md",
+                "file": "C++/ImGui/ImGui.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -173,7 +125,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CONCURRENCY/Mutex.md",
+                "file": "C++/ImGui/ImGui.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -196,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CONCURRENCY/Mutex.md"
+                "file": "C++/ImGui/ImGui.md"
               }
             }
           }
@@ -217,51 +169,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0ce89f50923a191e",
+  "active": "dc9c2b8520d3d4fe",
   "lastOpenFiles": [
-    "CONCURRENCY/Mutex.md",
-    "CONCURRENCY/Threads.md",
-    "CONCURRENCY/Shared Data.md",
-    "CONCURRENCY/CPUs and Threads.md",
-    "SS/Screenshot 2024-04-10 121648.png",
-    "SS",
-    "CONCURRENCY/SS/Screenshot 2024-04-10 202028.png",
-    "CONCURRENCY/SS",
-    "CONCURRENCY/Untitled.md",
-    "SS/Screenshot 2024-04-10 201341.png",
-    "CONCURRENCY/SS/Screenshot 2024-04-10 215241.png",
-    "CONCURRENCY/SS/Screenshot 2024-04-10 215244.png",
-    "CONCURRENCY/SS/Screenshot 2024-04-10 215738.png",
-    "CONCURRENCY/SS/Screenshot 2024-04-11 141621.png",
-    "CONCURRENCY/SS/Screenshot 2024-04-11 142243.png",
-    "CONCURRENCY/SS/Screenshot 2024-04-11 144513.png",
-    "CONCURRENCY/SS/Screenshot 2024-04-11 144641.png",
-    "Move Semantics - Done with the object.md",
-    "CONCURRENCY/Sync Issues.md",
-    "CONCURRENCY/Thread Management and Interface.md",
-    "Modern Pointer Usage.md",
-    "Strings.md",
-    "Stream Functions - Output Formatting.md",
-    "CONCURRENCY/CONCURRENCY.md",
-    "CONCURRENCY",
-    "CONTAINERS/Tuple.md",
-    "Random Numbers.md",
-    "FUNCTIONAL/Lambda.md",
-    "Type Casting.md",
-    "FUNCTIONAL/FUNCTIONAL.md",
-    "Literals.md",
-    "CONTAINERS/CONTAINERS.md",
-    "CONTAINERS/Filtering.md",
-    "CONTAINERS/Dictionary/Map ( Dictionary ).md",
-    "FUNCTIONAL/Currying.md",
-    "PATTERNS/Structural Patterns/Adapter.md",
-    "PATTERNS/Structural Patterns/Bridge.md",
-    "PATTERNS/Structural Patterns/Structural Patterns.md",
-    "CONTAINERS/Dictionary/Insert a key-value pair.md",
-    "CONTAINERS",
-    "FUNCTIONAL",
-    "CONTAINERS/Dictionary",
-    "PATTERNS/Structural Patterns",
-    "PATTERNS"
+    "C++/ImGui/ImGui.md",
+    "C++/ImGui",
+    "C++/TEMPLATES/Variadic Templates.md",
+    "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+    "C++/TEMPLATES/TEMPLATES.md",
+    "C++/CONTAINERS/Tuple.md",
+    "C++/TEMPLATES",
+    "C++/CONCURRENCY/Thread Management and Interface.md",
+    "C++/CONCURRENCY/Shared Data.md",
+    "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
+    "C++/VSCode Clangd Lint Fix.md",
+    "C++/CONCURRENCY/CPUs and Threads.md",
+    "C++/CONCURRENCY/Sync Issues.md",
+    "C++/C++.md",
+    "C++/CONCURRENCY/Untitled.md",
+    "C++/Type Casting.md",
+    "C++",
+    "C++/Move Semantics - Done with the object.md",
+    "C++/CONCURRENCY/Mutex.md",
+    "C++/CONCURRENCY/Threads.md",
+    "C++/SS/Screenshot 2024-04-10 121648.png",
+    "C++/SS",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-10 202028.png",
+    "C++/CONCURRENCY/SS",
+    "C++/SS/Screenshot 2024-04-10 201341.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-10 215241.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-10 215244.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-10 215738.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 141621.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 142243.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 144513.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 144641.png",
+    "C++/Modern Pointer Usage.md",
+    "C++/Strings.md",
+    "C++/Stream Functions - Output Formatting.md",
+    "C++/CONCURRENCY/CONCURRENCY.md",
+    "C++/CONCURRENCY",
+    "C++/Random Numbers.md",
+    "C++/FUNCTIONAL/Lambda.md",
+    "C++/FUNCTIONAL/FUNCTIONAL.md",
+    "C++/Literals.md",
+    "C++/CONTAINERS/CONTAINERS.md",
+    "C++/CONTAINERS",
+    "C++/FUNCTIONAL",
+    "C++/CONTAINERS/Dictionary",
+    "C++/PATTERNS/Structural Patterns"
   ]
 }

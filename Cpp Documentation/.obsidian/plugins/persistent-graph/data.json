@@ -1,139 +1,149 @@
 {
   "nodePositions": [
     {
-      "id": "CONCURRENCY/CONCURRENCY.md",
-      "x": 558.8558349609375,
-      "y": 93.43839263916016
+      "id": "C++/C++.md",
+      "x": -385.5042419433594,
+      "y": 46.17350769042969
     },
     {
-      "id": "CONCURRENCY/Thread Management and Interface.md",
-      "x": 584.8359375,
-      "y": 335.6047058105469
+      "id": "C++/Type Casting.md",
+      "x": -485.94854736328125,
+      "y": 205.4322509765625
     },
     {
-      "id": "CONCURRENCY/Threads.md",
-      "x": 436.7171630859375,
-      "y": 219.09054565429688
+      "id": "C++/CONCURRENCY/CONCURRENCY.md",
+      "x": 660.560302734375,
+      "y": -151.82630920410156
     },
     {
-      "id": "CONTAINERS/CONTAINERS.md",
-      "x": 201.7969512939453,
-      "y": -443.0316162109375
+      "id": "C++/CONCURRENCY/CPUs and Threads.md",
+      "x": -407.6612243652344,
+      "y": -602.8796997070312
     },
     {
-      "id": "CONTAINERS/Dictionary/Map ( Dictionary ).md",
-      "x": 370.4124450683594,
-      "y": -376.9515075683594
+      "id": "C++/CONCURRENCY/Mutex.md",
+      "x": 453.570068359375,
+      "y": -174.96852111816406
     },
     {
-      "id": "CONTAINERS/Filtering.md",
-      "x": 275.47894287109375,
-      "y": -598.3034057617188
+      "id": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard.md",
+      "x": 302.8176574707031,
+      "y": -85.22183990478516
     },
     {
-      "id": "CONTAINERS/Tuple.md",
-      "x": 53.31166458129883,
-      "y": -539.5642700195312
+      "id": "C++/CONCURRENCY/Shared Data.md",
+      "x": 452.63519287109375,
+      "y": 8.045585632324219
     },
     {
-      "id": "FUNCTIONAL/Currying.md",
-      "x": 170.7420654296875,
-      "y": 165.2493896484375
+      "id": "C++/CONCURRENCY/Sync Issues.md",
+      "x": 15.3681001663208,
+      "y": -679.1036376953125
     },
     {
-      "id": "FUNCTIONAL/FUNCTIONAL.md",
-      "x": 24.40726661682129,
-      "y": 73.16326141357422
+      "id": "C++/CONCURRENCY/Threads.md",
+      "x": 630.0767211914062,
+      "y": 26.73320960998535
     },
     {
-      "id": "FUNCTIONAL/Lambda.md",
-      "x": 167.0916748046875,
-      "y": -30.616514205932617
+      "id": "C++/CONCURRENCY/Thread Management and Interface.md",
+      "x": 771.7710571289062,
+      "y": 117.24736022949219
     },
     {
-      "id": "Literals.md",
-      "x": -643.3634643554688,
-      "y": -88.68904876708984
+      "id": "C++/CONTAINERS/CONTAINERS.md",
+      "x": 35.7437858581543,
+      "y": -407.09442138671875
     },
     {
-      "id": "Modern Pointer Usage.md",
-      "x": -410.1087646484375,
-      "y": 51.114566802978516
+      "id": "C++/CONTAINERS/Filtering.md",
+      "x": -139.82955932617188,
+      "y": -414.2803649902344
     },
     {
-      "id": "Move Semantics - Done with the object.md",
-      "x": -593.9848022460938,
-      "y": 213.62847900390625
+      "id": "C++/CONTAINERS/Tuple.md",
+      "x": 96.43118286132812,
+      "y": -245.8026885986328
     },
     {
-      "id": "Number Systems.md",
-      "x": -551.7503051757812,
-      "y": -376.1097412109375
+      "id": "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
+      "x": 195.00279235839844,
+      "y": -483.62213134765625
     },
     {
-      "id": "PATTERNS/PATTERNS.md",
-      "x": -272.3744812011719,
-      "y": 488.30224609375
+      "id": "C++/FUNCTIONAL/Currying.md",
+      "x": 285.17864990234375,
+      "y": 189.26547241210938
     },
     {
-      "id": "PATTERNS/Structural Patterns/Adapter.md",
-      "x": -204.1737518310547,
-      "y": 661.1069946289062
+      "id": "C++/FUNCTIONAL/Lambda.md",
+      "x": 213.16249084472656,
+      "y": 328.31939697265625
     },
     {
-      "id": "PATTERNS/Structural Patterns/Bridge.md",
-      "x": -151.82591247558594,
-      "y": 361.3551025390625
+      "id": "C++/FUNCTIONAL/FUNCTIONAL.md",
+      "x": 389.7532653808594,
+      "y": 336.4798278808594
     },
     {
-      "id": "PATTERNS/Structural Patterns/Structural Patterns.md",
-      "x": -94.37049102783203,
-      "y": 528.6373291015625
+      "id": "C++/PATTERNS/PATTERNS.md",
+      "x": 158.64122009277344,
+      "y": 542.914794921875
     },
     {
-      "id": "Random Numbers.md",
-      "x": -389.7629089355469,
-      "y": -203.2589874267578
+      "id": "C++/PATTERNS/Structural Patterns/Adapter.md",
+      "x": -4.237845420837402,
+      "y": 669.8916015625
     },
     {
-      "id": "Stream Functions - Output Formatting.md",
-      "x": -118.4942855834961,
-      "y": -179.12216186523438
+      "id": "C++/PATTERNS/Structural Patterns/Bridge.md",
+      "x": -186.39254760742188,
+      "y": 530.3042602539062
     },
     {
-      "id": "Strings.md",
-      "x": -322.5483093261719,
-      "y": -524.0519409179688
+      "id": "C++/PATTERNS/Structural Patterns/Structural Patterns.md",
+      "x": -13.64316463470459,
+      "y": 495.1665344238281
     },
     {
-      "id": "Type Casting.md",
-      "x": -153.8965606689453,
-      "y": -408.1570129394531
+      "id": "C++/Literals.md",
+      "x": -231.42225646972656,
+      "y": 151.77392578125
     },
     {
-      "id": "CONCURRENCY/Shared Data.md",
-      "x": 362.35882568359375,
-      "y": 395.9756164550781
+      "id": "C++/Modern Pointer Usage.md",
+      "x": -354.055419921875,
+      "y": 232.2420196533203
     },
     {
-      "id": "CONCURRENCY/Sync Issues.md",
-      "x": -212.02496337890625,
-      "y": 89.94427490234375
+      "id": "C++/Move Semantics - Done with the object.md",
+      "x": -200.62899780273438,
+      "y": 10.564460754394531
     },
     {
-      "id": "CONCURRENCY/CPUs and Threads.md",
-      "x": 217.25863647460938,
-      "y": -227.63758850097656
+      "id": "C++/Number Systems.md",
+      "x": -288.268798828125,
+      "y": -112.51214599609375
     },
     {
-      "id": "CONCURRENCY/Untitled.md",
-      "x": 118.96493530273438,
-      "y": 426.9409484863281
+      "id": "C++/Random Numbers.md",
+      "x": -429.9079895019531,
+      "y": -137.7675018310547
     },
     {
-      "id": "CONCURRENCY/Mutex.md",
-      "x": 275.44500732421875,
-      "y": 555.3770141601562
+      "id": "C++/Stream Functions - Output Formatting.md",
+      "x": -567.0650634765625,
+      "y": 85.7334213256836
+    },
+    {
+      "id": "C++/Strings.md",
+      "x": -541.1394653320312,
+      "y": -59.25083541870117
+    },
+    {
+      "id": "C++/VSCode Clangd Lint Fix.md",
+      "x": -199.55079650878906,
+      "y": -615.0523071289062
     }
   ],
   "automaticallyRestoreNodePositions": true
