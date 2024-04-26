@@ -1,3 +1,5 @@
+[[Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts]]
+
 - lock()
 	- Tries to lock the mutex
 	- If not successful, waits until it locks the mutex
@@ -88,6 +90,7 @@ Task 2 unlocked the mutex
 ---
 
 ## Internally Synchronized Class Example:
+
 ```cpp
 class Vector
 {
@@ -102,4 +105,5 @@ public:
     }
 };
 ```
+
 

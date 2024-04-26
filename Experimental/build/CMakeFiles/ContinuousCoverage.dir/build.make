@@ -52,7 +52,7 @@ RM = C:\mingw64\bin\cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Workspace\Programming\Cpp\Experimental\src
+CMAKE_SOURCE_DIR = C:\Workspace\Programming\Cpp\Experimental
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = C:\Workspace\Programming\Cpp\Experimental\build
@@ -81,6 +81,6 @@ CMakeFiles/ContinuousCoverage.dir/clean:
 .PHONY : CMakeFiles/ContinuousCoverage.dir/clean
 
 CMakeFiles/ContinuousCoverage.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Workspace\Programming\Cpp\Experimental\src C:\Workspace\Programming\Cpp\Experimental\src C:\Workspace\Programming\Cpp\Experimental\build C:\Workspace\Programming\Cpp\Experimental\build C:\Workspace\Programming\Cpp\Experimental\build\CMakeFiles\ContinuousCoverage.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Workspace\Programming\Cpp\Experimental C:\Workspace\Programming\Cpp\Experimental C:\Workspace\Programming\Cpp\Experimental\build C:\Workspace\Programming\Cpp\Experimental\build C:\Workspace\Programming\Cpp\Experimental\build\CMakeFiles\ContinuousCoverage.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ContinuousCoverage.dir/depend
 

@@ -1,5 +1,5 @@
 # CMake generated Testfile for 
-# Source directory: C:/Workspace/Programming/Cpp/Experimental/src
+# Source directory: C:/Workspace/Programming/Cpp/Experimental
 # Build directory: C:/Workspace/Programming/Cpp/Experimental/build
 # 
 # This file includes the relevant testing commands required for 

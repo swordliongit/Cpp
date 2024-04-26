@@ -4,7 +4,7 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Workspace/Programming/Cpp/Experimental/src
+SourceDirectory: C:/Workspace/Programming/Cpp/Experimental
 BuildDirectory: C:/Workspace/Programming/Cpp/Experimental/build
 
 # Where to place the cost data store
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/mingw64/bin/cmake.exe" "C:/Workspace/Programming/Cpp/Experimental/src"
+ConfigureCommand: "C:/mingw64/bin/cmake.exe" "C:/Workspace/Programming/Cpp/Experimental"
 MakeCommand: C:/mingw64/bin/cmake.exe --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

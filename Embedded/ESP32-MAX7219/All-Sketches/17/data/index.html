@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LED-Matrix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="jquery.min.js"></script>
+</head>
+<body>
+  <h2>LED-Matrix</h2>
+	<div>
+		<label for="ledtext" >Text</label><br/>
+		<input name="ledtext" id="ledtext" type="text" value="%safedledtext%" /><br/>
+	
+		<fieldset class="radiobuttons">
+			<label for="rocket">Rocket</label>
+			<input type="radio" id="rocket" name="sprite" >    
+			
+			<label for="walker">Walker</label>
+			<input type="radio" id="walker" name="sprite" >   
+
+			<label for="pacman">pacman</label>
+			<input type="radio" id="pacman" name="sprite" >
+			
+			<label for="ghost">ghost</label>
+			<input type="radio" id="ghost" name="sprite" >
+
+			<label for="heart">heart</label>
+			<input type="radio" id="heart" name="sprite" >  
+
+			<label for="wave">wave</label>
+			<input type="radio" id="wave" name="sprite" >  		
+			
+			<label for="bunny">Bunny</label>
+			<input type="radio" id="bunny" name="sprite" > 			
+
+		</fieldset>
+	
+		<button name="eintragen" class="button button_senden" onClick="submitGET()">anzeigen</button>
+	</div>
+      
+<script>
+	function submitGET(){
+		var l_text = $("#ledtext").val();
+		var url="?ledtext="+l_text;
+		
+		
+		
+		if($('#rocket').is(':checked')){
+		url="?rocket="+l_text;
+		 }
+		 else if($('#walker').is(':checked')){
+			url="?walker="+l_text;
+		 }
+		
+		 else if($('#pacman').is(':checked')){
+			url="?pacman="+l_text;
+		 }
+		 else if($('#heart').is(':checked')){
+			url="?heart="+l_text;
+		 }
+		  else if($('#wave').is(':checked')){
+			url="?wave="+l_text;
+		 }
+		   else if($('#ghost').is(':checked')){
+			url="?ghost="+l_text;
+		 }
+			else if($('#bunny').is(':checked')){
+			url="?bunny="+l_text;
+		 }
+		 else {
+			url="?ledtext="+l_text;
+		 }
+		
+		console.log(url);
+		
+		$.get(url, function( data ) {
+			//location.reload();
+		});
+		
+	}
+</script>
+
+ 
+</body>
+</html>
+

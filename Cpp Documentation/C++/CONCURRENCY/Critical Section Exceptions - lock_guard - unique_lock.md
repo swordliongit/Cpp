@@ -47,11 +47,14 @@ Constructor's optional second arguments:
 - std::adopt_lock
 	- Takes a mutex that is already locked
 	- Avoids locking the mutex twice
+- bool try_lock_for()
+- bool try_lock_until
+	- These are forwarded to the wrapped mutex, will only compile if the mutex supports the operation
 
 ```cpp
 void printer_task_alt(std::string str, std::mutex& mtx) {
     for (int i = 0; i < 5; ++i) {
-        std::unique_lock<std::mutex> uqlock{mtx};
+        std::unique_lock<std::mutex> uqlock{mtx}; // lock called
         std::cout << str[0] << str[1] << str[2] << std::endl;
         uqlock.unlock();
         std::this_thread::sleep_for(50ms);

@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.html": "jinja-html",
-        "*.jinja2": "jinja",
-        "iostream": "cpp"
-    }
-}

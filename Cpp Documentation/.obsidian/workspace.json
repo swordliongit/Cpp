@@ -18,31 +18,259 @@
             }
           },
           {
-            "id": "1ddbdb28e173c695",
+            "id": "13f724ea016c661d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/TEMPLATES/Variadic Templates.md",
+                "file": "C++/CONCURRENCY/Mutex.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "dc9c2b8520d3d4fe",
+            "id": "bb9aef8cbf1d9a46",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/ImGui/ImGui.md",
+                "file": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0fb912e56ce9859e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/Literals.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "14d1f8957fa1d086",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/C++.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "8de4ab0c4a30ea81",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Threads.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ed486b953cc25628",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e29e105eea639233",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Mutex.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6e6376bae6ff0cdb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONTAINERS/Tuple.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "3d6161f113fd3c29",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "49134b2df045c4ad",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "473d0c579b660f43",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "888b1ecdc5bca91e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d6908681dfbf740c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9be08da8d922a18f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c389055dcff48ddf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "66c9b9fe1e96e622",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Mutex.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "3ec28b6b7a2b2847",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONTAINERS/Tuple.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f8831dd512019899",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONTAINERS/Queue.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ab4a2deb8d0d0aa3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/Embedded - ESP32/Embedded - ESP32.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d4d69631647e30eb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/Literals.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4fc5784a1efed33f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 21
       }
     ],
     "direction": "vertical"
@@ -92,7 +320,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 270.50434494018555
   },
   "right": {
     "id": "f8e511d41ff08dc2",
@@ -108,7 +336,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "C++/ImGui/ImGui.md",
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -125,7 +353,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "C++/ImGui/ImGui.md",
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -148,7 +376,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "C++/ImGui/ImGui.md"
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md"
               }
             }
           }
@@ -169,28 +397,38 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "dc9c2b8520d3d4fe",
+  "active": "4fc5784a1efed33f",
   "lastOpenFiles": [
-    "C++/ImGui/ImGui.md",
-    "C++/ImGui",
-    "C++/TEMPLATES/Variadic Templates.md",
-    "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
-    "C++/TEMPLATES/TEMPLATES.md",
+    "C++/Literals.md",
+    "C++/Embedded - ESP32/Embedded - ESP32.md",
+    "C++/Embedded - ESP32/HTTP Requests - JSON.md",
+    "C++/Embedded - ESP32",
+    "C++/CONTAINERS/Queue.md",
     "C++/CONTAINERS/Tuple.md",
-    "C++/TEMPLATES",
-    "C++/CONCURRENCY/Thread Management and Interface.md",
-    "C++/CONCURRENCY/Shared Data.md",
-    "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
-    "C++/VSCode Clangd Lint Fix.md",
-    "C++/CONCURRENCY/CPUs and Threads.md",
-    "C++/CONCURRENCY/Sync Issues.md",
-    "C++/C++.md",
-    "C++/CONCURRENCY/Untitled.md",
-    "C++/Type Casting.md",
-    "C++",
-    "C++/Move Semantics - Done with the object.md",
+    "C++/CONTAINERS/CONTAINERS.md",
     "C++/CONCURRENCY/Mutex.md",
+    "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+    "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+    "C++/CONCURRENCY/Thread Management and Interface.md",
     "C++/CONCURRENCY/Threads.md",
+    "C++/C++.md",
+    "C++/Type Casting.md",
+    "C++/Stream Functions - Output Formatting.md",
+    "C++/Strings.md",
+    "C++/Random Numbers.md",
+    "C++/Number Systems.md",
+    "C++/CONCURRENCY/Shared Data.md",
+    "C++/ImGui/filesystem.md",
+    "C++/ImGui/ImGui.md",
+    "C++/FUNCTIONAL/Lambda.md",
+    "C++/FUNCTIONAL/Currying.md",
+    "C++/FUNCTIONAL/FUNCTIONAL.md",
+    "C++/TEMPLATES/Variadic Templates.md",
+    "C++/ImGui",
+    "C++/TEMPLATES/TEMPLATES.md",
+    "C++/TEMPLATES",
+    "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
+    "C++",
     "C++/SS/Screenshot 2024-04-10 121648.png",
     "C++/SS",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-10 202028.png",
@@ -203,19 +441,9 @@
     "C++/CONCURRENCY/SS/Screenshot 2024-04-11 142243.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-11 144513.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-11 144641.png",
-    "C++/Modern Pointer Usage.md",
-    "C++/Strings.md",
-    "C++/Stream Functions - Output Formatting.md",
-    "C++/CONCURRENCY/CONCURRENCY.md",
     "C++/CONCURRENCY",
-    "C++/Random Numbers.md",
-    "C++/FUNCTIONAL/Lambda.md",
-    "C++/FUNCTIONAL/FUNCTIONAL.md",
-    "C++/Literals.md",
-    "C++/CONTAINERS/CONTAINERS.md",
     "C++/CONTAINERS",
     "C++/FUNCTIONAL",
-    "C++/CONTAINERS/Dictionary",
-    "C++/PATTERNS/Structural Patterns"
+    "C++/CONTAINERS/Dictionary"
   ]
 }

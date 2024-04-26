@@ -1,4 +1,4 @@
-# Install script for directory: C:/Workspace/Programming/Cpp/Experimental/src
+# Install script for directory: C:/Workspace/Programming/Cpp/Experimental
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

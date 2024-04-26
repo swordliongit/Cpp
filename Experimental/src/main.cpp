@@ -1,270 +1,108 @@
 
-#include <barrier>
-#include <exception>
-#include <iostream>
-#include <iterator>
-#include <map>
-#include <mutex>
-#include <string>
-#include <thread>
-#include <vector>
 
+#include <cstring>
+#include <iostream>
+#include <cstdint>
+#include <queue>
+#include <set>
+#include <thread>
+// const uint8_t broadcastAddress[6] = {0x78, 0x21, 0x84, 0xBB, 0x9F, 0x18};
 
 using namespace std::literals;
 
+uint8_t copied[6];
 
-auto thread_controller(std::thread&& t) {
-    std::cout << t.get_id() << " is running..." << std::endl;
-    std::this_thread::sleep_for(5s);
-    std::cout << "Execution finished." << std::endl;
-
-    return t;
-}
-
-std::thread create_thread(int id) {
-    std::thread t([&id]() {
-        std::cout << "Custom id " << id << std::endl;
-    });
-    return t;
-}
-
-void poo() {
-    std::cout << "Hello from thread";
-}
-
-class Task
+struct CompareOrder
 {
-public:
-    void operator()() {
-        std::cout << "Functor Thread!";
+    bool operator()(const std::tuple<const uint8_t *, int> &a, const std::tuple<const uint8_t *, int> &b) const {
+        // Compare based on the order value
+        return std::get<1>(a) > std::get<1>(b); // Change > to < for ascending order
     }
 };
 
-class ThreadGuard
+class UniqueQueue
 {
-    std::thread thr;
+    std::priority_queue<std::tuple<const uint8_t *, int>, std::vector<std::tuple<const uint8_t *, int>>, CompareOrder>
+        pqueue{};
+    std::set<std::tuple<const uint8_t *, int>> proxy{};
 
 public:
-    explicit ThreadGuard(std::thread&& thrpassed) : thr(std::move(thrpassed)) {
-    }
-
-    ~ThreadGuard() {
-        if (thr.joinable()) {
-            thr.join();
+    void push(const std::tuple<const uint8_t *, int> &t) {
+        if (this->proxy.insert(t).second) {
+            this->pqueue.push(t);
         }
     }
 
-    ThreadGuard(const ThreadGuard&) = delete; // Deleted copy constructor to prevent copying
-    ThreadGuard& operator=(const ThreadGuard&) = delete;
+    void pop() {
+        this->proxy.erase(pqueue.top());
+        this->pqueue.pop();
+    }
+
+    size_t size() {
+        return this->pqueue.size();
+    }
+
+    bool empty() {
+        return this->pqueue.empty();
+    }
+
+    std::tuple<const uint8_t *, int> top() {
+        return this->pqueue.top();
+    }
 };
 
-int num = 0;
-std::mutex mutex;
+UniqueQueue slave_queue;
 
-void adder() {
+void OnDataRecv(const uint8_t *mac) {
+    // Serial.println((uintptr_t)mac, HEX);
+    // memcpy(&message_to_rcv, incomingData, sizeof(message_to_rcv));
+
+    // uint8_t copied_mac[6];
+    // std::copy(mac, mac + 6, copied_mac);
+
+    std::copy(mac, mac + 6, copied);
+    slave_queue.push(std::make_tuple(copied, 1));
 
     try {
-        for (int i = 0; i < 100'000; i++) {
-            std::lock_guard lguard{mutex};
-            ++num;
-            // throw std::exception();
-        }
-    } catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
+        char macStr[18];
+        std::cout << "Mac received:";
+        const uint8_t *t = std::get<0>(slave_queue.top());
+        snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", t[0], t[1], t[2], t[3], t[4], t[5]);
+        std::cout << macStr;
+    } catch (const std::exception &e) {
+        // std::cout << e.what();
+        std::cerr << e.what() << '\n';
     }
 }
 
-void task1() {
-    mutex.lock();
-    std::cout << "Task 1 locked the mutex" << std::endl;
-    std::this_thread::sleep_for(2s);
-    mutex.unlock();
-    std::cout << "Task 1 unlocked the mutex" << std::endl;
-}
 
-void task2() {
-    std::this_thread::sleep_for(500ms);
-    while (!mutex.try_lock()) {
-        std::cout << "Task 2 trying to lock the mutex" << std::endl;
-        std::this_thread::sleep_for(200ms);
+void register_peers() {
+
+    const uint8_t *t = std::get<0>(slave_queue.top());
+    char macStr2[18];
+    snprintf(macStr2, sizeof(macStr2), "%02x:%02x:%02x:%02x:%02x:%02x", t[0], t[1], t[2], t[3], t[4], t[5]);
+    std::cout << "Mac in register_peers(): "
+              << "\n";
+    std::cout << macStr2;
+    std::vector<std::tuple<const uint8_t *, int>> popped_list;
+    while (!slave_queue.empty()) {
+        popped_list.push_back(slave_queue.top());
+        slave_queue.pop();
     }
-    std::cout << "Task 2 locked the mutex" << std::endl;
-    std::this_thread::sleep_for(2s);
-    std::cout << "Task 2 unlocked the mutex" << std::endl;
-}
 
-class Vector
-{
-    std::mutex mutex;
-    std::vector<int> vec;
-
-public:
-    void push_back(const int& i) {
-        mutex.lock();
-        vec.push_back(i);
-        mutex.unlock();
-    }
-};
-
-std::barrier barrier{3};
-
-void btask1() {
-    std::this_thread::sleep_for(3s);
-    std::cout << "thread 1 arrived to barrier"
-              << "\n";
-    barrier.arrive_and_wait();
-    std::cout << "thread 1 exited the barrier"
-              << "\n";
-}
-
-void btask2() {
-    std::cout << "thread 2 arrived to barrier"
-              << "\n";
-    barrier.arrive_and_wait();
-    std::cout << "thread 2 exited the barrier"
-              << "\n";
-}
-
-void btask3() {
-    std::this_thread::sleep_for(5s);
-    std::cout << "thread 3 arrived to barrier"
-              << "\n";
-    barrier.arrive_and_wait();
-    std::cout << "thread 3 exited the barrier"
-              << "\n";
-}
-
-void printer_task(std::string str, std::mutex& mtx) {
-    for (int i = 0; i < 5; ++i) {
-        try {
-            std::lock_guard lguard{mtx};
-            std::cout << str[0] << str[1] << str[2] << std::endl;
-            throw std::exception();
-            std::this_thread::sleep_for(50ms);
-        } catch (const std::exception& e) {
-            std::cout << "Exception caught: " << e.what() << std::endl;
-        }
+    for (auto &el : popped_list) {
+        slave_queue.push(el);
     }
 }
 
-void printer_task_alt(std::string str, std::mutex& mtx) {
-    for (int i = 0; i < 5; ++i) {
-        std::unique_lock<std::mutex> uqlock{mtx};
-        std::cout << str[0] << str[1] << str[2] << std::endl;
-        uqlock.unlock();
-        std::this_thread::sleep_for(50ms);
-    }
-}
+int main() {
 
-int main(int argc, char const* argv[]) {
-
-    // std::thread t1(btask1);
-    // std::thread t2(btask2);
-    // std::thread t3(btask3);
-    std::mutex mtx;
-    // std::thread t1(printer_task, "abc", std::ref(mtx));
-    // std::thread t2(printer_task, "xyz", std::ref(mtx));
-    // std::thread t3(printer_task, "def", std::ref(mtx));
-
-    std::thread t1(printer_task_alt, "abc", std::ref(mtx));
-    std::thread t2(printer_task_alt, "xyz", std::ref(mtx));
-    std::thread t3(printer_task_alt, "def", std::ref(mtx));
-
-    t1.join();
-    t2.join();
-    t3.join();
-
-    // for (auto it = jsdict.) {
-    //     std::cout << key << value;
-    // }
-    // t1.join();
-    // t2.join();
-    // t3.join();
-    // basic mutex
-    // std::thread t1(adder);
-    // std::thread t2(adder);
-    // std::thread t3(adder);
-
-    // t1.join();
-    // t2.join();
-    // t3.join();
-
-    // std::cout << num;
-
-
-    // try {
-    //     std::thread thr(poo);
-    //     ThreadGuard tguard(std::move(thr));
-
-    //     throw std::exception();
-    // } catch (const std::exception& e) {
-    //     std::cerr << e.what() << '\n';
-    // }
-
-    // detachment
-
-    // std::thread thr([]() {
-    //     std::thread shr([]() {
-    //         std::this_thread::sleep_for(5s);
-    //         std::cout << "Second child completed" << std::endl;
-    //     });
-    //     shr.detach();
-    //     std::cout << "First child completed" << std::endl;
-    // });
-
-    // thr.join();
-    // std::this_thread::sleep_for(7s);
-
-    // std::cout << "Main thread is still running and about to finish.";
-
-
-    // std::thread thr([]() {
-    //     std::cout << "Hello, I am a thread" << std::endl;
-    // });
-
-    // std::thread thrback = thread_controller(std::move(thr));
-    // std::cout << "Grabbed the thread back to main" << std::endl;
-    // thrback.join();
-
-    // std::cout << "Main continues normally" << std::endl;
-
-    // std::thread t1 = create_thread(5);
-    // t1.join();
-    // std::thread t2 = create_thread(12);
-    // t2.join();
-
-    // int y = 10;
-    // std::thread thr(func, std::ref(y));
-    // thr.join();
-
-    // std::thread thr([]() {
-    //     ;
-    // });
-    // std::cout << thr.native_handle() << std::endl;
-    // thr.join();
-    // std::cout << thr.native_handle();
-
-    // std::cout << thr.get_id() << std::endl;
-    // std::cout << std::this_thread::get_id();
-    // thr.join();
-
-    // thread pause
-
-    // using namespace std::literals;
-    // std::thread thr([]() {
-    //     std::cout << "Processing..." << std::endl;
-    //     std::this_thread::sleep_for(2s);
-    //     std::cout << "Done" << std::endl;
-    // });
-    // thr.join();
-
-    // std::thread thr([]() {
-    //     std::cout << "Hello from child thread";
-    // });
-    // thr.join();
-
-    // Task task1;
-    // std::thread thr(task1);
-    // thr.join();
-    return 0;
+    uint8_t mac[6] = {0x78, 0x21, 0x84, 0xBB, 0x9F, 0x18};
+    OnDataRecv(mac);
+    register_peers();
+    // std::this_thread::sleep_for(4s);
+    mac[0] = 0x12;
+    uint8_t mac2[6] = {0x2B, 0x21, 0x84, 0xBB, 0x9F, 0x20};
+    OnDataRecv(mac2);
+    register_peers();
 }

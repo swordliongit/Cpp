@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LED-Matrix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="jquery.min.js"></script>
+</head>
+<body>
+  <h2>ESP-32 Server</h2>
+    <div>
+      <label for="ledtext">Text</label><br/>
+      <input name="ledtext" id="ledtext" type="text" value="%savedledtext%"/><br/>
+      <button name="sendtext" class="button button_send" onclick="submitGet()">Show on LED Matrix</button>
+    </div>
+      
+ 
+<script>
+  
+  function submitGet()
+  {
+    var l_text = $("#ledtext").val();  
+    var url="?ledtext=" + l_text;
+    console.log(url);
+
+    $.get(url, function(data){
+      // nothing to do
+    });
+
+  }
+	
+</script>
+
+ 
+</body>
+</html>
+
