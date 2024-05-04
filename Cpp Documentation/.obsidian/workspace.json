@@ -18,67 +18,19 @@
             }
           },
           {
-            "id": "13f724ea016c661d",
+            "id": "8c5f0b9aba6e8c70",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/CONCURRENCY/Mutex.md",
+                "file": "C++/CONCURRENCY/Shared Data.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "bb9aef8cbf1d9a46",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0fb912e56ce9859e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/Literals.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "14d1f8957fa1d086",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/C++.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8de4ab0c4a30ea81",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONCURRENCY/Threads.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ed486b953cc25628",
+            "id": "5405fd8da7251bd2",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -90,7 +42,77 @@
             }
           },
           {
-            "id": "e29e105eea639233",
+            "id": "85bedae4d111b64a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f0470991269070c2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Thread-Local Data.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2845c448df074509",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183236.png"
+              }
+            }
+          },
+          {
+            "id": "68a719001d9d205c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d01254b6993ebcac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9debcae38178000c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "572c1fe86bac9328",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -102,139 +124,55 @@
             }
           },
           {
-            "id": "6e6376bae6ff0cdb",
+            "id": "097460968fd66a41",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/CONTAINERS/Tuple.md",
+                "file": "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "3d6161f113fd3c29",
+            "id": "d4e4cbf89ba2ff2d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "file": "C++/Move Semantics - Done with the object.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "49134b2df045c4ad",
+            "id": "2536614e4aebf81d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+                "file": "C++/Embedded - ESP32/How to Send Large Data over ESP-NOW.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "473d0c579b660f43",
+            "id": "00ae92d5bf54477b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+                "file": "C++/Random Numbers.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "888b1ecdc5bca91e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d6908681dfbf740c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9be08da8d922a18f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c389055dcff48ddf",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "66c9b9fe1e96e622",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONCURRENCY/Mutex.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "3ec28b6b7a2b2847",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONTAINERS/Tuple.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f8831dd512019899",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "C++/CONTAINERS/Queue.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ab4a2deb8d0d0aa3",
+            "id": "02083e5e2e5783a3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -246,31 +184,43 @@
             }
           },
           {
-            "id": "d4d69631647e30eb",
+            "id": "074bd8e553712394",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/Literals.md",
+                "file": "C++/CONTAINERS/Bitset.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "4fc5784a1efed33f",
+            "id": "34dbf676da1f50a8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
+                "file": "C++/CONCURRENCY/Deadlock.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ba0b5bdea49bc800",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/CONCURRENCY.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 21
+        "currentTab": 17
       }
     ],
     "direction": "vertical"
@@ -320,7 +270,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 270.50434494018555
+    "width": 300.50434494018555
   },
   "right": {
     "id": "f8e511d41ff08dc2",
@@ -336,7 +286,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
+                "file": "C++/CONCURRENCY/CONCURRENCY.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -353,7 +303,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
+                "file": "C++/CONCURRENCY/CONCURRENCY.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -376,7 +326,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "C++/CONCURRENCY/Thread Management and Interface.md"
+                "file": "C++/CONCURRENCY/CONCURRENCY.md"
               }
             }
           }
@@ -397,37 +347,42 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4fc5784a1efed33f",
+  "active": "ba0b5bdea49bc800",
   "lastOpenFiles": [
-    "C++/Literals.md",
+    "C++/CONCURRENCY/Deadlock.md",
+    "C++/CONTAINERS/Bitset.md",
     "C++/Embedded - ESP32/Embedded - ESP32.md",
+    "C++/Embedded - ESP32/How to Send Large Data over ESP-NOW.md",
+    "C++/Random Numbers.md",
+    "C++/Move Semantics - Done with the object.md",
+    "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
+    "C++/CONCURRENCY/Mutex.md",
+    "C++/CONCURRENCY/CONCURRENCY.md",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-30 203040.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-30 202916.png",
+    "C++/CONCURRENCY/Thread-Local Data.md",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183236.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183059.png",
+    "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183205.png",
+    "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+    "C++/CONCURRENCY/Thread Management and Interface.md",
+    "C++/CONCURRENCY/Shared Data.md",
+    "C++/CONCURRENCY/Multiple reader, Single writer - Shared Mutex.md",
+    "C++/CONTAINERS/Queue.md",
+    "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+    "C++/Literals.md",
     "C++/Embedded - ESP32/HTTP Requests - JSON.md",
     "C++/Embedded - ESP32",
-    "C++/CONTAINERS/Queue.md",
     "C++/CONTAINERS/Tuple.md",
     "C++/CONTAINERS/CONTAINERS.md",
-    "C++/CONCURRENCY/Mutex.md",
-    "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
-    "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
-    "C++/CONCURRENCY/Thread Management and Interface.md",
     "C++/CONCURRENCY/Threads.md",
     "C++/C++.md",
     "C++/Type Casting.md",
     "C++/Stream Functions - Output Formatting.md",
     "C++/Strings.md",
-    "C++/Random Numbers.md",
     "C++/Number Systems.md",
-    "C++/CONCURRENCY/Shared Data.md",
-    "C++/ImGui/filesystem.md",
-    "C++/ImGui/ImGui.md",
-    "C++/FUNCTIONAL/Lambda.md",
-    "C++/FUNCTIONAL/Currying.md",
-    "C++/FUNCTIONAL/FUNCTIONAL.md",
-    "C++/TEMPLATES/Variadic Templates.md",
     "C++/ImGui",
-    "C++/TEMPLATES/TEMPLATES.md",
     "C++/TEMPLATES",
-    "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
     "C++",
     "C++/SS/Screenshot 2024-04-10 121648.png",
     "C++/SS",
@@ -436,11 +391,6 @@
     "C++/SS/Screenshot 2024-04-10 201341.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-10 215241.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-10 215244.png",
-    "C++/CONCURRENCY/SS/Screenshot 2024-04-10 215738.png",
-    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 141621.png",
-    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 142243.png",
-    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 144513.png",
-    "C++/CONCURRENCY/SS/Screenshot 2024-04-11 144641.png",
     "C++/CONCURRENCY",
     "C++/CONTAINERS",
     "C++/FUNCTIONAL",

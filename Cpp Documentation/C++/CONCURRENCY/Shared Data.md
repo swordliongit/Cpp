@@ -4,3 +4,4 @@
  
 [[Mutex]]
 [[Critical Section Exceptions - lock_guard - unique_lock]]
+[[Shared Data Initialization - Lazy init, call_once]]

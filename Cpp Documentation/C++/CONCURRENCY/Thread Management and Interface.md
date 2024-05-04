@@ -187,6 +187,7 @@ int main(int argc, char const* argv[]) {
 ```
 
 ## Thread Detachment
+
 - The main thread will continue executing and it won't terminate the program. The main thread can end before the child thread.
 
 ```cpp
@@ -198,4 +199,13 @@ int main(int argc, char const* argv[]) {
 	shr.detach();
 	// main thread will complete independent of the child
 }
+```
+
+## Launching Multiple Threads
+
+```cpp
+std::vector<std::thread> threads;
+
+for (int i = 0; i < 20; ++i)
+	threads.push_back(std::thread(func));
 ```

@@ -1,4 +1,6 @@
 [[Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts]]
+[[Multiple reader, Single writer - Shared Mutex]]
+[[Deadlock]]
 
 - lock()
 	- Tries to lock the mutex

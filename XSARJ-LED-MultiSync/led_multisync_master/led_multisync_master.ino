@@ -60,7 +60,8 @@
 #include <tuple>
 #include <string>
 #include <esp_wifi.h>
-#include <Arduino_JSON.h>
+// #include <Arduino_JSON.h>
+#include <bitset>
 
 #define HOST_OF_OTA "http://panel.xsarj.com:8081/web/content/2568?download=true"
 HTTPClient client;
@@ -72,10 +73,10 @@ int camera_version = 0;
 int http_get_version = 9999;
 
 const char *host = "esp32";
-// constexpr char *ssid = "ARTINSYSTEMS";
-// constexpr char *password = "Artin2023Artin";
-constexpr char *ssid = "SL-MOBILE";
-constexpr char *password = "sword1998";
+constexpr char *ssid = "ARTINSYSTEMS";
+constexpr char *password = "Artin2023Artin";
+// constexpr char *ssid = "SL-MOBILE";
+// constexpr char *password = "sword1998";
 
 String wifiname = "";
 String wifipassword = "";
@@ -125,6 +126,8 @@ String id;
 #define DISPLAYS_DOWN 1
 DMD dmd(DISPLAYS_ACROSS, DISPLAYS_DOWN);
 
+#define MAX_ROW 8
+
 /*-------------------------------------------------------------------------------------
 ESP NOW
 ---------------------------------------------------------------------------------------*/
@@ -132,9 +135,11 @@ ESP NOW
 // Must match the sender structure
 
 // REPLACE WITH YOUR RECEIVER MAC Address
-uint8_t broadcastAddress_1[6] = {0xB0, 0xA7, 0x32, 0xDB, 0xC5, 0x3C};
-uint8_t broadcastAddress_2[6] = {0x48, 0xE7, 0x29, 0xB7, 0xE1, 0xCC};
-uint8_t broadcastAddress_3[6] = {0x78, 0x21, 0x84, 0xBB, 0x9F, 0x18};
+// uint8_t broadcastAddress_1[6] = {0xB0, 0xA7, 0x32, 0xDB, 0xC5, 0x3C};
+uint8_t broadcastAddress_1[6] = {0x48, 0xE7, 0x29, 0xB7, 0xE1, 0xCC};
+uint8_t broadcastAddress_2[6] = {0x78, 0x21, 0x84, 0xBB, 0x9F, 0x18};
+uint8_t broadcastAddress_3[6] = {0x40, 0x22, 0xD8, 0x6E, 0x7F, 0xCC};
+
 
 struct CompareOrder
 {
@@ -146,8 +151,7 @@ struct CompareOrder
 
 class UniqueQueue
 {
-    std::priority_queue<std::tuple<const uint8_t *, int>, std::vector<std::tuple<const uint8_t *, int>>, CompareOrder>
-        pqueue{};
+    std::priority_queue<std::tuple<const uint8_t *, int>, std::vector<std::tuple<const uint8_t *, int>>, CompareOrder> pqueue{};
     std::set<std::tuple<const uint8_t *, int>> proxy{};
 
 public:
@@ -175,7 +179,7 @@ public:
     }
 };
 
-UniqueQueue slave_queue;
+UniqueQueue slave_queue, proxy_queue;
 uint8_t copied_mac[6];
 
 
@@ -186,20 +190,31 @@ enum class Animation
     ANIM3
 };
 
-// std::vector<std::tuple<uint8_t*, Animation>> receivers{
-//     {broadcastAddress_1, Animation::ANIM1},
-//     {broadcastAddress_2, Animation::ANIM1},
-//     {broadcastAddress_3, Animation::ANIM1},
-// };
-
 // Send
+
+enum class Flags : unsigned int
+{
+    None = 0,
+    Init = 1 << 0,  // 0001
+    Shift = 1 << 1, // 0010
+    Flag3 = 1 << 2, // 0100
+    Flag4 = 1 << 3  // 1000
+};
 typedef struct struct_message_to_send
 {
-    Animation anim;
+    // Animation anim;
+    char charArray[64];
+    size_t bitSetStringSize;
+    bool cmd = true;
+    // int delay;
+    // Flags slave_flag = Flags::None;
+
 } struct_message_to_send;
 
 // Create a struct_message called MasterData
 struct_message_to_send message_to_send;
+std::vector<std::vector<int>> self_anim_part;
+
 
 esp_now_peer_info_t peerInfo;
 
@@ -210,55 +225,44 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
     char macStr[18];
     Serial.print("Packet to: ");
     // Copies the sender mac address to a string
-    snprintf(macStr,
-             sizeof(macStr),
-             "%02x:%02x:%02x:%02x:%02x:%02x",
-             mac_addr[0],
-             mac_addr[1],
-             mac_addr[2],
-             mac_addr[3],
-             mac_addr[4],
-             mac_addr[5]);
+    snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);
     Serial.print(macStr);
     Serial.print(" send status:\t");
     Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+    // Serial.println(sizeof(message_to_send.anim));
 }
 
 // Receive
 typedef struct struct_message_to_receive
 {
-    int order;
+    bool is_anim_completed;
 } struct_message_to_receive;
 
 // Create a struct_message called message_to_rcv
 struct_message_to_receive message_to_rcv;
 
 bool should_animate = false;
+bool sync_mutex = false;
 
 // callback function that will be executed when data is received
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
     // Serial.println((uintptr_t)mac, HEX);
     memcpy(&message_to_rcv, incomingData, sizeof(message_to_rcv));
 
-    std::copy(mac, mac + 6, copied_mac);
-    slave_queue.push(std::make_tuple(copied_mac, message_to_rcv.order));
-
     Serial.print("Bytes received: ");
     Serial.println(len);
-    try {
-        char macStr[18];
-        Serial.print("Mac received:");
-        const uint8_t *t = std::get<0>(slave_queue.top());
-        snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", t[0], t[1], t[2], t[3], t[4], t[5]);
-        Serial.print(macStr);
-    } catch (const std::exception &e) {
-        Serial.println(e.what());
-        // std::cerr << e.what() << '\n';
-    }
+    sync_mutex = true;
+    // try {
+    //     char macStr[18];
+    //     // Serial.print("Mac received:");
+    //     // const uint8_t *t = std::get<0>(slave_queue.top());
+    //     snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", t[0], t[1], t[2], t[3], t[4], t[5]);
+    //     Serial.print(macStr);
+    // } catch (const std::exception &e) {
+    //     Serial.println(e.what());
+    //     // std::cerr << e.what() << '\n';
+    // }
 
-    Serial.println();
-    Serial.print("Order: ");
-    Serial.println(message_to_rcv.order);
     Serial.println();
 }
 
@@ -509,32 +513,37 @@ void register_peers() {
     peerInfo.channel = 0;
     peerInfo.encrypt = false;
 
-    const uint8_t *t = std::get<0>(slave_queue.top());
-    char macStr2[18];
-    snprintf(macStr2, sizeof(macStr2), "%02x:%02x:%02x:%02x:%02x:%02x", t[0], t[1], t[2], t[3], t[4], t[5]);
-    Serial.print("Mac in register_peers(): ");
-    Serial.println(macStr2);
-    std::vector<std::tuple<const uint8_t *, int>> popped_list;
-    while (!slave_queue.empty()) {
+    // std::copy(mac, mac + 6, copied_mac);
+    // std::tuple<uint8_t *, int> peer{copied_mac, message_to_rcv.order};
+    // slave_queue.push(peer);
 
-        memcpy(peerInfo.peer_addr, std::get<0>(slave_queue.top()), 6);
-        if (esp_now_add_peer(&peerInfo) != ESP_OK) {
-            Serial.println("Failed to add peer");
-            return;
-        }
-        popped_list.push_back(slave_queue.top());
-        slave_queue.pop();
+    memcpy(peerInfo.peer_addr, broadcastAddress_1, 6);
+    if (esp_now_add_peer(&peerInfo) != ESP_OK) {
+        Serial.println("Failed to add peer");
+        return;
     }
-
-    for (auto &el : popped_list) {
-        slave_queue.push(el);
+    memcpy(peerInfo.peer_addr, broadcastAddress_2, 6);
+    if (esp_now_add_peer(&peerInfo) != ESP_OK) {
+        Serial.println("Failed to add peer");
+        return;
     }
+    memcpy(peerInfo.peer_addr, broadcastAddress_3, 6);
+    if (esp_now_add_peer(&peerInfo) != ESP_OK) {
+        Serial.println("Failed to add peer");
+        return;
+    }
+    Serial.println("All peers registered successfully");
+    slave_queue.push(std::make_tuple(broadcastAddress_1, 1));
+    slave_queue.push(std::make_tuple(broadcastAddress_2, 2));
+    slave_queue.push(std::make_tuple(broadcastAddress_3, 3));
 }
 
 /*--------------------------------------------------------------------------------------
   setup
   Called by the Arduino architecture before the main loop begins
   --------------------------------------------------------------------------------------*/
+PatternAnimator p10(&dmd);
+
 void setup(void) {
     Serial.begin(115200);
     Serial2.begin(9600);
@@ -586,6 +595,140 @@ void setup(void) {
 
     Serial.println("Screen Started");
     Serial.println("Waiting For Serial Datas");
+
+    register_peers();
+
+    // message_to_send.bitString = ;
+    // strcpy(message_to_send.bitString, vectorToBitString(p10.grid));
+
+    // char *bitString = vectorToBitString(grid);
+    std::string bitString = convertToBitString(p10.grid);
+    std::string compressedString = compressBitString(bitString);
+
+    for (size_t i = 0; i < compressedString.size(); ++i) {
+        message_to_send.charArray[i] = compressedString[i];
+    }
+    Serial.print("Bit String: ");
+    Serial.println(bitString.c_str());
+    Serial.print("Compressed String: ");
+    Serial.println();
+    for (unsigned char c : message_to_send.charArray) {
+        Serial.print(binaryString(c).c_str());
+        Serial.println();
+    }
+
+    Serial.println(bitString.size());
+    Serial.println(compressedString.size());
+
+    // message_to_send.slave_flag =
+    // while (!slave_queue.empty()) {
+    //     message_to_send.anim = p10.grid;
+    //     esp_err_t result = esp_now_send(std::get<0>(slave_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
+
+    //     if (result == ESP_OK) {
+    //         Serial.println("Sent with success");
+    //     } else {
+    //         Serial.println("Error sending the data");
+    //     }
+
+    //     proxy_queue.push(slave_queue.top());
+    //     slave_queue.pop();
+    // }
+    // while (!proxy_queue.empty()) {
+    //     slave_queue.push(proxy_queue.top());
+    //     proxy_queue.pop();
+    // }
+}
+
+void prepare_next_matrix(std::vector<std::vector<int>> &matrix) {
+    std::string bitString = convertToBitString(matrix);
+    std::string compressedString = compressBitString(bitString);
+
+    size_t compressedSize = compressedString.size();
+    Serial.println(compressedSize);
+    message_to_send.bitSetStringSize = compressedSize;
+    for (size_t i = 0; i < compressedSize; ++i) {
+        message_to_send.charArray[i] = compressedString[i];
+    }
+
+    Serial.println(bitString.c_str());
+    Serial.print("Compressed String: ");
+    Serial.println();
+    for (unsigned char c : message_to_send.charArray) {
+        Serial.print(binaryString(c).c_str());
+        Serial.println();
+    }
+    shiftMatrixDownOnce(matrix);
+}
+
+void shiftMatrixDownOnce(std::vector<std::vector<int>> &matrix) {
+    int numRows = matrix.size();
+    int numCols = matrix[0].size();
+
+    // Save the last row
+    std::vector<int> lastRow = matrix[numRows - 1];
+
+    // Shift each row down by one position
+    for (int i = numRows - 1; i > 0; --i) {
+        matrix[i] = matrix[i - 1];
+    }
+
+    // Place the last row at the top
+    matrix[0] = lastRow;
+}
+
+bool flip = true;
+
+// Function to convert 2D vector to a bit string
+std::string convertToBitString(const std::vector<std::vector<int>> &grid) {
+    std::string bitString;
+    for (const auto &row : grid) {
+        for (int cell : row) {
+            bitString += (cell == 1) ? '1' : '0';
+        }
+    }
+    return bitString;
+}
+
+// Function to compress the bit string into bit fields
+std::string compressBitString(const std::string &bitString) {
+    std::string compressedString;
+    for (size_t i = 0; i < bitString.size(); i += 8) {
+        std::bitset<8> bits(bitString.substr(i, 8));
+        compressedString += static_cast<char>(bits.to_ulong());
+    }
+    return compressedString;
+}
+
+// Function to convert bit string back into 2D vector
+std::vector<std::vector<int>> convertFromBitString(const std::string &bitString, int numRows, int numCols) {
+    std::vector<std::vector<int>> grid(numRows, std::vector<int>(numCols));
+    int index = 0;
+    for (int i = 0; i < numRows; ++i) {
+        for (int j = 0; j < numCols; ++j) {
+            grid[i][j] = (bitString[index++] == '1') ? 1 : 0;
+        }
+    }
+    return grid;
+}
+
+// Function to decompress the compressed string back into bit string
+std::string decompressBitString(const std::string &compressedString) {
+    std::string bitString;
+    for (unsigned char c : compressedString) {
+        std::bitset<8> bits(c);
+        bitString += bits.to_string();
+    }
+    return bitString;
+}
+
+// Function to print binary representation of a character
+std::string binaryString(unsigned char c) {
+    std::string result;
+    for (int i = 7; i >= 0; --i) {
+        result += ((c >> i) & 1) ? '1' : '0';
+    }
+    return result;
 }
 
 /*--------------------------------------------------------------------------------------
@@ -593,7 +736,6 @@ void setup(void) {
   Arduino architecture main loop
   --------------------------------------------------------------------------------------*/
 
-PatternAnimator p10(&dmd);
 
 void loop(void) {
     timerWrite(timer, 0); // reset timer (feed watchdog)
@@ -602,55 +744,90 @@ void loop(void) {
     // 10 x 14 font clock, including demo of OR and NOR modes for pixels so that the flashing colon can be overlayed
     dmd.clearScreen(true);
     dmd.selectFont(System5x7);
-
-    delay(5000);
+    // if (master) {
     // Sync slaves into a queue (ordered based on order values received from slaves)
-    if (!slave_queue.empty()) {
-        register_peers();
-    }
-    Serial.print("Queue size: ");
-    Serial.println(slave_queue.size());
-    // while (!slave_queue.empty()) {
-    //     Serial.println(std::get<1>(slave_queue.top()));
-    //     slave_queue.pop();
-    // }
 
     // Initial sync to Server
 
 
     // Check for context from Server - loop
-    //---> Sync slaves for animation
-    delay(8000);
+    //---> Animation Sync
+    // delay(5000);
+    // Animate self
+    // Serial.println("Master animating...");
+    // for (int i = 0; i < MAX_ROW; i++) {
+    //     p10.draw_pattern_static(p10.grid, 4, 0);
+    //     delay(500);
+    //     shiftMatrixDownOnce(p10.grid);
+    // }
+    // dmd.writePixel(4, 0, GRAPHICS_NORMAL, 1);
+    // if (flip) {
+    //     p10.draw_pattern_static(p10.grid, 4, 0);
+    //     delay(2000);
+    //     shiftMatrixDownOnce(p10.grid);
+    //     p10.draw_pattern_static(p10.grid, 4, 0);
 
-    if (!slave_queue.empty()) {
-        char macStr[18];
-        auto mac_addr = std::get<0>(slave_queue.top());
-        snprintf(macStr,
-                 sizeof(macStr),
-                 "%02x:%02x:%02x:%02x:%02x:%02x",
-                 mac_addr[0],
-                 mac_addr[1],
-                 mac_addr[2],
-                 mac_addr[3],
-                 mac_addr[4],
-                 mac_addr[5]);
-        Serial.println(macStr);
-    }
-    while (!slave_queue.empty()) {
-        message_to_send.anim = Animation::ANIM1;
-        esp_err_t result =
-            esp_now_send(std::get<0>(slave_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
+    //     flip = false;
+    // }
 
-        if (result == ESP_OK) {
-            Serial.println("Sent with success");
-        } else {
-            Serial.println("Error sending the data");
+    // dmd.clearScreen(true);
+    // Serial.println("Animation completed...");
+    // Animate slaves
+    int order = 1;
+
+    delay(6000);
+
+    if (flip) {
+        for (int i = 0; i < 9; i++) {
+            while (!slave_queue.empty()) {
+                Serial.print("Animating slave ");
+                Serial.print(order);
+                Serial.println();
+                // message_to_send.anim = Animation::ANIM1;
+                // message_to_send.anim = p10.grid;
+                // message_to_send.delay = 500;
+                // message_to_send.order = order;
+                // message_to_send.anim = p10.grid;
+                // Serial.print(message_to_send.bitString);
+                Serial.println();
+                esp_err_t result = esp_now_send(std::get<0>(slave_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
+                if (result == ESP_OK) {
+                    Serial.println("Sent with success");
+
+                    // wait for response from the queued slave
+                    // while (!sync_mutex) {
+                    //     // Serial.println("[Master] waiting for slave to complete animation...");
+                    //     ;
+                    // }
+                    Serial.println("Slave completed animation, continuing to next slave");
+                    // sync_mutex = false;
+                } else {
+                    Serial.println("Error sending the data");
+                }
+
+                // delete[] message_to_send.bitString;
+
+                proxy_queue.push(slave_queue.top());
+                slave_queue.pop();
+                ++order;
+            }
+            while (!proxy_queue.empty()) {
+                slave_queue.push(proxy_queue.top());
+                proxy_queue.pop();
+            }
+            prepare_next_matrix(p10.grid);
+            delay(300);
         }
-        delay(1000);
-        slave_queue.pop();
+        flip = false;
     }
-    Serial.print("Queue size: ");
-    Serial.println(slave_queue.size());
+
+
+    // delay(10000);
+    // message_to_send.cmd = false;
+    // shiftMatrixDownOnce(p10.grid);
+    // delay(2000);
+
 
     // Heartbeat to slaves
+    // } // master
 }

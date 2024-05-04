@@ -55,6 +55,7 @@
 
 #include <esp_now.h>
 #include <esp_wifi.h>
+#include <bitset>
 
 #define HOST_OF_OTA "http://panel.xsarj.com:8081/web/content/2568?download=true"
 HTTPClient client;
@@ -108,6 +109,28 @@ void IRAM_ATTR resetModule() {
 #define DISPLAYS_DOWN 1
 DMD dmd(DISPLAYS_ACROSS, DISPLAYS_DOWN);
 
+#define MAX_ROW 8
+
+
+void serial2_get_data() {
+    if (Serial2.available() > 0) {
+        raw_serial2 = Serial2.readStringUntil('\n');
+        Serial.println("raw_serial2: " + raw_serial2);
+        if (raw_serial2.indexOf("p_") >= 0 && raw_serial2.indexOf("!") >= 0) {
+            screen_test_string = raw_serial2.substring(raw_serial2.indexOf("p_") + 2, raw_serial2.indexOf("!"));
+            Serial.println("screen_test_string: " + screen_test_string);
+            yield();
+        }
+        if (raw_serial2.indexOf("pst_") >= 0 && raw_serial2.indexOf("!") >= 0) {
+            data_from_serial2 = raw_serial2.substring(raw_serial2.indexOf("pst_") + 4, raw_serial2.indexOf("!"));
+            Serial.println("data_from_serial2: " + data_from_serial2);
+            //screen_test_string = data_from_serial2;
+            yield();
+        }
+        // change_wifi_Command();
+    }
+}
+
 /*-------------------------------------------------------------------------------------
 ESP NOW
 ---------------------------------------------------------------------------------------*/
@@ -116,19 +139,19 @@ ESP NOW
 
 // REPLACE WITH YOUR RECEIVER MAC Address
 // Master: B0:A7:32:DB:C5:3C, 48:E7:29:95:23:34 ( home )
-// uint8_t broadcastAddress[6] = {0xB0, 0xA7, 0x32, 0xDB, 0xC5, 0x3C};
-uint8_t broadcastAddress[6] = {0x48, 0xE7, 0x29, 0x95, 0x23, 0x34};
+uint8_t broadcastAddress[6] = {0xB0, 0xA7, 0x32, 0xDB, 0xC5, 0x3C};
+// uint8_t broadcastAddress[6] = {0x48, 0xE7, 0x29, 0x95, 0x23, 0x34};
 
 enum class Animation
 {
-    ARROW_HORIZONTAL,
+    ANIM1,
     ANIM2,
     ANIM3
 };
 // Send
 typedef struct struct_message_to_send
 {
-    int order;
+    bool is_anim_completed;
 } struct_message_to_send;
 
 // Create a struct_message called MasterData
@@ -136,34 +159,30 @@ struct_message_to_send message_to_send;
 
 esp_now_peer_info_t peerInfo;
 
-bool mac_sent = false;
+// bool mac_sent = false;
 
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
     char macStr[18];
     Serial.print("Packet to: ");
     // Copies the sender mac address to a string
-    snprintf(macStr,
-             sizeof(macStr),
-             "%02x:%02x:%02x:%02x:%02x:%02x",
-             mac_addr[0],
-             mac_addr[1],
-             mac_addr[2],
-             mac_addr[3],
-             mac_addr[4],
-             mac_addr[5]);
+    snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);
     Serial.print(macStr);
     Serial.print(" send status:\t");
     Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+
     // Serial.println(status);
-    if (!status)
-        mac_sent = true;
+    // if (!status)
+    //     mac_sent = true;
 }
 
 // Receive
 typedef struct struct_message_to_receive
 {
-    Animation anim;
+    char charArray[64];
+    size_t bitSetStringSize;
+    bool cmd;
+    // char t[32];
 } struct_message_to_receive;
 
 // Create a struct_message called message_to_rcv
@@ -171,13 +190,36 @@ struct_message_to_receive message_to_rcv;
 
 bool should_animate = false;
 
+
+std::vector<std::vector<int>> self_anim_part;
+
+std::string compressedString;
+
+std::vector<std::vector<int>> convertFromBitString(const std::string &bitString, int numRows, int numCols);
+
+PatternAnimator p10(&dmd);
+// std::string decompressedString;
+// std::vector<std::vector<int>> reconstructedGrid;
+std::vector<std::vector<int>> reconstructedGrid;
+
+
 // callback function that will be executed when data is received
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
     memcpy(&message_to_rcv, incomingData, sizeof(message_to_rcv));
     Serial.print("Bytes received: ");
     Serial.println(len);
-    Serial.print("Anim: ");
-    Serial.println(static_cast<int>(message_to_rcv.anim));
+    for (unsigned char c : message_to_rcv.charArray) {
+        Serial.print(binaryString(c).c_str());
+        Serial.println();
+    }
+    Serial.println();
+    Serial.println();
+    compressedString = std::string(message_to_rcv.charArray, 64);
+
+    std::string decompressedString = decompressBitString(compressedString);
+    reconstructedGrid = convertFromBitString(decompressedString, p10.grid.size(), p10.grid[0].size());
+    // Serial.print("Char: ");
+    // Serial.println(message_to_rcv.t);
     Serial.println();
 
     should_animate = true;
@@ -191,8 +233,8 @@ void IRAM_ATTR triggerScan() {
     dmd.scanDisplayBySPI();
 }
 // Insert your SSID
-// constexpr char WIFI_SSID[] = "ARTINSYSTEMS";
-constexpr char WIFI_SSID[] = "SL-MOBILE";
+constexpr char WIFI_SSID[] = "ARTINSYSTEMS";
+// constexpr char WIFI_SSID[] = "SL-MOBILE";
 
 int32_t getWiFiChannel(const char *ssid) {
     if (int32_t n = WiFi.scanNetworks()) {
@@ -203,6 +245,58 @@ int32_t getWiFiChannel(const char *ssid) {
         }
     }
     return 0;
+}
+
+// Function to convert 2D vector to a bit string
+std::string convertToBitString(const std::vector<std::vector<int>> &grid) {
+    std::string bitString;
+    for (const auto &row : grid) {
+        for (int cell : row) {
+            bitString += (cell == 1) ? '1' : '0';
+        }
+    }
+    return bitString;
+}
+
+// Function to compress the bit string into bit fields
+std::string compressBitString(const std::string &bitString) {
+    std::string compressedString;
+    for (size_t i = 0; i < bitString.size(); i += 8) {
+        std::bitset<8> bits(bitString.substr(i, 8));
+        compressedString += static_cast<char>(bits.to_ulong());
+    }
+    return compressedString;
+}
+
+// Function to convert bit string back into 2D vector
+std::vector<std::vector<int>> convertFromBitString(const std::string &bitString, int numRows, int numCols) {
+    std::vector<std::vector<int>> grid(numRows, std::vector<int>(numCols));
+    int index = 0;
+    for (int i = 0; i < numRows; ++i) {
+        for (int j = 0; j < numCols; ++j) {
+            grid[i][j] = (bitString[index++] == '1') ? 1 : 0;
+        }
+    }
+    return grid;
+}
+
+// Function to decompress the compressed string back into bit string
+std::string decompressBitString(const std::string &compressedString) {
+    std::string bitString;
+    for (unsigned char c : compressedString) {
+        std::bitset<8> bits(c);
+        bitString += bits.to_string();
+    }
+    return bitString;
+}
+
+// Function to print binary representation of a character
+std::string binaryString(unsigned char c) {
+    std::string result;
+    for (int i = 7; i >= 0; --i) {
+        result += ((c >> i) & 1) ? '1' : '0';
+    }
+    return result;
 }
 
 /*--------------------------------------------------------------------------------------
@@ -299,6 +393,15 @@ void setup(void) {
 
     Serial.println("Screen Started");
     Serial.println("Waiting For Serial Datas");
+
+    log_i("Total heap: %u", ESP.getHeapSize());
+    log_i("Free heap: %u", ESP.getFreeHeap());
+    log_i("Total PSRAM: %u", ESP.getPsramSize());
+    log_i("Free PSRAM: %d", ESP.getFreePsram());
+    log_i("spiram size %u", esp_spiram_get_size());
+    log_i("himem free %u", esp_himem_get_free_size());
+    log_i("himem phys %u", esp_himem_get_phys_size());
+    log_i("himem reserved %u", esp_himem_reserved_area_size());
 }
 
 void anim_StationReserved(PatternAnimator &p10, double cycle = std::numeric_limits<double>::infinity()) {
@@ -501,12 +604,30 @@ void anim_StationWaiting_custom(PatternAnimator &p10, const char *bChars, byte l
     }
 }
 
+void shiftMatrixDownOnce(std::vector<std::vector<int>> &matrix) {
+    int numRows = matrix.size();
+    int numCols = matrix[0].size();
+
+    // Save the last row
+    std::vector<int> lastRow = matrix[numRows - 1];
+
+    // Shift each row down by one position
+    for (int i = numRows - 1; i > 0; --i) {
+        matrix[i] = matrix[i - 1];
+    }
+
+    // Place the last row at the top
+    matrix[0] = lastRow;
+}
+
+
+bool flip = true;
+
 /*--------------------------------------------------------------------------------------
   loop
   Arduino architecture main loop
   --------------------------------------------------------------------------------------*/
 
-PatternAnimator p10(&dmd);
 
 void loop(void) {
     timerWrite(timer, 0); // reset timer (feed watchdog)
@@ -516,33 +637,88 @@ void loop(void) {
     dmd.clearScreen(true);
     dmd.selectFont(System5x7);
 
-    message_to_send.order = 2;
-    // Send
-    while (!mac_sent) {
-        esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&message_to_send, sizeof(message_to_send));
+    if (should_animate) {
+        // Serial.println();
+        // Serial.println();
 
-        if (result == ESP_OK) {
-            Serial.println("Sent with success");
-        } else {
-            Serial.println("Error sending the data");
-        }
-        delay(1000);
+        // draw the pattern
+
+        // p10.draw_pattern_static(p10.grid, 4, 0);
+        // shiftMatrixDownOnce(p10.grid);
+
+        // // Check if the reconstruction is correct
+        // // for (const auto &row : reconstructedGrid) {
+        // //     for (int cell : row) {
+        // //         std::cout << cell << " ";
+        // //     }
+        // //     std::cout << std::endl;
+        // // }
+        // // Serial.print(decompressedString.c_str());
+        // reconstructedGrid.clear();
+        p10.draw_pattern_static(reconstructedGrid, 4, 0);
     }
 
+    delay(1);
+    // delay(2000);
 
-    // if (should_animate) {
-    //     digitalWrite(LED_BUILTIN, HIGH);
-    //     Serial.println("Animating...");
-    //     Serial.println(static_cast<int>(SlaveData.anim));
-    //     switch (SlaveData.anim) {
-    //         case Animation::ARROW_HORIZONTAL:
-    //             // anim_StationWaiting_custom(p10, "Slave Master", 12);
-    //             anim_StationWaiting(p10, 1);
-    //             break;
-    //         default:
-    //             break;
+    // Send Mac to serial
+    // while (!mac_sent) {
+    //     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&message_to_send, sizeof(message_to_send));
+
+    //     if (result == ESP_OK) {
+    //         Serial.println("Sent with success");
+    //     } else {
+    //         Serial.println("Error sending the data");
     //     }
+    //     delay(1000);
+    // }
 
-    //     should_animate = false;
-    //     digitalWrite(LED_BUILTIN, LOW);
+    // if (slave) {
+    // Listen for animation command
+    // Serial.println("[Slave] Waiting for command from Master...");
+    // p10.draw_pattern_static(p10.grid, 12, 0);
+    // delay(5000);
+    // p10.draw_pattern_static(p10.grid, 4, 0);
+
+    // delay(2000);
+    // if (should_animate) {
+    //     // digitalWrite(LED_BUILTIN, HIGH);
+    //     // Serial.println("Animating...");
+
+    //     if (message_to_rcv.cmd) {
+    //         // p10.draw_pattern_static(message_to_rcv.anim, 4, 0);
+    //         delay(1);
+    //     } else {
+    //         dmd.clearScreen(true);
+    //     }
+    // switch (message_) {
+    // case Animation::ANIM1: {
+    //     // dmd.writePixel(4, 0, GRAPHICS_NORMAL, 1);
+    //     p10.draw_pattern_static(p10.grid, 4, 0);
+    // for (int i = 0; i < MAX_ROW; i++) {
+    //     p10.draw_pattern_static(p10.grid, 4, 0);
+    //     delay(500);
+    //     shiftMatrixDownOnce(p10.grid);
+    // }
+    // dmd.clearScreen(true);
+    // Serial.println("Animation completed...");
+    // // dmd.clearScreen(true);
+    // message_to_send.is_anim_completed = true;
+    // esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&message_to_send, sizeof(message_to_send));
+    // should_animate = false;
+    // if (result == ESP_OK) {
+    //     Serial.println("Sent with success");
+    // } else {
+    //     Serial.println("Error sending the data");
+    // }
+    // break;
 }
+
+// default:
+//     break;
+// }
+
+
+// should_animate = false;
+// digitalWrite(LED_BUILTIN, LOW);
+// } slave end
