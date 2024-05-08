@@ -206,21 +206,21 @@ std::vector<std::vector<int>> reconstructedGrid;
 // callback function that will be executed when data is received
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
     memcpy(&message_to_rcv, incomingData, sizeof(message_to_rcv));
-    Serial.print("Bytes received: ");
-    Serial.println(len);
-    for (unsigned char c : message_to_rcv.charArray) {
-        Serial.print(binaryString(c).c_str());
-        Serial.println();
-    }
-    Serial.println();
-    Serial.println();
+    // Serial.print("Bytes received: ");
+    // Serial.println(len);
+    // for (unsigned char c : message_to_rcv.charArray) {
+    //     Serial.print(binaryString(c).c_str());
+    //     Serial.println();
+    // }
+    // Serial.println();
+    // Serial.println();
     compressedString = std::string(message_to_rcv.charArray, 64);
 
     std::string decompressedString = decompressBitString(compressedString);
     reconstructedGrid = convertFromBitString(decompressedString, p10.grid.size(), p10.grid[0].size());
     // Serial.print("Char: ");
     // Serial.println(message_to_rcv.t);
-    Serial.println();
+    // Serial.println();
 
     should_animate = true;
 }
@@ -659,6 +659,7 @@ void loop(void) {
     }
 
     delay(1);
+    // dmd.clearScreen(true);
     // delay(2000);
 
     // Send Mac to serial

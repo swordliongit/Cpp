@@ -2,208 +2,218 @@
   "nodePositions": [
     {
       "id": "C++/C++.md",
-      "x": -450.2666015625,
-      "y": 68.59447479248047
+      "x": -468.9783935546875,
+      "y": 113.19986724853516
     },
     {
       "id": "C++/CONCURRENCY/CONCURRENCY.md",
-      "x": 807.770751953125,
-      "y": -141.2914276123047
+      "x": 841.631103515625,
+      "y": -100.41405487060547
     },
     {
       "id": "C++/CONCURRENCY/CPUs and Threads.md",
-      "x": -693.4537963867188,
-      "y": -453.3655090332031
+      "x": -746.153076171875,
+      "y": -460.1781311035156
     },
     {
       "id": "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
-      "x": 399.62335205078125,
-      "y": 22.30173110961914
-    },
-    {
-      "id": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
-      "x": 238.05718994140625,
-      "y": -189.8255157470703
-    },
-    {
-      "id": "C++/CONCURRENCY/Multiple reader, Single writer - Shared Mutex.md",
-      "x": 488.76361083984375,
-      "y": -454.852783203125
-    },
-    {
-      "id": "C++/CONCURRENCY/Mutex.md",
-      "x": 372.68890380859375,
-      "y": -316.68353271484375
-    },
-    {
-      "id": "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
-      "x": 623.232421875,
-      "y": -259.034423828125
-    },
-    {
-      "id": "C++/CONCURRENCY/Shared Data.md",
-      "x": 502.1329345703125,
-      "y": -126.31010437011719
-    },
-    {
-      "id": "C++/CONCURRENCY/Sync Issues.md",
-      "x": 178.9119415283203,
-      "y": -875.5062255859375
-    },
-    {
-      "id": "C++/CONCURRENCY/Thread Management and Interface.md",
-      "x": 751.8640747070312,
-      "y": 144.43170166015625
-    },
-    {
-      "id": "C++/CONCURRENCY/Thread-Local Data.md",
-      "x": -0.09946632385253906,
-      "y": 288.7237243652344
-    },
-    {
-      "id": "C++/CONCURRENCY/Threads.md",
-      "x": 679.994873046875,
-      "y": -16.756946563720703
-    },
-    {
-      "id": "C++/CONTAINERS/CONTAINERS.md",
-      "x": 49.816707611083984,
-      "y": -643.5826416015625
-    },
-    {
-      "id": "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
-      "x": -75.58868408203125,
-      "y": -512.9549560546875
-    },
-    {
-      "id": "C++/CONTAINERS/Filtering.md",
-      "x": -114.38101959228516,
-      "y": -713.6272583007812
-    },
-    {
-      "id": "C++/CONTAINERS/Queue.md",
-      "x": 100.32799530029297,
-      "y": -476.1918640136719
-    },
-    {
-      "id": "C++/CONTAINERS/Tuple.md",
-      "x": 234.26808166503906,
-      "y": -652.8075561523438
-    },
-    {
-      "id": "C++/Embedded - ESP32/Embedded - ESP32.md",
-      "x": -435.7860107421875,
-      "y": -437.2111511230469
-    },
-    {
-      "id": "C++/Embedded - ESP32/HTTP Requests - JSON.md",
-      "x": -278.7749938964844,
-      "y": -360.74652099609375
-    },
-    {
-      "id": "C++/FUNCTIONAL/Currying.md",
-      "x": 335.30010986328125,
-      "y": 371.3609313964844
-    },
-    {
-      "id": "C++/FUNCTIONAL/FUNCTIONAL.md",
-      "x": 383.03826904296875,
-      "y": 546.4544067382812
-    },
-    {
-      "id": "C++/FUNCTIONAL/Lambda.md",
-      "x": 219.63299560546875,
-      "y": 483.97369384765625
-    },
-    {
-      "id": "C++/ImGui/ImGui.md",
-      "x": -529.2808837890625,
-      "y": 603.9584350585938
-    },
-    {
-      "id": "C++/ImGui/filesystem.md",
-      "x": -668.9853515625,
-      "y": 495.9253845214844
-    },
-    {
-      "id": "C++/Literals.md",
-      "x": -270.73760986328125,
-      "y": 127.58570098876953
-    },
-    {
-      "id": "C++/Modern Pointer Usage.md",
-      "x": -363.6260986328125,
-      "y": 234.50106811523438
-    },
-    {
-      "id": "C++/Move Semantics - Done with the object.md",
-      "x": -270.1166076660156,
-      "y": 3.605677843093872
-    },
-    {
-      "id": "C++/Number Systems.md",
-      "x": -368.9704895019531,
-      "y": -97.27629852294922
-    },
-    {
-      "id": "C++/PATTERNS/PATTERNS.md",
-      "x": 93.6831283569336,
-      "y": 657.439208984375
-    },
-    {
-      "id": "C++/PATTERNS/Structural Patterns/Adapter.md",
-      "x": -65.961669921875,
-      "y": 748.4799194335938
-    },
-    {
-      "id": "C++/PATTERNS/Structural Patterns/Bridge.md",
-      "x": -228.31517028808594,
-      "y": 619.8505859375
-    },
-    {
-      "id": "C++/PATTERNS/Structural Patterns/Structural Patterns.md",
-      "x": -61.55025100708008,
-      "y": 570.4136352539062
-    },
-    {
-      "id": "C++/Random Numbers.md",
-      "x": -532.1033935546875,
-      "y": -99.9609603881836
-    },
-    {
-      "id": "C++/Stream Functions - Output Formatting.md",
-      "x": -624.8538818359375,
-      "y": 136.53079223632812
-    },
-    {
-      "id": "C++/Strings.md",
-      "x": -625.0928344726562,
-      "y": -3.052833080291748
-    },
-    {
-      "id": "C++/TEMPLATES/TEMPLATES.md",
-      "x": 571.1674194335938,
-      "y": 339.6899108886719
-    },
-    {
-      "id": "C++/TEMPLATES/Variadic Templates.md",
-      "x": 641.9649047851562,
-      "y": 496.99658203125
-    },
-    {
-      "id": "C++/Type Casting.md",
-      "x": -512.3001708984375,
-      "y": 242.51876831054688
-    },
-    {
-      "id": "C++/VSCode Clangd Lint Fix.md",
-      "x": -427.6832580566406,
-      "y": -699.5883178710938
+      "x": 396.3675231933594,
+      "y": 77.1667251586914
     },
     {
       "id": "C++/CONCURRENCY/Deadlock.md",
-      "x": 200.90846252441406,
-      "y": -345.89141845703125
+      "x": 243.88555908203125,
+      "y": -317.0662841796875
+    },
+    {
+      "id": "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+      "x": 278.6000061035156,
+      "y": -170.9854736328125
+    },
+    {
+      "id": "C++/CONCURRENCY/Multiple reader, Single writer - Shared Mutex.md",
+      "x": 511.926025390625,
+      "y": -454.86724853515625
+    },
+    {
+      "id": "C++/CONCURRENCY/Mutex.md",
+      "x": 418.0909118652344,
+      "y": -294.0123291015625
+    },
+    {
+      "id": "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
+      "x": 597.0675048828125,
+      "y": -226.265869140625
+    },
+    {
+      "id": "C++/CONCURRENCY/Shared Data.md",
+      "x": 494.0720520019531,
+      "y": -76.05353546142578
+    },
+    {
+      "id": "C++/CONCURRENCY/Sync Issues.md",
+      "x": 221.83119201660156,
+      "y": -896.1970825195312
+    },
+    {
+      "id": "C++/CONCURRENCY/Thread Management and Interface.md",
+      "x": 763.0690307617188,
+      "y": 200.38162231445312
+    },
+    {
+      "id": "C++/CONCURRENCY/Thread-Local Data.md",
+      "x": 670.1954345703125,
+      "y": -105.27925109863281
+    },
+    {
+      "id": "C++/CONCURRENCY/Threads.md",
+      "x": 709.640869140625,
+      "y": 32.48084259033203
+    },
+    {
+      "id": "C++/CONTAINERS/Bitset.md",
+      "x": -5.823668003082275,
+      "y": -489.4560241699219
+    },
+    {
+      "id": "C++/CONTAINERS/CONTAINERS.md",
+      "x": 37.9918098449707,
+      "y": -669.2454833984375
+    },
+    {
+      "id": "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
+      "x": -129.06167602539062,
+      "y": -597.645263671875
+    },
+    {
+      "id": "C++/CONTAINERS/Filtering.md",
+      "x": -102.34895324707031,
+      "y": -778.6259765625
+    },
+    {
+      "id": "C++/CONTAINERS/Queue.md",
+      "x": 147.59860229492188,
+      "y": -528.4771728515625
+    },
+    {
+      "id": "C++/CONTAINERS/Tuple.md",
+      "x": 218.47747802734375,
+      "y": -693.5411376953125
+    },
+    {
+      "id": "C++/Embedded - ESP32/Embedded - ESP32.md",
+      "x": -406.4117736816406,
+      "y": -397.1463317871094
+    },
+    {
+      "id": "C++/Embedded - ESP32/HTTP Requests - JSON.md",
+      "x": -241.6363983154297,
+      "y": -336.9096984863281
+    },
+    {
+      "id": "C++/Embedded - ESP32/How to Send Large Data over ESP-NOW.md",
+      "x": -574.3340454101562,
+      "y": -353.4821472167969
+    },
+    {
+      "id": "C++/FUNCTIONAL/Currying.md",
+      "x": 341.5582275390625,
+      "y": 423.55218505859375
+    },
+    {
+      "id": "C++/FUNCTIONAL/FUNCTIONAL.md",
+      "x": 383.09674072265625,
+      "y": 600.0511474609375
+    },
+    {
+      "id": "C++/FUNCTIONAL/Lambda.md",
+      "x": 221.18936157226562,
+      "y": 534.3779296875
+    },
+    {
+      "id": "C++/ImGui/ImGui.md",
+      "x": -501.2212219238281,
+      "y": 649.0574951171875
+    },
+    {
+      "id": "C++/ImGui/filesystem.md",
+      "x": -649.6594848632812,
+      "y": 555.27880859375
+    },
+    {
+      "id": "C++/Literals.md",
+      "x": -281.9671936035156,
+      "y": 155.31858825683594
+    },
+    {
+      "id": "C++/Modern Pointer Usage.md",
+      "x": -362.7587585449219,
+      "y": 267.12261962890625
+    },
+    {
+      "id": "C++/Move Semantics - Done with the object.md",
+      "x": -298.4617919921875,
+      "y": 27.953840255737305
+    },
+    {
+      "id": "C++/Number Systems.md",
+      "x": -429.19891357421875,
+      "y": -65.61868286132812
+    },
+    {
+      "id": "C++/PATTERNS/PATTERNS.md",
+      "x": 80.32875061035156,
+      "y": 677.19384765625
+    },
+    {
+      "id": "C++/PATTERNS/Structural Patterns/Adapter.md",
+      "x": -72.56478881835938,
+      "y": 749.546875
+    },
+    {
+      "id": "C++/PATTERNS/Structural Patterns/Bridge.md",
+      "x": -220.43453979492188,
+      "y": 633.6495971679688
+    },
+    {
+      "id": "C++/PATTERNS/Structural Patterns/Structural Patterns.md",
+      "x": -58.98870849609375,
+      "y": 567.7796630859375
+    },
+    {
+      "id": "C++/Random Numbers.md",
+      "x": -583.8049926757812,
+      "y": -36.513877868652344
+    },
+    {
+      "id": "C++/Stream Functions - Output Formatting.md",
+      "x": -635.670166015625,
+      "y": 200.7629852294922
+    },
+    {
+      "id": "C++/Strings.md",
+      "x": -655.5606689453125,
+      "y": 70.03321075439453
+    },
+    {
+      "id": "C++/TEMPLATES/TEMPLATES.md",
+      "x": 592.368408203125,
+      "y": 387.6471252441406
+    },
+    {
+      "id": "C++/TEMPLATES/Variadic Templates.md",
+      "x": 655.0233154296875,
+      "y": 547.0758666992188
+    },
+    {
+      "id": "C++/Type Casting.md",
+      "x": -514.9612426757812,
+      "y": 291.83770751953125
+    },
+    {
+      "id": "C++/VSCode Clangd Lint Fix.md",
+      "x": -466.5721435546875,
+      "y": -703.6748657226562
     }
   ],
   "automaticallyRestoreNodePositions": true

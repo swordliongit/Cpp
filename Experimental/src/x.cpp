@@ -69,15 +69,13 @@ int main() {
         }
         shiftMatrixDownOnce(grid);
         std::cout << "\n\n";
-        std::this_thread::sleep_for(100ms);
+        std::this_thread::sleep_for(250ms);
     }
 
-    std::this_thread::sleep_for(2s);
+    std::this_thread::sleep_for(250ms);
 
-    shift_matrix_up_once(grid);
-    for (int i = 0; i < 8; ++i) {
-        shift_matrix_up_once(grid);
 
+    for (int i = 0; i < 9; ++i) {
         // Display the resulting matrix
         for (const auto &row : grid) {
             for (int val : row) {
@@ -85,9 +83,9 @@ int main() {
             }
             std::cout << std::endl;
         }
-
+        shift_matrix_up_once(grid);
         std::cout << "\n\n";
-        std::this_thread::sleep_for(2s);
+        std::this_thread::sleep_for(250ms);
     }
 
 

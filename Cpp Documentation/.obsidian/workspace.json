@@ -218,9 +218,92 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "8cc5589be4d19840",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f9f4469e2eb90a89",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONTAINERS/CONTAINERS.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "103bf9415f8517b7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Thread-Local Data.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d121b5155ad0633d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Thread-Local Data.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4a340e8ab4f7b548",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Shared Data.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a0ba9ea303846447",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/VSCode Clangd Lint Fix.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "089a128c17f41d24",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/Strings.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ],
-        "currentTab": 17
+        ]
       }
     ],
     "direction": "vertical"
@@ -286,7 +369,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "C++/CONCURRENCY/CONCURRENCY.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -303,7 +385,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "C++/CONCURRENCY/CONCURRENCY.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -325,9 +406,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "C++/CONCURRENCY/CONCURRENCY.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -347,8 +426,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ba0b5bdea49bc800",
+  "active": "55bbcfc38cd4409b",
   "lastOpenFiles": [
+    "C++/Strings.md",
+    "C++/VSCode Clangd Lint Fix.md",
+    "C++/CONCURRENCY/Shared Data.md",
+    "C++/CONCURRENCY/Thread-Local Data.md",
+    "C++/CONTAINERS/CONTAINERS.md",
+    "C++/CONCURRENCY/Thread Management and Interface.md",
+    "C++/CONCURRENCY/CONCURRENCY.md",
     "C++/CONCURRENCY/Deadlock.md",
     "C++/CONTAINERS/Bitset.md",
     "C++/Embedded - ESP32/Embedded - ESP32.md",
@@ -357,16 +443,12 @@
     "C++/Move Semantics - Done with the object.md",
     "C++/CONCURRENCY/Shared Data Initialization - Lazy init, call_once.md",
     "C++/CONCURRENCY/Mutex.md",
-    "C++/CONCURRENCY/CONCURRENCY.md",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-30 203040.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-30 202916.png",
-    "C++/CONCURRENCY/Thread-Local Data.md",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183236.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183059.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183205.png",
     "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
-    "C++/CONCURRENCY/Thread Management and Interface.md",
-    "C++/CONCURRENCY/Shared Data.md",
     "C++/CONCURRENCY/Multiple reader, Single writer - Shared Mutex.md",
     "C++/CONTAINERS/Queue.md",
     "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
@@ -374,13 +456,10 @@
     "C++/Embedded - ESP32/HTTP Requests - JSON.md",
     "C++/Embedded - ESP32",
     "C++/CONTAINERS/Tuple.md",
-    "C++/CONTAINERS/CONTAINERS.md",
     "C++/CONCURRENCY/Threads.md",
     "C++/C++.md",
     "C++/Type Casting.md",
     "C++/Stream Functions - Output Formatting.md",
-    "C++/Strings.md",
-    "C++/Number Systems.md",
     "C++/ImGui",
     "C++/TEMPLATES",
     "C++",

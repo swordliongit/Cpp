@@ -10,9 +10,15 @@
 
 struct CompareOrder
 {
+    bool ascending;
+    explicit CompareOrder(bool asc = true) : ascending(asc) {
+    }
     bool operator()(const std::tuple<std::string, int> &a, const std::tuple<std::string, int> &b) const {
         // Compare based on the order value
-        return std::get<1>(a) > std::get<1>(b); // Change > to < for ascending order
+        if (ascending)
+            return std::get<1>(a) < std::get<1>(b); // Ascending order
+        else
+            return std::get<1>(a) > std::get<1>(b); // Descending order
     }
 };
 
@@ -22,6 +28,10 @@ class UniqueQueue
     std::set<std::tuple<std::string, int>> proxy;
 
 public:
+    UniqueQueue(bool ascending = true) : pqueue(CompareOrder(ascending)) {
+    }
+
+
     void push(const std::tuple<std::string, int> &t) {
         if (this->proxy.insert(t).second) {
             this->pqueue.push(t);
@@ -38,17 +48,17 @@ public:
     }
 
     bool empty() {
-        return pqueue.empty();
+        return this->pqueue.empty();
     }
 
     std::tuple<std::string, int> top() {
-        return pqueue.top();
+        return this->pqueue.top();
     }
 };
 
 int main() {
     std::tuple<std::string, int> t1{"first", 1}, t2{"second", 2}, t3{"third", 3};
-    UniqueQueue queue, queue2;
+    UniqueQueue queue(false), queue2(true);
 
     queue.push(std::make_tuple("first", 1));
     std::cout << queue.size() << "\n";

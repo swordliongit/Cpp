@@ -186,8 +186,9 @@ int main(int argc, char const* argv[]) {
 }
 ```
 
-## Thread Detachment
+## Background Threads - Daemon Threads
 
+- Detached threads truly run in the background.  Ownership and control are passed over to the C++ Runtime Library.
 - The main thread will continue executing and it won't terminate the program. The main thread can end before the child thread.
 
 ```cpp

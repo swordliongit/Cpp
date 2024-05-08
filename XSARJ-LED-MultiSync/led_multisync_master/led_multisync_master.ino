@@ -140,12 +140,19 @@ uint8_t broadcastAddress_1[6] = {0x48, 0xE7, 0x29, 0xB7, 0xE1, 0xCC};
 uint8_t broadcastAddress_2[6] = {0x78, 0x21, 0x84, 0xBB, 0x9F, 0x18};
 uint8_t broadcastAddress_3[6] = {0x40, 0x22, 0xD8, 0x6E, 0x7F, 0xCC};
 
+bool DEBUG = false;
 
 struct CompareOrder
 {
+    bool ascending;
+    explicit CompareOrder(bool asc = true) : ascending(asc) {
+    }
     bool operator()(const std::tuple<const uint8_t *, int> &a, const std::tuple<const uint8_t *, int> &b) const {
         // Compare based on the order value
-        return std::get<1>(a) > std::get<1>(b); // Change > to < for ascending order
+        if (ascending)
+            return std::get<1>(a) < std::get<1>(b); // Ascending order
+        else
+            return std::get<1>(a) > std::get<1>(b); // Descending order
     }
 };
 
@@ -155,6 +162,8 @@ class UniqueQueue
     std::set<std::tuple<const uint8_t *, int>> proxy{};
 
 public:
+    UniqueQueue(bool ascending = true) : pqueue(CompareOrder(ascending)) {
+    }
     void push(const std::tuple<const uint8_t *, int> &t) {
         if (this->proxy.insert(t).second) {
             this->pqueue.push(t);
@@ -179,7 +188,8 @@ public:
     }
 };
 
-UniqueQueue slave_queue, proxy_queue;
+UniqueQueue slave_queue(false);
+UniqueQueue proxy_queue(true);
 uint8_t copied_mac[6];
 
 
@@ -220,15 +230,17 @@ esp_now_peer_info_t peerInfo;
 
 // callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-    // Serial.print("\r\nLast Packet Send Status:\t");
+    if (DEBUG) {
+        Serial.print("\r\nLast Packet Send Status:\t");
+        Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+        char macStr[18];
+        Serial.print("Packet to: ");
+        // Copies the sender mac address to a string
+        snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);
+        Serial.print(macStr);
+        Serial.print(" send status:\t");
+    }
     // Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
-    char macStr[18];
-    Serial.print("Packet to: ");
-    // Copies the sender mac address to a string
-    snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);
-    Serial.print(macStr);
-    Serial.print(" send status:\t");
-    Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
     // Serial.println(sizeof(message_to_send.anim));
 }
 
@@ -608,17 +620,20 @@ void setup(void) {
     for (size_t i = 0; i < compressedString.size(); ++i) {
         message_to_send.charArray[i] = compressedString[i];
     }
-    Serial.print("Bit String: ");
-    Serial.println(bitString.c_str());
-    Serial.print("Compressed String: ");
-    Serial.println();
-    for (unsigned char c : message_to_send.charArray) {
-        Serial.print(binaryString(c).c_str());
-        Serial.println();
-    }
+    // if (DEBUG) {
+    //     Serial.print("Bit String: ");
+    //     Serial.println(bitString.c_str());
+    //     Serial.print("Compressed String: ");
+    //     Serial.println();
+    //     for (unsigned char c : message_to_send.charArray) {
+    //         Serial.print(binaryString(c).c_str());
+    //         Serial.println();
+    //     }
 
-    Serial.println(bitString.size());
-    Serial.println(compressedString.size());
+    //     Serial.println(bitString.size());
+    //     Serial.println(compressedString.size());
+    // }
+
 
     // message_to_send.slave_flag =
     // while (!slave_queue.empty()) {
@@ -645,23 +660,38 @@ void prepare_next_matrix(std::vector<std::vector<int>> &matrix) {
     std::string compressedString = compressBitString(bitString);
 
     size_t compressedSize = compressedString.size();
-    Serial.println(compressedSize);
+    // Serial.println(compressedSize);
+    message_to_send.bitSetStringSize = compressedSize;
+    for (size_t i = 0; i < compressedSize; ++i) {
+        message_to_send.charArray[i] = compressedString[i];
+    }
+}
+
+void prepare_and_shift_next_matrix(std::vector<std::vector<int>> &matrix, std::function<void(std::vector<std::vector<int>> &)> shifter) {
+    std::string bitString = convertToBitString(matrix);
+    std::string compressedString = compressBitString(bitString);
+
+    size_t compressedSize = compressedString.size();
+    // Serial.println(compressedSize);
     message_to_send.bitSetStringSize = compressedSize;
     for (size_t i = 0; i < compressedSize; ++i) {
         message_to_send.charArray[i] = compressedString[i];
     }
 
-    Serial.println(bitString.c_str());
-    Serial.print("Compressed String: ");
-    Serial.println();
-    for (unsigned char c : message_to_send.charArray) {
-        Serial.print(binaryString(c).c_str());
+    if (DEBUG) {
+        Serial.println(bitString.c_str());
+        Serial.print("Compressed String: ");
         Serial.println();
+        for (unsigned char c : message_to_send.charArray) {
+            Serial.print(binaryString(c).c_str());
+            Serial.println();
+        }
     }
-    shiftMatrixDownOnce(matrix);
+
+    shifter(matrix);
 }
 
-void shiftMatrixDownOnce(std::vector<std::vector<int>> &matrix) {
+void shift_matrix_down_once(std::vector<std::vector<int>> &matrix) {
     int numRows = matrix.size();
     int numCols = matrix[0].size();
 
@@ -677,7 +707,22 @@ void shiftMatrixDownOnce(std::vector<std::vector<int>> &matrix) {
     matrix[0] = lastRow;
 }
 
-bool flip = true;
+void shift_matrix_up_once(std::vector<std::vector<int>> &matrix) {
+    int numRows = matrix.size();
+    int numCols = matrix[0].size();
+
+    // Save the first row
+    std::vector<int> firstRow = matrix[0];
+
+    // Shift each row up by one position
+    for (int i = 0; i < numRows - 1; ++i) {
+        matrix[i] = matrix[i + 1];
+    }
+
+    // Place the first row at the bottom
+    matrix[numRows - 1] = firstRow;
+}
+
 
 // Function to convert 2D vector to a bit string
 std::string convertToBitString(const std::vector<std::vector<int>> &grid) {
@@ -736,6 +781,10 @@ std::string binaryString(unsigned char c) {
   Arduino architecture main loop
   --------------------------------------------------------------------------------------*/
 
+constexpr int ANIM_DELAY = 20; // 20
+constexpr int SWITCH_DELAY = ANIM_DELAY * 4;
+bool flip = false;
+
 
 void loop(void) {
     timerWrite(timer, 0); // reset timer (feed watchdog)
@@ -758,13 +807,13 @@ void loop(void) {
     // for (int i = 0; i < MAX_ROW; i++) {
     //     p10.draw_pattern_static(p10.grid, 4, 0);
     //     delay(500);
-    //     shiftMatrixDownOnce(p10.grid);
+    //     shift_matrix_down_once(p10.grid);
     // }
     // dmd.writePixel(4, 0, GRAPHICS_NORMAL, 1);
     // if (flip) {
     //     p10.draw_pattern_static(p10.grid, 4, 0);
     //     delay(2000);
-    //     shiftMatrixDownOnce(p10.grid);
+    //     shift_matrix_down_once(p10.grid);
     //     p10.draw_pattern_static(p10.grid, 4, 0);
 
     //     flip = false;
@@ -775,56 +824,96 @@ void loop(void) {
     // Animate slaves
     int order = 1;
 
-    delay(6000);
-
-    if (flip) {
-        for (int i = 0; i < 9; i++) {
-            while (!slave_queue.empty()) {
-                Serial.print("Animating slave ");
-                Serial.print(order);
-                Serial.println();
-                // message_to_send.anim = Animation::ANIM1;
-                // message_to_send.anim = p10.grid;
-                // message_to_send.delay = 500;
-                // message_to_send.order = order;
-                // message_to_send.anim = p10.grid;
-                // Serial.print(message_to_send.bitString);
-                Serial.println();
-                esp_err_t result = esp_now_send(std::get<0>(slave_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
-                if (result == ESP_OK) {
-                    Serial.println("Sent with success");
-
-                    // wait for response from the queued slave
-                    // while (!sync_mutex) {
-                    //     // Serial.println("[Master] waiting for slave to complete animation...");
-                    //     ;
-                    // }
-                    Serial.println("Slave completed animation, continuing to next slave");
-                    // sync_mutex = false;
-                } else {
-                    Serial.println("Error sending the data");
-                }
-
-                // delete[] message_to_send.bitString;
-
-                proxy_queue.push(slave_queue.top());
-                slave_queue.pop();
-                ++order;
-            }
-            while (!proxy_queue.empty()) {
-                slave_queue.push(proxy_queue.top());
-                proxy_queue.pop();
-            }
-            prepare_next_matrix(p10.grid);
-            delay(300);
-        }
-        flip = false;
+    // delay(6000);
+    // Animate Self/Master
+    std::vector<std::vector<int>> proxy = p10.grid;
+    for (int i = 0; i < 8; i++) {
+        p10.draw_pattern_static(proxy, 4, 0);
+        shift_matrix_down_once(proxy);
+        delay(ANIM_DELAY);
     }
+    p10.draw_pattern_static(p10.grid_turned_off, 4, 0);
+    delay(SWITCH_DELAY);
+
+    // Animate Slaves
+    while (!slave_queue.empty()) {
+        std::vector<std::vector<int>> proxy = p10.grid;
+
+        for (int i = 0; i < 9; i++) {
+            // Serial.print("Animating slave ");
+            // Serial.print(order);
+            // Serial.println();
+            esp_err_t result = esp_now_send(std::get<0>(slave_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
+            if (result == ESP_OK) {
+                ;
+            } else {
+                Serial.println("Error sending the data");
+            }
+
+            // delete[] message_to_send.bitString;
+            prepare_and_shift_next_matrix(proxy, shift_matrix_down_once);
+            delay(ANIM_DELAY);
+        }
+        // Clear the slave's screen
+        prepare_next_matrix(p10.grid_turned_off);
+        esp_err_t result = esp_now_send(std::get<0>(slave_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
+
+        proxy_queue.push(slave_queue.top());
+        slave_queue.pop();
+        ++order;
+        // delay(120);
+        delay(SWITCH_DELAY);
+    }
+    delay(SWITCH_DELAY * 2);
+    prepare_and_shift_next_matrix(p10.grid, shift_matrix_up_once);
+    while (!proxy_queue.empty()) {
+        std::vector<std::vector<int>> proxy = p10.grid;
+
+        for (int i = 0; i < 8; i++) {
+            prepare_and_shift_next_matrix(proxy, shift_matrix_up_once);
+
+            // Serial.print("Animating slave ");
+            // Serial.print(order);
+            // Serial.println();
+            esp_err_t result = esp_now_send(std::get<0>(proxy_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
+            if (result == ESP_OK) {
+                ;
+            } else {
+                Serial.println("Error sending the data");
+            }
+
+            // delete[] message_to_send.bitString;
+            delay(ANIM_DELAY);
+        }
+        // Clear the slave's screen
+        prepare_next_matrix(p10.grid_turned_off);
+        esp_err_t result = esp_now_send(std::get<0>(proxy_queue.top()), (uint8_t *)&message_to_send, sizeof(message_to_send));
+
+        slave_queue.push(proxy_queue.top());
+        proxy_queue.pop();
+        ++order;
+        // delay(120);
+        delay(SWITCH_DELAY);
+    }
+    // prepare_and_shift_next_matrix(p10.grid, shift_matrix_down_once);
+
+    proxy = p10.grid;
+    for (int i = 0; i < 8; i++) {
+        p10.draw_pattern_static(proxy, 4, 0);
+        shift_matrix_up_once(proxy);
+        delay(ANIM_DELAY);
+    }
+    p10.draw_pattern_static(p10.grid_turned_off, 4, 0);
+    delay(SWITCH_DELAY * 2);
+    // Shift 1 more time
+    shift_matrix_down_once(p10.grid);
+
+    // delay(SWITCH_DELAY * 2);
 
 
     // delay(10000);
     // message_to_send.cmd = false;
-    // shiftMatrixDownOnce(p10.grid);
+    // shift_matrix_down_once(p10.grid);
     // delay(2000);
 
 
