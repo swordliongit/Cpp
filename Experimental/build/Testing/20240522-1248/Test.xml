@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Win32-mingw32-make"
+	BuildStamp="20240522-1248-Experimental"
+	Name="SWORD"
+	Generator="ctest-3.26.4"
+	CompilerName="C:/mingw64/bin/g++.exe"
+	CompilerVersion="13.1.0"
+	OSName="Windows"
+	Hostname="SWORD"
+	OSRelease=" Professional"
+	OSVersion=" (Build 9200)"
+	OSPlatform="AMD64"
+	Is64Bits="1"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="0"
+	ModelID="0"
+	ProcessorCacheSize="0"
+	NumberOfLogicalCPU="20"
+	NumberOfPhysicalCPU="14"
+	TotalVirtualMemory="32103"
+	TotalPhysicalMemory="16051"
+	LogicalProcessorsPerPhysical="1"
+	ProcessorClockFrequency="2688"
+	>
+	<Testing>
+		<StartDateTime>May 22 15:48 Turkey Standard Time</StartDateTime>
+		<StartTestTime>1716382089</StartTestTime>
+		<TestList/>
+		<EndDateTime>May 22 15:48 Turkey Standard Time</EndDateTime>
+		<EndTestTime>1716382089</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

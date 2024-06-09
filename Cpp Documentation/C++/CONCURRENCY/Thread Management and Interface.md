@@ -11,19 +11,27 @@ std::cout << thr.native_handle();
 thr.join();
 ```
 
+---
+
 ## Thread Id - get_id(), std::this_thread::get_id()
 
 - Used internally by the system's implementation
 - A new thread may get the id of an earlier thread which has completed
+- ==std::thread::id== is the type
 
 ```cpp
- std::thread thr([]() {
+std::thread thr([]() {
         ;
 });
 std::cout << thr.get_id() << std::endl; // 2
 std::cout << std::this_thread::get_id(); // 12
 ```
 
+```cpp
+std::thread::id master_id = std::this_thread::get_id();
+```
+
+---
 
 ## Pausing Threads - sleep_for()
 - Works for single threaded programs too. Pauses thread that executes main()
@@ -47,8 +55,18 @@ std::thread thr([]() {
 
 ```
 
+---
 
 ## Passing and Returning Threads
+
+- Temporary objects are moved and copied implicitly
+```cpp
+void some_function();
+std::thread t1(some_function);
+std::thread t2 = std::move(t1);
+t1 = std::thread(some_other_function);
+```
+
 
 ```cpp
 void thread_controller(std::thread&& t) {
@@ -80,6 +98,21 @@ t1.join();
 std::thread t2 = create_thread(12);
 t2.join();
 ```
+
+### Passing Member Functions
+
+```cpp
+class X
+{
+public:
+    void do_lengthy_work(int y);
+};
+
+X my_x;
+std::thread t(&X::do_lengthy_work, &my_x, 5);
+```
+
+---
 
 ## Thread Exception Handling
 
@@ -186,6 +219,8 @@ int main(int argc, char const* argv[]) {
 }
 ```
 
+---
+
 ## Background Threads - Daemon Threads
 
 - Detached threads truly run in the background.  Ownership and control are passed over to the C++ Runtime Library.
@@ -202,6 +237,8 @@ int main(int argc, char const* argv[]) {
 }
 ```
 
+---
+
 ## Launching Multiple Threads
 
 ```cpp
@@ -209,4 +246,17 @@ std::vector<std::thread> threads;
 
 for (int i = 0; i < 20; ++i)
 	threads.push_back(std::thread(func));
+```
+
+### Alternative - for_each:
+```cpp
+std::vector<std::thread> threads;
+std::for_each(threads.begin(), threads.end(), std::mem_fn(&std::thread::join));
+```
+
+---
+
+## Choosing Thread Number at Runtime
+```cpp
+std::cout << std::thread::hardware_concurrency();
 ```

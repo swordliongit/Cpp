@@ -39,12 +39,10 @@ void setup() {
     doc["count"] = 4;
 
     // Serialize JSON document
-    char json[128];
+    std::string json;
     serializeJson(doc, json);
 
-    WiFiClient client; // or WiFiClientSecure for HTTPS
     HTTPClient http;
-
     // Send request
     http.begin(server_endpoint);
     http.addHeader("Content-Type", "application/json");
@@ -53,7 +51,7 @@ void setup() {
     http.addHeader("Accept", "*/*");
     http.addHeader("User-Agent", "PostmanRuntime/7.26.8");
     http.setConnectTimeout(5000);
-    http.POST(json);
+    http.POST(json.c_str());
 
     // Read response
     Serial.print(http.getString());

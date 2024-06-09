@@ -2,5 +2,5 @@
     "configuration": "FlashFreq=80,UploadSpeed=921600,DebugLevel=none",
     "board": "esp32:esp32:esp32doit-devkit-v1",
     "port": "COM6",
-    "sketch": "led_multisync_master\\led_multisync_master.ino"
+    "sketch": "led_multisync\\led_multisync.ino"
 }

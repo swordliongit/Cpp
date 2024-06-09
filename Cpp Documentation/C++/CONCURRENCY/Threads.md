@@ -3,8 +3,7 @@
 
 - Move-only class following RAII
 - Constructor acquires a resource and destructor releases it
-- **Data Race**: Occurs when multiple threads access the same memory location concurrently, and at least one thread modifies the data, without synchronization.
-- **Race Condition**: A broader term referring to any situation where the program's behavior depends on the timing and order of events.
+
 
 ```cpp
 #include <thread>

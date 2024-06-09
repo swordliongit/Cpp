@@ -1,6 +1,8 @@
 - Thread A locks mutex 1 and waits for mutex 2
 - Thread B locks mutex 2 and waits for mutex 1
 - Both threads kept waiting, deadlocking each other
+- Easiest way to deadlock is to have 2 threads call join() for the other thread, even without any locks
+- ==scoped_lock== is the counter to deadlock emerging from multiple mutex locks
 
 ## Avoidance
 - Make the threads acquire locks in the same order

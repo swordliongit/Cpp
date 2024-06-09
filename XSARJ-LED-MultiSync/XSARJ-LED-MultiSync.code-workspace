@@ -50,7 +50,9 @@
             "typeinfo": "cpp",
             "random": "cpp",
             "string": "cpp",
-            "bitset": "cpp"
+            "bitset": "cpp",
+            "cstring": "cpp",
+            "string_view": "cpp"
         }
     }
 }

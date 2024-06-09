@@ -1,0 +1,1 @@
+1. Slaves currently get the master's mac statically. Master's mac must be provided to them in other ways.

@@ -10,25 +10,30 @@
 #include <esp_now.h>
 
 
+#include <esp_wifi.h>
 #include <ezButton.h>
 ezButton mySwitch(17); // create ezButton object that attach to ESP32 pin GPIO17
 
-uint8_t broadcastAddress_1[6] = {0x8C, 0xCE, 0x4E, 0x8C, 0x64, 0x44};
+uint8_t broadcastAddress_1[6] = {0x78, 0x21, 0x84, 0x9D, 0xF0, 0xB8};
+// 78:21:84:9D:F0:B8
+// 0x8C, 0xCE, 0x4E, 0x8C, 0x64, 0x44
 
 // Structure example to send data
 // Must match the receiver structure
-typedef struct struct_message
+struct struct_message
 {
     char a[32];
     int b;
     float c;
     bool d;
-} struct_message;
+};
 
 // Create a struct_message called myData
 struct_message myData;
 
 esp_now_peer_info_t peerInfo;
+
+bool message_sent = false; // Flag to track if the message has been sent
 
 // callback when data is sent
 void OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status) {
@@ -51,16 +56,35 @@ void OnDataSent(const uint8_t* mac_addr, esp_now_send_status_t status) {
     Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
+int32_t getWiFiChannel(const char* ssid) {
+    if (int32_t n = WiFi.scanNetworks()) {
+        for (uint8_t i = 0; i < n; i++) {
+            if (!strcmp(ssid, WiFi.SSID(i).c_str())) {
+                return WiFi.channel(i);
+            }
+        }
+    }
+    return 0;
+}
+
 void setup() {
     Serial.begin(115200);
 
 
     pinMode(LED_BUILTIN, OUTPUT);   // blue led on chip to notify boot is pressed
     digitalWrite(LED_BUILTIN, LOW); // start off
+    // switch setup
+    mySwitch.setDebounceTime(50); // set debounce time to 50 milliseconds
+
     // Set device as a Wi-Fi Station
     WiFi.mode(WIFI_STA);
-    // switch setup
-    mySwitch.setDebounceTime(0); // set debounce time to 50 milliseconds
+    int32_t channel = getWiFiChannel("SL-MOBILE");
+
+    WiFi.printDiag(Serial); // Uncomment to verify channel number before
+    esp_wifi_set_promiscuous(true);
+    esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
+    esp_wifi_set_promiscuous(false);
+    WiFi.printDiag(Serial); // Uncomment to verify channel change after
 
     // Init ESP-NOW
     if (esp_now_init() != ESP_OK) {
@@ -73,7 +97,7 @@ void setup() {
     esp_now_register_send_cb(OnDataSent);
 
     // Register peer
-    peerInfo.channel = 0;
+    // peerInfo.channel = 0;
     peerInfo.encrypt = false;
 
     memcpy(peerInfo.peer_addr, broadcastAddress_1, 6);
@@ -92,22 +116,24 @@ void loop() {
     myData.c = 1.2;
     myData.d = true;
 
-    if (mySwitch.isPressed()) {
-        Serial.println("The switch: OFF -> ON");
-        digitalWrite(LED_BUILTIN, HIGH);
-        esp_err_t result = esp_now_send(broadcastAddress_1, (uint8_t*)&myData, sizeof(myData));
+    if (mySwitch.getState() == 1) {
+        if (!message_sent) {
+            // Serial.println("The switch: ON -> OFF");
+            digitalWrite(LED_BUILTIN, LOW);
+            esp_err_t result = esp_now_send(broadcastAddress_1, (uint8_t*)&myData, sizeof(myData));
 
-        if (result == ESP_OK) {
-            Serial.println("Sent with success");
-        } else {
-            Serial.println("Error sending the data");
+            if (result == ESP_OK) {
+                Serial.println("Sent with success");
+            } else {
+                Serial.println("Error sending the data");
+            }
+            message_sent = true;
+            delay(1000);
         }
-        delay(1000);
-    }
-
-    if (mySwitch.isReleased()) {
-        digitalWrite(LED_BUILTIN, LOW);
-        Serial.println("The switch: ON -> OFF");
+    } else {
+        digitalWrite(LED_BUILTIN, HIGH);
+        // Serial.println("The switch: OFF -> ON");
+        message_sent = false;
     }
 
     // int state = mySwitch.getState();

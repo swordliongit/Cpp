@@ -297,6 +297,10 @@ void wifi_Get_Data_Parser(String response) {
       Serial.println(charge_counter);
     }
 
+    swSer.println("ms_" + String(setting_4_value) + "!");
+
+    
+
     Serial.println("---------------- Data Get And Parsed By Wifi -----------------");
     Serial.print("device_update:");
     Serial.println(device_update);

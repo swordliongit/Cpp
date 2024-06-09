@@ -6,3 +6,6 @@
 [[Stream Functions - Output Formatting]]
 [[Strings]]
 [[Type Casting]]
+[[algorithm]]
+[[Iterators]]
+[[const]]
