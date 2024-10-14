@@ -1,7 +1,6 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-
 #include <ArduinoJson.h>
 #include <esp_now.h>
 #include <WiFi.h>
@@ -30,23 +29,24 @@ std::string serial2_get_data(const char* prefix, const char* suffix);
 void register_peers(UniqueQueue& slave_queue);
 void unregister_all_peers(UniqueQueue& slave_queue);
 
-template <typename Function, typename... Args>
-void run_every_seconds(const unsigned long Interval, Function func, Args... args) {
-
+template <typename Function, typename... Args> void run_every_seconds(const unsigned long Interval, Function func, Args... args)
+{
     static unsigned long last_time_run = 0;
     unsigned long current_time = millis();
 
-    if (current_time - last_time_run >= Interval) {
-        func(args...);
-        last_time_run = current_time;
-    }
+    if (current_time - last_time_run >= Interval)
+        {
+            func(args...);
+            last_time_run = current_time;
+        }
 }
 
 int32_t getWiFiChannel(const char* ssid);
 
 void prepare_next_matrix(std::vector<std::vector<int>>& matrix);
 
-void prepare_and_shift_next_matrix(std::vector<std::vector<int>>& matrix, std::function<void(std::vector<std::vector<int>>&)> shifter, bool should_print = false);
+void prepare_and_shift_next_matrix(std::vector<std::vector<int>>& matrix, std::function<void(std::vector<std::vector<int>>&)> shifter,
+                                   bool should_print = false);
 
 void shift_matrix_down(std::vector<std::vector<int>>& matrix);
 

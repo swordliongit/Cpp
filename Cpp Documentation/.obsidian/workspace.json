@@ -100,8 +100,105 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "50f5cccc55859cf8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONTAINERS/Queue.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "acddce25285da957",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/PATTERNS/Matrix Shift.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4e49767137b6e855",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONTAINERS/Bitset.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6d9e8b13b4d06e23",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/Embedded - ESP32/How to Send Large Data over ESP-NOW.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a8c9a64a5eb16ad4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/VSCode Clangd Lint Fix.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4724ab917fbc7743",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/algorithm.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "736018b42c203f8e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Mutex.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c298826f1ce68cda",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 15
       }
     ],
     "direction": "vertical"
@@ -130,7 +227,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "chrono",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -147,7 +244,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -167,7 +265,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "C++/CONCURRENCY/Thread-Safe Stack.md",
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -184,7 +282,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "C++/CONCURRENCY/Thread-Safe Stack.md",
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -207,7 +305,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "C++/CONCURRENCY/Thread-Safe Stack.md"
+                "file": "C++/CONCURRENCY/Thread Management and Interface.md"
               }
             }
           }
@@ -228,34 +326,34 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "55bbcfc38cd4409b",
+  "active": "c298826f1ce68cda",
   "lastOpenFiles": [
-    "C++/CONCURRENCY/Thread-Safe Stack.md",
-    "C++/CONCURRENCY/Multiple reader, Single writer - Shared Mutex.md",
-    "C++/CONCURRENCY/Deadlock.md",
-    "C++/TEMPLATES/Variadic Templates.md",
-    "C++/Iterators.md",
-    "C++/CONCURRENCY/Thread Management and Interface.md",
-    "C++/const.md",
-    "C++/C++.md",
-    "C++/CONCURRENCY/Threads.md",
-    "C++/CONCURRENCY/CONCURRENCY.md",
-    "C++/CONCURRENCY/Thread-Local Data.md",
+    "C++/Literals.md",
     "C++/CONCURRENCY/Mutex.md",
-    "C++/algorithm.md",
-    "C++/Move Semantics - Done with the object.md",
-    "C++/PATTERNS/Matrix Shift.md",
-    "C++/PATTERNS/Structural Patterns/Structural Patterns.md",
-    "C++/PATTERNS/Structural Patterns/Adapter.md",
-    "C++/PATTERNS/Structural Patterns/Bridge.md",
-    "C++/PATTERNS/PATTERNS.md",
-    "C++/Strings.md",
-    "C++/VSCode Clangd Lint Fix.md",
-    "C++/CONCURRENCY/Shared Data.md",
+    "C++/CONCURRENCY/Multiple reader, Single writer - Shared Mutex.md",
+    "C++/CONCURRENCY/Multiple Lock - Recursive Mutex, Timed Mutex, Timeouts.md",
+    "C++/CONCURRENCY/Deadlock.md",
+    "C++/CONCURRENCY/CPUs and Threads.md",
+    "C++/CONCURRENCY/Critical Section Exceptions - lock_guard - unique_lock.md",
+    "C++/CONCURRENCY/CONCURRENCY.md",
+    "C++/CONTAINERS/Tuple.md",
+    "C++/CONTAINERS/Queue.md",
+    "C++/CONTAINERS/Filtering.md",
     "C++/CONTAINERS/CONTAINERS.md",
     "C++/CONTAINERS/Bitset.md",
-    "C++/Embedded - ESP32/Embedded - ESP32.md",
+    "C++/CONTAINERS/Dictionary/Map ( Dictionary ).md",
+    "C++/Embedded - ESP32/HTTP Requests - JSON.md",
     "C++/Embedded - ESP32/How to Send Large Data over ESP-NOW.md",
+    "C++/Embedded - ESP32/Embedded - ESP32.md",
+    "C++/FUNCTIONAL/Currying.md",
+    "C++/ImGui/filesystem.md",
+    "C++/VSCode Clangd Lint Fix.md",
+    "C++/Type Casting.md",
+    "C++/Stream Functions - Output Formatting.md",
+    "C++/Number Systems.md",
+    "C++/Random Numbers.md",
+    "C++/Modern Pointer Usage.md",
+    "C++/algorithm.md",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-30 203040.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-30 202916.png",
     "C++/CONCURRENCY/SS/Screenshot 2024-04-28 183236.png",

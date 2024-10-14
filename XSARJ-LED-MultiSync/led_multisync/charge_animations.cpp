@@ -1,7 +1,7 @@
 #include "charge_animations.hpp"
 
-
-void anim_StationReserved(PatternAnimator& p10, double cycle) {
+void anim_StationReserved(PatternAnimator& p10, double cycle)
+{
     int ROW_START = 4;
     int COL_START = 23;
     int msdelay = 250;
@@ -31,8 +31,8 @@ void anim_StationReserved(PatternAnimator& p10, double cycle) {
     // }
 }
 
-
-void anim_StationWaiting(PatternAnimator& p10, double cycle) {
+void anim_StationWaiting(PatternAnimator& p10, double cycle)
+{
     int ROW_START = 4;
     int COL_START = 0;
     int PANEL_LAST_COL = 49;
@@ -44,13 +44,12 @@ void anim_StationWaiting(PatternAnimator& p10, double cycle) {
     p10.draw_pattern_scrolling(p10.xsarj, ROW_START, COL_START, delaystep, cycle);
 }
 
-
 // *********************************
 // Station Stopped( chargehandle )
 // *********************************
 
-
-void anim_StationError(PatternAnimator& p10, double cycle) {
+void anim_StationError(PatternAnimator& p10, double cycle)
+{
     int ROW_START = 4;
     int COL_START = 0;
     int msdelay = 0;
@@ -114,72 +113,84 @@ void anim_StationError(PatternAnimator& p10, double cycle) {
     thread_excmark.join();
 }
 
-
-void anim_StationCharge_Starting(PatternAnimator& p10) {
-    for (int cycle = 0; cycle < 1; ++cycle) {
-        p10.dmd->drawMarquee("Sarj Basliyor", 13, (32 * DISPLAYS_ACROSS) - 1, 4);
-        long start = millis();
-        long timer = start;
-        boolean ret = false;
-        while (!ret) {
-            if ((timer + 21) < millis()) {
-                ret = p10.dmd->stepMarquee(-1, 0);
-                timer = millis();
-            }
+void anim_StationCharge_Starting(PatternAnimator& p10)
+{
+    for (int cycle = 0; cycle < 1; ++cycle)
+        {
+            p10.dmd->drawMarquee("Sarj Basliyor", 13, (32 * DISPLAYS_ACROSS) - 1, 4);
+            long start = millis();
+            long timer = start;
+            boolean ret = false;
+            while (!ret)
+                {
+                    if ((timer + 21) < millis())
+                        {
+                            ret = p10.dmd->stepMarquee(-1, 0);
+                            timer = millis();
+                        }
+                }
         }
-    }
 }
 
-
-void anim_StationCharge_Started(PatternAnimator& p10) {
-    for (int cycle = 0; cycle < 1; ++cycle) {
-        p10.dmd->drawMarquee("Sarj Basladi", 12, (32 * DISPLAYS_ACROSS) - 1, 4);
-        long start = millis();
-        long timer = start;
-        boolean ret = false;
-        while (!ret) {
-            if ((timer + 21) < millis()) {
-                ret = p10.dmd->stepMarquee(-1, 0);
-                timer = millis();
-            }
+void anim_StationCharge_Started(PatternAnimator& p10)
+{
+    for (int cycle = 0; cycle < 1; ++cycle)
+        {
+            p10.dmd->drawMarquee("Sarj Basladi", 12, (32 * DISPLAYS_ACROSS) - 1, 4);
+            long start = millis();
+            long timer = start;
+            boolean ret = false;
+            while (!ret)
+                {
+                    if ((timer + 21) < millis())
+                        {
+                            ret = p10.dmd->stepMarquee(-1, 0);
+                            timer = millis();
+                        }
+                }
         }
-    }
 }
 
-
-void anim_StationCharge_Stopped(PatternAnimator& p10) {
-    for (int cycle = 0; cycle < 1; ++cycle) {
-        p10.dmd->drawMarquee("Sarj Sonlandirildi", 18, (32 * DISPLAYS_ACROSS) - 1, 4);
-        long start = millis();
-        long timer = start;
-        boolean ret = false;
-        while (!ret) {
-            if ((timer + 21) < millis()) {
-                ret = p10.dmd->stepMarquee(-1, 0);
-                timer = millis();
-            }
+void anim_StationCharge_Stopped(PatternAnimator& p10)
+{
+    for (int cycle = 0; cycle < 1; ++cycle)
+        {
+            p10.dmd->drawMarquee("Sarj Sonlandirildi", 18, (32 * DISPLAYS_ACROSS) - 1, 4);
+            long start = millis();
+            long timer = start;
+            boolean ret = false;
+            while (!ret)
+                {
+                    if ((timer + 21) < millis())
+                        {
+                            ret = p10.dmd->stepMarquee(-1, 0);
+                            timer = millis();
+                        }
+                }
         }
-    }
 }
 
-
-void anim_InsertSocket(PatternAnimator& p10, double cycle) {
-    for (int cycle = 0; cycle < 1; ++cycle) {
-        p10.dmd->drawMarquee("Soketi Takin", 12, (32 * DISPLAYS_ACROSS) - 1, 4);
-        long start = millis();
-        long timer = start;
-        boolean ret = false;
-        while (!ret) {
-            if ((timer + 21) < millis()) {
-                ret = p10.dmd->stepMarquee(-1, 0);
-                timer = millis();
-            }
+void anim_InsertSocket(PatternAnimator& p10, double cycle)
+{
+    for (int cycle = 0; cycle < 1; ++cycle)
+        {
+            p10.dmd->drawMarquee("Soketi Takin", 12, (32 * DISPLAYS_ACROSS) - 1, 4);
+            long start = millis();
+            long timer = start;
+            boolean ret = false;
+            while (!ret)
+                {
+                    if ((timer + 21) < millis())
+                        {
+                            ret = p10.dmd->stepMarquee(-1, 0);
+                            timer = millis();
+                        }
+                }
         }
-    }
 }
 
-
-void anim_StationCharge_Charging(PatternAnimator& p10, double cycle) {
+void anim_StationCharge_Charging(PatternAnimator& p10, double cycle)
+{
     int ROW_START = 4;
     int COL_START = 0;
     int delaystep = 35;
@@ -195,16 +206,23 @@ void anim_StationCharge_Charging(PatternAnimator& p10, double cycle) {
     p10.draw_pattern_scrolling(p10.lightning, ROW_START, COL_START, delaystep, cycle);
 }
 
+void anim_charge_battery(PatternAnimator& p10, int slice)
+{
+    p10.draw_pattern_static(p10.bat_full, 4, 0);
+}
 
-void anim_StationWaiting_custom(PatternAnimator& p10, const char* bChars, byte length) {
+void anim_StationWaiting_custom(PatternAnimator& p10, const char* bChars, byte length)
+{
     p10.dmd->drawMarquee(bChars, length, (32 * DISPLAYS_ACROSS) - 1, 4);
     long start = millis();
     long timer = start;
     boolean ret = false;
-    while (!ret) {
-        if ((timer + 21) < millis()) {
-            ret = p10.dmd->stepMarquee(-1, 0);
-            timer = millis();
+    while (!ret)
+        {
+            if ((timer + 21) < millis())
+                {
+                    ret = p10.dmd->stepMarquee(-1, 0);
+                    timer = millis();
+                }
         }
-    }
 }

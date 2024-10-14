@@ -14,22 +14,18 @@ void anim_StationWaiting(PatternAnimator& p10, double cycle = std::numeric_limit
 // *********************************
 void anim_StationError(PatternAnimator& p10, double cycle = std::numeric_limits<double>::infinity());
 
-
 void anim_StationCharge_Starting(PatternAnimator& p10);
-
 
 void anim_StationCharge_Started(PatternAnimator& p10);
 
-
 void anim_StationCharge_Stopped(PatternAnimator& p10);
-
 
 void anim_InsertSocket(PatternAnimator& p10, double cycle = std::numeric_limits<double>::infinity());
 
-
 void anim_StationCharge_Charging(PatternAnimator& p10, double cycle = std::numeric_limits<double>::infinity());
 
-
 void anim_StationWaiting_custom(PatternAnimator& p10, const char* bChars, byte length);
+
+void anim_charge_battery(PatternAnimator& p10, int slice);
 
 #endif

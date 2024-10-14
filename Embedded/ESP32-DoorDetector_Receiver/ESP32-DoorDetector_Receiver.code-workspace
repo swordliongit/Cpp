@@ -1,8 +1,12 @@
 {
 	"folders": [
-		{
-			"path": "."
-		}
+        {
+            "path": "."
+        },
+        {
+            "name": "ESP32-CAM",
+            "path": "../ESP32-CAM/ESP32-CAM"
+        }
     ],
     "settings": {}
 }

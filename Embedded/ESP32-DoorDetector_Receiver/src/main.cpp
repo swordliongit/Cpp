@@ -78,7 +78,7 @@ void log_status() {
 
 void play_and_log() {
 
-    log_status();
+    // log_status();
 
     buzzer.tone(NOTE_C4, 250);
     buzzer.tone(NOTE_D4, 250);
@@ -106,18 +106,18 @@ void setup() {
     Serial.begin(115200);
 
     // Set the device as a Station and Soft Access Point simultaneously
-    WiFi.mode(WIFI_AP_STA);
+    WiFi.mode(WIFI_STA);
 
-    // Set device as a Wi-Fi Station
-    WiFi.begin("SL-MOBILE", "sword1998");
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(1000);
-        Serial.println("Setting as a Wi-Fi Station..");
-    }
-    Serial.print("Station IP Address: ");
-    Serial.println(WiFi.localIP());
-    Serial.print("Wi-Fi Channel: ");
-    Serial.println(WiFi.channel());
+    // // Set device as a Wi-Fi Station
+    // WiFi.begin("SL-MOBILE", "sword1998");
+    // while (WiFi.status() != WL_CONNECTED) {
+    //     delay(1000);
+    //     Serial.println("Setting as a Wi-Fi Station..");
+    // }
+    // Serial.print("Station IP Address: ");
+    // Serial.println(WiFi.localIP());
+    // Serial.print("Wi-Fi Channel: ");
+    // Serial.println(WiFi.channel());
 
     // Init ESP-NOW
     if (esp_now_init() != ESP_OK) {

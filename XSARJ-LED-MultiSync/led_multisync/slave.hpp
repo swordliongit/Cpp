@@ -18,18 +18,15 @@ struct struct_message_to_receive_slave
     // char t[32];
 };
 
-
 struct struct_message_to_send_slave
 {
     bool is_anim_completed;
 };
-
 
 extern struct_message_to_receive_slave message_to_rcv_slave;
 extern struct_message_to_send_slave message_to_send_slave;
 
 void on_data_sent_slave(const uint8_t* mac_addr, esp_now_send_status_t status);
 void on_data_recv_slave(const uint8_t* mac, const uint8_t* incomingData, int len);
-
 
 #endif
