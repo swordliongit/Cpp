@@ -10,7 +10,7 @@ AllowShortFunctionsOnASingleLine: Empty
 # AllowShortLoopsOnASingleLine: true
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
-BreakBeforeBraces: GNU # Whitesmiths for complete indentation
+BreakBeforeBraces: Allman # Whitesmiths for complete indentation
 BraceWrapping:
   AfterClass:      true
   AfterControlStatement: true
@@ -39,5 +39,5 @@ SortIncludes: false
 SpaceBeforeParens: ControlStatements
 SpacesInContainerLiterals: false
 Standard:        Cpp11
-ColumnLimit: 80
+ColumnLimit: 120
 IndentWidth: 4

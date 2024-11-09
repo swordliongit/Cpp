@@ -10,18 +10,17 @@ struct_message_to_send_master message_to_send_master;
 void on_data_sent_master(const uint8_t* mac_addr, esp_now_send_status_t status)
 {
     bool print = false;
-    if (print)
-        {
-            Serial.print("\r\nLast Packet Send Status:\t");
-            Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
-            char macStr[18];
-            Serial.print("Packet to: ");
-            // Copies the sender mac address to a string
-            snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3],
-                     mac_addr[4], mac_addr[5]);
-            Serial.print(macStr);
-            Serial.print(" send status:\t");
-        }
+    if (print) {
+        Serial.print("\r\nLast Packet Send Status:\t");
+        Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+        char macStr[18];
+        Serial.print("Packet to: ");
+        // Copies the sender mac address to a string
+        snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4],
+                 mac_addr[5]);
+        Serial.print(macStr);
+        Serial.print(" send status:\t");
+    }
     // Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" :
     // "Delivery Fail"); Serial.println(sizeof(message_to_send.anim));
 }
@@ -60,30 +59,25 @@ bool connect_cloud()
     bool success = false;
 
     int http_response_code = http.POST(json.c_str());
-    if (http_response_code > 0)
-        {
-            String response = http.getString();
-            JsonDocument response_doc;
-            DeserializationError error = deserializeJson(response_doc, response);
-            if (!error)
-                {
-                    if (response_doc["result"].containsKey("status") && response_doc["result"]["status"] == "OK")
-                        {
-                            success = true;
-                        }
-                }
-            else
-                {
-                    Serial.println(error.c_str());
-                }
-            Serial.println(response);
+    if (http_response_code > 0) {
+        String response = http.getString();
+        JsonDocument response_doc;
+        DeserializationError error = deserializeJson(response_doc, response);
+        if (!error) {
+            if (response_doc["result"].containsKey("status") && response_doc["result"]["status"] == "OK") {
+                success = true;
+            }
         }
-    else
-        {
-            // Print error message if the request failed
-            Serial.print("Error on HTTP request: ");
-            Serial.println(http_response_code);
+        else {
+            Serial.println(error.c_str());
         }
+        Serial.println(response);
+    }
+    else {
+        // Print error message if the request failed
+        Serial.print("Error on HTTP request: ");
+        Serial.println(http_response_code);
+    }
     // Disconnect
     http.end();
 
@@ -114,35 +108,30 @@ void send_heartbeat()
     http.setConnectTimeout(5000);
 
     int http_response_code = http.POST(json.c_str());
-    if (http_response_code > 0)
-        {
-            // Serial.println("Heartbeat sent...");
+    if (http_response_code > 0) {
+        // Serial.println("Heartbeat sent...");
 
-            String response = http.getString();
-            JsonDocument response_doc;
-            DeserializationError error = deserializeJson(response_doc, response);
-            if (!error)
-                {
-                    if (response_doc["result"].containsKey("should_update"))
-                        {
-                            bool should_update = response_doc["result"]["should_update"];
-                            role_manager.set_update_required(should_update);
-                            // Serial.println(role_manager.is_update_required());
-                        }
-                    else
-                        {
-                            Serial.print("deserializeJson() failed: ");
-                            Serial.println(error.c_str());
-                        }
-                    // Serial.println(response);
-                }
-            else
-                {
-                    // Print error message if the request failed
-                    Serial.print("Error on HTTP request: ");
-                    Serial.println(http_response_code);
-                }
+        String response = http.getString();
+        JsonDocument response_doc;
+        DeserializationError error = deserializeJson(response_doc, response);
+        if (!error) {
+            if (response_doc["result"].containsKey("should_update")) {
+                bool should_update = response_doc["result"]["should_update"];
+                role_manager.set_update_required(should_update);
+                // Serial.println(role_manager.is_update_required());
+            }
+            else {
+                Serial.print("deserializeJson() failed: ");
+                Serial.println(error.c_str());
+            }
+            // Serial.println(response);
         }
+        else {
+            // Print error message if the request failed
+            Serial.print("Error on HTTP request: ");
+            Serial.println(http_response_code);
+        }
+    }
 }
 
 bool get_action_from_cloud()
@@ -167,56 +156,57 @@ bool get_action_from_cloud()
     http.setConnectTimeout(5000);
 
     int http_response_code = http.POST(json.c_str());
-    if (http_response_code > 0)
-        {
-            // Serial.println("Getting action list...");
+    if (http_response_code > 0) {
+        // Serial.println("Getting action list...");
 
-            String response = http.getString();
-            JsonDocument response_doc;
-            DeserializationError error = deserializeJson(response_doc, response);
-            if (!error)
-                {
-                    bool is_pattern = response_doc["result"]["is_pattern"];
-                    String slave_mac_list = response_doc["result"]["slave_mac_list"];
-                    String display_text = response_doc["result"]["display_text"];
-                    String pattern_animation = response_doc["result"]["pattern_animation"];
-                    String pattern = response_doc["result"]["pattern"];
-                    Serial.println(response);
+        String response = http.getString();
+        JsonDocument response_doc;
+        DeserializationError error = deserializeJson(response_doc, response);
+        if (!error) {
+            bool is_pattern = response_doc["result"]["is_pattern"];
+            String slave_mac_list = response_doc["result"]["slave_mac_list"];
+            String display_text = response_doc["result"]["display_text"];
+            String animation_list = response_doc["result"]["animation_list"];
+            String custom_text_list = response_doc["result"]["custom_text_list"];
 
-                    // Extract and convert MAC addresses
-                    std::vector<String> mac_addresses = split_string(slave_mac_list, ',');
-                    std::vector<std::array<uint8_t, 6>> broadcast_addresses;
+            // String pattern_animation = response_doc["result"]["pattern_animation"];
+            // String pattern = response_doc["result"]["pattern"];
+            Serial.println(response);
 
-                    for (const String& mac : mac_addresses)
-                        {
-                            std::array<uint8_t, 6> mac_array;
-                            extract_mac(mac, mac_array);
-                            broadcast_addresses.push_back(mac_array);
-                        }
+            // Extract and convert MAC addresses
+            std::vector<String> mac_addresses = split_string(slave_mac_list, ',');
+            std::vector<std::array<uint8_t, 6>> broadcast_addresses;
 
-                    EspNowRoleManager& role_manager = EspNowRoleManager::get_instance();
-                    role_manager.broadcast_addresses = broadcast_addresses;
-                    role_manager.is_pattern = is_pattern;
-                    role_manager.display_texts = split_string(display_text, ',');
-                    role_manager.pattern_animation = pattern_animation;
-                    Serial.println(pattern_animation);
-                    Serial.println(role_manager.pattern_animation);
-                    role_manager.pattern = convertFromBitString(std::string(pattern.c_str()), p10.grid_32.size(), p10.grid_32[0].size());
+            for (const String& mac : mac_addresses) {
+                std::array<uint8_t, 6> mac_array;
+                extract_mac(mac, mac_array);
+                broadcast_addresses.push_back(mac_array);
+            }
 
-                    // Serial.print("Broadcast addresses size: ");
-                    // Serial.println(role_manager.broadcast_addresses.size());
+            EspNowRoleManager& role_manager = EspNowRoleManager::get_instance();
+            role_manager.broadcast_addresses = broadcast_addresses;
+            role_manager.is_pattern = is_pattern;
+            role_manager.display_texts = split_string(display_text, ',');
+            role_manager.animation_list = split_string(animation_list, ',');
+            role_manager.custom_text_list = split_string(custom_text_list, ',');
+            // role_manager.pattern_animation = pattern_animation;
+            // Serial.println(pattern_animation);
+            // Serial.println(role_manager.pattern_animation);
+            // role_manager.pattern = convertFromBitString(std::string(pattern.c_str()), p10.grid_32.size(), p10.grid_32[0].size());
 
-                    return true;
-                }
-            else
-                {
-                    // Print error message if the request failed
-                    Serial.print("Error on HTTP request: ");
-                    Serial.println(http_response_code);
+            // Serial.print("Broadcast addresses size: ");
+            // Serial.println(role_manager.broadcast_addresses.size());
 
-                    return false;
-                }
+            return true;
         }
+        else {
+            // Print error message if the request failed
+            Serial.print("Error on HTTP request: ");
+            Serial.println(http_response_code);
+
+            return false;
+        }
+    }
 }
 
 void setup_action(UniqueQueue& slave_queue)
@@ -225,16 +215,14 @@ void setup_action(UniqueQueue& slave_queue)
 
     Serial.println("Setting up actions...");
 
-    if (role_manager.is_pattern)
-        {
-            message_to_send_master.flags.set(0, true);
-            message_to_send_master.flags.set(1, false);
-        }
-    else
-        {
-            message_to_send_master.flags.set(0, false);
-            message_to_send_master.flags.set(1, true);
-        }
+    if (role_manager.is_pattern) {
+        message_to_send_master.flags.set(0, true);
+        message_to_send_master.flags.set(1, false);
+    }
+    else {
+        message_to_send_master.flags.set(0, false);
+        message_to_send_master.flags.set(1, true);
+    }
 
     // Serial.println("Addresses received from cloud: ");
     // for (int i = 0; i < role_manager.broadcast_addresses.size(); i++) {
@@ -261,11 +249,10 @@ void setup_action(UniqueQueue& slave_queue)
     // Serial.print(slave_queue.size());
     // Serial.println();
 
-    for (size_t i = 0; i < role_manager.broadcast_addresses.size(); ++i)
-        {
-            auto& addr = role_manager.broadcast_addresses[i];
-            slave_queue.push(std::make_tuple(addr.data(), i + 1));
-        }
+    for (size_t i = 0; i < role_manager.broadcast_addresses.size(); ++i) {
+        auto& addr = role_manager.broadcast_addresses[i];
+        slave_queue.push(std::make_tuple(addr.data(), i + 1));
+    }
 
     // Serial.print("Queue size after adding new addresses: ");
     // Serial.println(slave_queue.size());

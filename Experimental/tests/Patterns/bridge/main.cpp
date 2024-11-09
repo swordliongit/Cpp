@@ -3,27 +3,29 @@
 // Implementor Interface
 class Implementor
 {
-public:
+  public:
     virtual void implementation() const = 0;
     virtual ~Implementor() = default;
 };
 
 class ImplementorA : public Implementor
 {
-public:
+  public:
     ImplementorA() = default;
 
-    void implementation() const {
+    void implementation() const
+    {
         std::cout << "ImplementationA::implementation" << std::endl;
     }
 };
 
 class ImplementorB : public Implementor
 {
-public:
+  public:
     ImplementorB() = default;
 
-    void implementation() const {
+    void implementation() const
+    {
         std::cout << "ImplementationB::implementation" << std::endl;
     }
 };
@@ -31,7 +33,7 @@ public:
 // Bridge interface
 class Abstraction
 {
-public:
+  public:
     virtual void function() const = 0;
     virtual ~Abstraction() = default;
 };
@@ -39,29 +41,29 @@ public:
 // Bridge abstraction, it's not affected by implementation changes
 class RefinedAbstraction : public Abstraction
 {
-public:
-    RefinedAbstraction(Implementor &implementation)
-        : implementor(implementation){};
+  public:
+    RefinedAbstraction(Implementor& implementation) : implementor(implementation){};
 
-    void function() const {
+    void function() const
+    {
         std::cout << "RefinedAbstraction::function" << std::endl;
         implementor.implementation();
     }
 
-private:
-    Implementor &implementor;
+  private:
+    Implementor& implementor;
 };
 
-int main() {
-
+int main()
+{
     ImplementorA implementorA;
     ImplementorB implementorB;
 
     RefinedAbstraction refinedAbstraction1(implementorA);
     RefinedAbstraction refinedAbstraction2(implementorB);
 
-    Abstraction *abstraction1 = &refinedAbstraction1;
-    Abstraction *abstraction2 = &refinedAbstraction2;
+    Abstraction* abstraction1 = &refinedAbstraction1;
+    Abstraction* abstraction2 = &refinedAbstraction2;
 
     abstraction1->function();
     std::cout << std::endl;

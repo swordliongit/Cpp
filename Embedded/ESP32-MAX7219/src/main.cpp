@@ -6,64 +6,61 @@
 #include <HTTPClient.h>
 #include <WiFiClientSecure.h>
 
-
-
 bool reset = true;
 
-void setup() 
+void setup()
 {
     Serial.begin(115200);
 
-    // Initialize SPIFFS
-    if(!SPIFFS.begin())
-    {
-        Serial.println("ERROR SPIFFS");
-        return;
-    }
+    // // Initialize SPIFFS
+    // if(!SPIFFS.begin())
+    // {
+    //     Serial.println("ERROR SPIFFS");
+    //     return;
+    // }
 
-    // Configure static IP address
-    if(!WiFi.config(local_IP, gateway, subnet, primaryDNS))
-    {
-        Serial.println("STA Failed to configure");
-    }
+    // // Configure static IP address
+    // if(!WiFi.config(local_IP, gateway, subnet, primaryDNS))
+    // {
+    //     Serial.println("STA Failed to configure");
+    // }
 
-    // connect to WiFi
-    connectToAP();
-    delay(100);
+    // // connect to WiFi
+    // connectToAP();
+    // delay(100);
 
-    server.on("/", HTTP_GET, 
-        [](AsyncWebServerRequest* request)
-        {
-            request->send(SPIFFS, "/index.html", String(), false, processor);
-            if(request->params() > 0) startAnim(checkParams(request));
-        }
-    );
-    server.on("/style.css", HTTP_GET, 
-        [](AsyncWebServerRequest* request)
-        {
-            request->send(SPIFFS, "/style.css", "text/css");
-        }
-    );
-    server.on("/jquery.min.js", HTTP_GET, 
-        [](AsyncWebServerRequest* request)
-        {
-            request->send(SPIFFS, "/jquery.min.js", "text/javascript");
-        }
-    );
+    // server.on("/", HTTP_GET,
+    //     [](AsyncWebServerRequest* request)
+    //     {
+    //         request->send(SPIFFS, "/index.html", String(), false, processor);
+    //         if(request->params() > 0) startAnim(checkParams(request));
+    //     }
+    // );
+    // server.on("/style.css", HTTP_GET,
+    //     [](AsyncWebServerRequest* request)
+    //     {
+    //         request->send(SPIFFS, "/style.css", "text/css");
+    //     }
+    // );
+    // server.on("/jquery.min.js", HTTP_GET,
+    //     [](AsyncWebServerRequest* request)
+    //     {
+    //         request->send(SPIFFS, "/jquery.min.js", "text/javascript");
+    //     }
+    // );
 
-    // Start server
-    server.begin();
+    // // Start server
+    // server.begin();
 
-    // start led animation
+    // // start led animation
     startDisplay();
-    Serial.println("Finished loading");
-    
+    // Serial.println("Finished loading");
 }
 
-void loop() 
+void loop()
 {
     esp_task_wdt_reset();
-    if (Display.displayAnimate()) 
+    if (Display.displayAnimate())
     {
         Display.displayReset();
     }
@@ -79,9 +76,8 @@ void loop()
     // delay(500);
 }
 
-
 // void setup() {
- 
+
 //   Display.begin();
 //   Display.setIntensity(0);
 //   Display.displayClear();
@@ -91,7 +87,7 @@ void loop()
 //   Display.setTextAlignment(PA_LEFT);
 //   Display.print("ESP32");
 //   delay(2000);
-  
+
 //   Display.setTextAlignment(PA_CENTER);
 //   Display.print("ESP32");
 //   delay(2000);
@@ -109,10 +105,7 @@ void loop()
 // //   delay(2000);
 // }
 
-
-
 // #include <Arduino.h>
-
 
 // /***
 //  * LED Blinking

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_led,led.multisync,model_led_multisync,,1,1,1,1
+access_node,led.node,model_led_node,,1,1,1,1
+access_text,led.text,model_led_text,,1,1,1,1
+access_animation,led.animation,model_led_animation,,1,1,1,1

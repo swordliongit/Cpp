@@ -12,8 +12,7 @@ void on_data_sent_slave(const uint8_t* mac_addr, esp_now_send_status_t status)
     char macStr[18];
     Serial.print("Packet to: ");
     // Copies the sender mac address to a string
-    snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4],
-             mac_addr[5]);
+    snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x", mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);
     Serial.print(macStr);
     Serial.print(" send status:\t");
     Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
@@ -37,7 +36,7 @@ void on_data_recv_slave(const uint8_t* mac, const uint8_t* incomingData, int len
     compressedString = std::string(message_to_rcv_slave.charArray, 64);
 
     std::string decompressedString = decompressBitString(compressedString);
-    reconstructedGrid = convertFromBitString(decompressedString, p10.grid.size(), p10.grid[0].size());
+    reconstructedGrid = convertFromBitString(decompressedString, p10.line.size(), p10.line[0].size());
 
     // Serial.println(message_to_rcv.flags.to_string().c_str());
     // Serial.print("Char: ");

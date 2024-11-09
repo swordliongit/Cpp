@@ -1,0 +1,91 @@
+<odoo>
+    <data>
+        <record id="led_multisync_form_view" model="ir.ui.view">
+            <field name="name">led.multisync.form.view</field>
+            <field name="model">led.multisync</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="3">
+                            <group string="Options">
+                                <field name="name" />
+                                <field name="master_mac" />
+                                <field name="is_pattern" widget="boolean_toggle"/>
+                                <field name="should_update" widget="boolean_toggle"/>
+                            </group>
+                            <group string="Devices">
+                                <field name="node_list">
+                                    <tree editable="bottom">
+                                        <field name="mac"/>
+                                        <field name="isMaster" widget="boolean_toggle"/>
+                                        <field name="sequence" widget="handle"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Text List">
+                                <field name="text_list" attrs="{'readonly': [('is_pattern', '=', True)]}">
+                                    <tree editable="bottom">
+                                        <field name="text" />
+                                        <field name="sequence" widget="handle" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Animations">
+                                <field name="animation_list" attrs="{'readonly': [('is_pattern', '=', False)]}">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <!-- <field name="custom_pattern"/> -->
+                                        <field name="pattern_animation" />
+                                        <field name="sequence" widget="handle" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="name" string="Details">
+                                
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="led_multisync_tree_view" model="ir.ui.view">
+            <field name="name">led.multisync.tree.view</field>
+            <field name="model">led.multisync</field>
+            <field name="arch" type="xml">
+                <tree string="Led">
+                    <field name="name" />
+                    <field name="master_mac" />
+                    <field name="should_update" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+        <record id="led_animation_view_form" model="ir.ui.view">
+            <field name="name">led.animation.form.view</field>
+            <field name="model">led.animation</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <!-- <field name="custom_pattern" /> -->
+                            <field name="pattern_animation" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Action to call the views-->
+        <record id="led_multisync_action" model="ir.actions.act_window">
+            <field name="name">Led MultiSync</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">led.multisync</field>
+            <field name="view_mode">tree,form</field>
+            <!-- <field name="target">inline</field> -->
+        </record>
+        <menuitem id="led_multisync_menu" name="Led" sequence="5" action="led_multisync_action"/>
+    </data>
+</odoo>

@@ -8,8 +8,7 @@ Singleton Class
 #include <array>
 #include <vector>
 
-class EspNowRoleManager
-{
+class EspNowRoleManager {
   private:
     std::function<void(bool, bool)> _callback;
     bool _master;
@@ -26,6 +25,8 @@ class EspNowRoleManager
     bool is_pattern;
     std::vector<std::array<uint8_t, 6>> broadcast_addresses;
     std::vector<String> display_texts;
+    std::vector<String> animation_list;
+    std::vector<String> custom_text_list;
     String pattern_animation;
     std::vector<std::vector<int>> pattern;
 
@@ -45,26 +46,24 @@ class EspNowRoleManager
 
     void set_slave()
     {
-        if (!is_slave())
-            {
-                _slave = true;
-                _master = false;
-                _callback(_master, _slave);
-                // roleChangeRequested = true;
-                // newMasterRole = false;
-            }
+        if (!is_slave()) {
+            _slave = true;
+            _master = false;
+            _callback(_master, _slave);
+            // roleChangeRequested = true;
+            // newMasterRole = false;
+        }
     }
 
     void set_master()
     {
-        if (!is_master())
-            {
-                _slave = false;
-                _master = true;
-                _callback(_master, _slave);
-                // roleChangeRequested = true;
-                // newMasterRole = true;
-            }
+        if (!is_master()) {
+            _slave = false;
+            _master = true;
+            _callback(_master, _slave);
+            // roleChangeRequested = true;
+            // newMasterRole = true;
+        }
     }
 
     bool is_slave()

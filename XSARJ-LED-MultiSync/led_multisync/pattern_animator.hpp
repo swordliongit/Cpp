@@ -5,8 +5,7 @@
 #include <limits>
 #include <vector>
 
-class PatternAnimator
-{
+class PatternAnimator {
   public:
     DMD* dmd;
     PatternAnimator(DMD* dmdinitialized)
@@ -15,11 +14,14 @@ class PatternAnimator
     }
 
     // multi-sync patterns
-    static std::vector<std::vector<int>> grid;
+    static std::vector<std::vector<int>> mask;
+    static std::vector<std::vector<int>> line;
     static std::vector<std::vector<int>> grid_turned_off;
     static std::vector<std::vector<int>> square;
     static std::vector<std::vector<int>> square_32;
     static std::vector<std::vector<int>> grid_32;
+    // 64x64
+    static std::vector<std::vector<int>> ball_64;
 
     // 7x35
     static std::vector<std::vector<int>> xsarj;
@@ -69,6 +71,8 @@ class PatternAnimator
     static std::vector<std::vector<int>> bat_7;
     // 8x64
     static std::vector<std::vector<int>> bat_6;
+    // 8x64
+    static std::vector<std::vector<int>> Battery;
 
     static std::vector<std::vector<std::vector<int>>> pattern_pack;
 
@@ -85,11 +89,10 @@ class PatternAnimator
     // advanced
     void draw_pattern_tetris(std::vector<std::vector<int>> pattern, int ROW_START, int COL_START, int PANEL_LAST_COL, int msdelay,
                              double cycle = std::numeric_limits<double>::infinity());
-    void draw_pattern_scrolling_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START,
-                                       int PATTERN_DISTANCE, float delaystep, double cycle = std::numeric_limits<double>::infinity());
+    void draw_pattern_scrolling_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START, int PATTERN_DISTANCE,
+                                       float delaystep, double cycle = std::numeric_limits<double>::infinity());
     void draw_pattern_scrolling_accumulator_series(std::vector<std::vector<std::vector<int>>> pattern_pack, int ROW_START, int COL_START,
-                                                   int PATTERN_DISTANCE, float delaystep,
-                                                   double cycle = std::numeric_limits<double>::infinity());
+                                                   int PATTERN_DISTANCE, float delaystep, double cycle = std::numeric_limits<double>::infinity());
     // helper functions
     void rotate_matrix_90(std::vector<std::vector<int>>& matrix);
 };
